@@ -1,22 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// Halaman utama (Welcome)
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function (){
+// Halaman Dashboard
+Route::get('/dashboard', function () {
     return view('administrator.dashboard.index');
+});
+
+// Route untuk Akun
+Route::prefix('akun')->group(function() {
+    Route::get('/', [Controller::class, 'index'])->name('akun.index');
+    Route::get('/tambah', [Controller::class, 'create'])->name('akun.create');
+});
+
+// Halaman Katalog Donasi
+Route::get('/katalog', function () {
+    return view('administrator.katalog_donasi.index');
 });

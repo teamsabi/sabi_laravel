@@ -1,7 +1,7 @@
 <div class="logo-header" data-background-color="light-blue">
     <a href="index.html" class="logo">
       <img
-        src="{{ asset('template/assets/img/kaiadmin/logo_light.svg')}}"
+        src="{{ asset('template/assets/img/JTICare.png')}}"
         alt="navbar brand"
         class="navbar-brand"
         height="20"
