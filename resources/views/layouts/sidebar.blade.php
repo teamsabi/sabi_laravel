@@ -38,25 +38,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#sidebarLayouts">
+            <a href="#">
               <i class="fas fa-users"></i>
               <p>Akun</p>
-              <span class="caret"></span>
             </a>
-            <div class="collapse" id="sidebarLayouts">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="#">
-                    <span class="sub-item">Data Admin</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="sub-item">Data User</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
             <a href="#">

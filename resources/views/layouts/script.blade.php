@@ -15,6 +15,47 @@
 <script src="{{asset('template/assets/js/demo.js')}}"></script>
 
 <script>
+  var myBarChart = new Chart(barChart, {
+    type: "bar",
+    data: {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+      datasets: [
+        {
+          label: "Donasi",
+          backgroundColor: "rgb(23, 125, 255)",
+          borderColor: "rgb(23, 125, 255)",
+          data: [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4],
+        },
+      ],
+    },
+      options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+              },
+            },
+          ],
+      },
+    },
+});
+
   $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
     type: "line",
     height: "70",
