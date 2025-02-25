@@ -11,7 +11,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         .registrasi-container {
             background-color: white;
@@ -21,12 +21,10 @@
             text-align: center;
             width: 100%;
             max-width: 400px;
-            box-sizing: border-box;
         }
         .registrasi-container h2 {
             font-weight: bold;
             margin-bottom: 20px;
-            font-size: 1.8rem;
         }
         .form-control {
             margin-bottom: 15px;
@@ -37,74 +35,70 @@
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            border-radius: 8px;
         }
         .btn-primary:hover {
             background-color: #357ABD;
         }
-        .forgot-password {
-            text-align: right;
-            display: block;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-        .registrasi-link {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-        .registrasi-link a {
+        .register-link a {
             color: #4A90E2;
             text-decoration: none;
-            font-weight: bold;
         }
-        .registrasi-link a:hover {
+        .register-link a:hover {
             text-decoration: underline;
         }
         .logo {
             margin-top: 20px;
         }
         .logo img {
-            width: 120px;
+            width: 100%;
+            max-width: 150px;
             height: auto;
         }
         .input-group-text {
             cursor: pointer;
-            font-size: 16px;
-        }
-
-        @media (max-width: 576px) {
-            .registrasi-container {
-                padding: 20px;
-                width: 90%;
-            }
-            .registrasi-container h2 {
-                font-size: 1.5rem;
-            }
+            font-size: 14px;
         }
     </style>
 </head>
+
 <body>
     <div class="registrasi-container">
-        <h2>Login</h2>
+        <h2>Registrasi</h2>
         <form>
             <div class="mb-3 text-start">
+                <label class="form-label" for="namaLengkap">Nama Lengkap</label>
+                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" type="text"/>
+            </div>
+            <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email" type="email"/>
+                <input class="form-control" id="email" placeholder="Masukkan Email anda" type="email"/>
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
+                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" type="number"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
                     <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" type="password"/>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword()">
-                        <i class="fas fa-eye" id="eyeIcon"></i>
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'eyeIcon1')">
+                        <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
                 </div>
-                <a class="forgot-password" href="#">Lupa Kata Sandi ?</a>
             </div>
-            <button class="btn btn-primary" type="submit">Masuk</button>
+            <div class="mb-3 text-start">
+                <label class="form-label" for="rePassword">Konfirmasi Kata Sandi</label>
+                <div class="position-relative">
+                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" type="password"/>
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('rePassword', 'eyeIcon2')">
+                        <i class="fas fa-eye" id="eyeIcon2"></i>
+                    </span>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Daftar</button>
         </form>
-        <div class="register-link">Belum Punya Akun?
-            <a href="{{ route('auth.registrasi') }}">Daftar</a>
+        <div class="register-link">Sudah Punya Akun?
+            <a href="{{ route('auth.login') }}">Masuk</a>
         </div>
         <div class="logo">
             <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
@@ -112,9 +106,9 @@
     </div>
 
     <script>
-        function togglePassword() {
-            let passwordInput = document.getElementById("password");
-            let eyeIcon = document.getElementById("eyeIcon");
+        function togglePassword(inputId, iconId) {
+            let passwordInput = document.getElementById(inputId);
+            let eyeIcon = document.getElementById(iconId);
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
                 eyeIcon.classList.remove("fa-eye");

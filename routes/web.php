@@ -8,10 +8,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route untuk login
+// Route untuk Login
 Route::get('/login', function () {
     return view('auth.login');
 })->name('auth.login');
+
+// Route untuk Registrasi
+Route::get('/registrasi', function () {
+    return view('auth.registrasi');
+})->name('auth.registrasi');
 
 // Route untuk Profile
 Route::get('/profile', function () {
