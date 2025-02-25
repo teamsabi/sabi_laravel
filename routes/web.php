@@ -8,6 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route untuk login
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('auth.login');
+
 // Route untuk Profile
 Route::get('/profile', function () {
     return view('administrator.profil.index'); 
