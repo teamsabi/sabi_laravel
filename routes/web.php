@@ -8,6 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route untuk Profile
+Route::get('/profile', function () {
+    return view('administrator.profil.index'); 
+})->name('profil.index');
+
 // Route untuk Dashboard
 Route::get('/dashboard', function () {
     return view('administrator.dashboard.index'); 
@@ -35,3 +40,18 @@ Route::prefix('kategori-donasi')->group(function() {
     })->name('kategori.create');
 });
 
+// Route untuk Data Donatur
+Route::get('/data-donatur', function () {
+    return view('administrator.data donatur.index'); 
+})->name('donatur.index');
+
+// Route untuk Laporan
+Route::prefix('laporan')->group(function() {
+    Route::get('/',function () {
+        return view('administrator.laporan.index'); 
+    })->name('laporan.index');
+
+    Route::get('/riwayat', function() {
+        return view('administrator.laporan.history');
+    })->name('laporan.riwayat');
+});
