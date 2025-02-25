@@ -10,15 +10,4 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    // Tampilkan halaman index akun
-    public function index()
-    {
-        return view('administrator.akun.index');
-    }
-
-    // Tampilkan halaman tambah akun (add)
-    public function create()
-    {
-        return view('administrator.akun.add');
-    }
 }
