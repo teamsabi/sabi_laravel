@@ -21,11 +21,11 @@
 
                     <div class="form-group mb-3">
                         <label for="name">Nama Lengkap</label>
-                        <input type="text" name="name" class="form-control" value="John Doe" required>
+                        <input type="text" name="name" class="form-control" value="Tiar Gantebf" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" value="john.doe@example.com" required>
+                        <input type="email" name="email" class="form-control" value="tiar@gmail.com" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="phone">No WhatsApp</label>

@@ -151,13 +151,13 @@
                           </div>
                           <div class="u-text">
                             <h4>Tiar Ganteng</h4>
-                            <p class="text-muted">jembut@gmail.com</p>
+                            <p class="text-muted">tiar@gmail.com</p>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Profil</a>
+                        <a class="dropdown-item" href="{{ route('profil.index') }}">Profil</a>
                         <a class="dropdown-item" href="#">Pengaturan Akun</a>
                         <a class="dropdown-item" href="#">Logout</a>
                       </li>
