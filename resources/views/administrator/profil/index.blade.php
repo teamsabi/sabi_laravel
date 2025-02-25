@@ -21,7 +21,7 @@
 
                     <div class="form-group mb-3">
                         <label for="name">Nama Lengkap</label>
-                        <input type="text" name="name" class="form-control" value="Tiar Gantebf" required>
+                        <input type="text" name="name" class="form-control" value="Tiar Ganteng" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
