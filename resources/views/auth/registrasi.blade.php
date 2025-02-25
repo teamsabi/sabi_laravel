@@ -39,11 +39,11 @@
         .btn-primary:hover {
             background-color: #357ABD;
         }
-        .register-link a {
+        .login-link a {
             color: #4A90E2;
             text-decoration: none;
         }
-        .register-link a:hover {
+        .login-link a:hover {
             text-decoration: underline;
         }
         .logo {

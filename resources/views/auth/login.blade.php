@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Registrasi - JTICare</title>
+    <title>Login - JTICare</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <style>
@@ -13,7 +13,7 @@
             margin: 0;
             padding: 20px;
         }
-        .registrasi-container {
+        .login-container {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
@@ -23,7 +23,7 @@
             max-width: 400px;
             box-sizing: border-box;
         }
-        .registrasi-container h2 {
+        .login-container h2 {
             font-weight: bold;
             margin-bottom: 20px;
             font-size: 1.8rem;
@@ -48,16 +48,16 @@
             margin-bottom: 15px;
             font-size: 0.9rem;
         }
-        .registrasi-link {
+        .register-link {
             margin-top: 15px;
             font-size: 0.9rem;
         }
-        .registrasi-link a {
+        .register-link a {
             color: #4A90E2;
             text-decoration: none;
             font-weight: bold;
         }
-        .registrasi-link a:hover {
+        .register-link a:hover {
             text-decoration: underline;
         }
         .logo {
@@ -73,18 +73,18 @@
         }
 
         @media (max-width: 576px) {
-            .registrasi-container {
+            .login-container {
                 padding: 20px;
                 width: 90%;
             }
-            .registrasi-container h2 {
+            .login-container h2 {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="registrasi-container">
+    <div class="login-container">
         <h2>Login</h2>
         <form>
             <div class="mb-3 text-start">
