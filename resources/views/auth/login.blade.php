@@ -64,7 +64,7 @@
             margin-top: 20px;
         }
         .logo img {
-            width: 120px;
+            width: 150px;
             height: auto;
         }
         .input-group-text {
