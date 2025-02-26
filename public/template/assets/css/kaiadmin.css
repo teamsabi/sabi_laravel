@@ -842,7 +842,7 @@ body {
 .logo-header {
   float: left;
   width: 265px;
-  height: 70px;
+  height: 50px;
   line-height: 60px;
   color: #333333;
   z-index: 1001;
@@ -5874,7 +5874,7 @@ label.error {
     padding-right: 15px; }
     .logo-header .logo {
       position: absolute;
-      left: 50%;
+      left: 20%;
       transform: translateX(-50%); }
     .logo-header .navbar-toggler {
       height: 100%;

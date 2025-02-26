@@ -6,7 +6,7 @@
             src="{{asset('template/assets/img/JTICare.png')}}"
             alt="navbar brand"
             class="navbar-brand"
-            height="20"
+            height="66"
           />
         </a>
         <div class="nav-toggle">
