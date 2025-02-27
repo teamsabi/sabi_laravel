@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="{{ asset ('template user/assets/css/slicknav.css') }}"/>
     <link rel="stylesheet" href="{{ asset ('template user/assets/css/flaticon.css') }}"/>
     <link rel="stylesheet" href="{{ asset ('template user/assets/css/progressbar_barfiller.css') }}"/>
-    <link rel="stylesheet" href="{{ asset ('template user/'assets/css/gijgo.css) }}"/>
+    <link rel="stylesheet" href="{{ asset ('template user/assets/css/gijgo.css') }}"/>
     <link rel="stylesheet" href="{{ asset ('template user/assets/css/animate.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset ('template user/assets/css/animated-headline.css') }}"/>
 	<link rel="stylesheet" href="{{ asset ('template user/assets/css/magnific-popup.css') }}"/>

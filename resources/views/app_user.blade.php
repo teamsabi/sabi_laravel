@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        @include('layouts user.head')
-    </head>
-    <body>  
-        <div class="wrapper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('JTICare- Wujudkan kepedulian melalui donasi!')</title>
+    <link rel="stylesheet" href="{{ asset('template user/assets/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
 
-            @include('layouts user.header')
+    @include('layouts user.header')
 
-            <div class="main-panel">
-                <div class="main-header">
-                    <div class="main-header-logo">
-                        @include('layouts user.preloader')
-                    </div>
+    <main>
+        @yield('content')
+    </main>
 
-                    @include('layouts user.script')
-                </div>
+    @include('layouts user.footer')
 
-                <div class="container">
-                    <div class="page-inner">
-                        @yield('content') 
-                    </div>
-                </div>
-
-                <footer class="footer">
-                    @include('layouts user.footer')
-                </footer>
-            </div>
-        </div>
-
-    </body>
+    <script src="{{ asset('template user/assets/js/script.js') }}"></script>
+</body>
 </html>
