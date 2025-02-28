@@ -65,3 +65,8 @@ Route::prefix('laporan')->group(function() {
         return view('administrator.laporan.history');
     })->name('laporan.riwayat');
 });
+
+// Route untuk Halaman Index User
+Route::get('/JTICare', function () {
+    return view('user.home.index');
+})->name('home.index');
