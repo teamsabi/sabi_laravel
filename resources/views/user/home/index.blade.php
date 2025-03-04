@@ -26,7 +26,7 @@
 <!-- slider Area End-->
 
 <!-- slider Katalog Donasi Start-->
-<div class="our-cases-area section-padding30">
+<div class="our-cases-area" style="padding-bottom: 20px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
@@ -83,5 +83,40 @@
         </div>
     </div>
 </div>
+<!-- slider Katalog Donasi End-->
+    
+<!-- Slider Download Start -->
+<section class="wantToWork-area">
+    <div class="container">
+        <div class="wants-wrapper w-padding2 section-bg" style="background-color: #063463; padding: 30px; border-radius: 10px;">
+            <div class="row align-items-center">
+                <!-- Bagian Kiri: Teks dan Tombol Download -->
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="wantToWork-caption wantToWork-caption2">
+                        <h2 style="color: white; font-size: 28px; font-weight: bold;">Download Aplikasi JTICare</h2>
+                    </div>
+                    <div class="mt-3" style="display: flex; gap: 15px;">
+                        <a href="#" style="display: inline-block;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="height: 50px;">
+                        </a>
+                        <a href="#" style="display: inline-block;">
+                            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="height: 50px;">
+                        </a>
+                    </div>
+                </div>
+                <!-- Bagian Kanan: Gambar Mockup HP -->
+                <div class="col-xl-6 col-lg-6 col-md-6 d-flex justify-content-end">
+                    <div style="transform: scale(1.5); transform-origin: right;">
+                        <img src="{{ asset('template user/assets/img/gallery/MockupHP.png') }}" alt="JTICare App"
+                            style="max-width: 200px; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- slider Download End-->
 
 @endsection
