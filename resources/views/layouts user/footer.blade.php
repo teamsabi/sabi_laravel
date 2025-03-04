@@ -9,7 +9,7 @@
                             <div class="footer-logo mb-20">
                                 <a href="#"><img src="{{ asset('template user/assets/img/logo/logo2_footer.png') }}" alt="TICare"></a>
                             </div>
-                            <p style="color: #dfdfdf;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
+                            <p style="color: #ffffffb2;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
