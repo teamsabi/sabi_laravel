@@ -31,7 +31,7 @@
                 <p class="card-text">
                     Berita duka, telah meninggal dunia Ayahanda dari teman kita Asep pada tanggal 11-01-2025.
                 </p>
-                <a href="{{ route('laporan.riwayat') }}" class="btn btn-primary btn-rounded btn-sm">Read More</a>
+                <a href="{{ route('laporan.riwayat') }}" class="btn btn-primary btn-rounded btn-sm">Baca Selengkapnya</a>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                 <p class="card-text">
                     Berita duka, telah meninggal dunia Ayahanda dari teman kita Asup pada tanggal 20-02-2025.
                 </p>
-                <a href="{{ route('laporan.riwayat') }}" class="btn btn-primary btn-rounded btn-sm">Read More</a>
+                <a href="{{ route('laporan.riwayat') }}" class="btn btn-primary btn-rounded btn-sm">Baca Selengkapnya</a>
             </div>
         </div>
     </div>
