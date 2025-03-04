@@ -43,7 +43,7 @@
                             </div>
                             <!-- Donate Button -->
                             <div class="header-right-btn d-none d-lg-block ml-3">
-                                <a href="contact.html" class="btn header-btn">Masuk</a>
+                                <a href="#" class="btn header-btn">Masuk</a>
                             </div>  
                         </div>
                     </div>
