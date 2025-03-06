@@ -72,6 +72,17 @@ Route::get('/JTICare', function () {
     return view('user.home.index');
 })->name('home.index');
 
+// Route untuk Kategori Donasi
+Route::prefix('JTICare')->group(function () {
+    Route::get('/', function () {
+        return view('user.home.index');
+    })->name('home.index');
+
+    Route::get('/donasi', function () {
+        return view('user.donasi.index');
+    })->name('donasi.index');
+});
+
 Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');
 Route::post('/sesi',[AuthController::class, 'login']);
 Route::get('/reg',[AuthController::class,'create'])->name('auth.registrasi');

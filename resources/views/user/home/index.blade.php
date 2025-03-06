@@ -124,7 +124,7 @@
             </div>   
             <!-- Lihat Semua Button -->
             <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">
-                <a href="#" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
+                <a href="{{ route('donasi.index') }}" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
             </div>                                
         </div>
     </div>
