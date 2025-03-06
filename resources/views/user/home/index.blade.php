@@ -164,7 +164,7 @@
 <!-- Download Mobile Start -->
 <section class="wantToWork-area">
     <div class="container">
-        <div class="wants-wrapper w-padding2 section-bg" style="background-image: url('{{ asset('template user/assets/img/gallery/Cover Download2.png') }}'); 
+        <div class="wants-wrapper w-padding2 section-bg" style="background-image: url('{{ asset('template user/assets/img/gallery/Cover Download.png') }}'); 
                     background-size: cover; background-position: center; padding: 30px; border-radius: 10px;">
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-6 col-md-6">
@@ -182,7 +182,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 d-flex justify-content-end">
                     <div style="transform: scale(1.5); transform-origin: right;">
-                        <img src="{{ asset('template user/assets/img/gallery/MockupHP2.png') }}" alt="JTICare App"
+                        <img src="{{ asset('template user/assets/img/gallery/MockupHP3.png') }}" alt="JTICare App"
                             style="max-width: 90px; height: auto;">
                     </div>
                 </div>

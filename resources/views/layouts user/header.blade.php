@@ -21,14 +21,14 @@
                     <!-- Logo -->
                     <div class="col-xl-12 col-lg-12 d-flex align-items-center">
                         <div class="logo mr-4" style="margin-top: 10px;">
-                            <a href="#">
+                            <a href="{{ route('home.index') }}">
                                 <img src="{{ asset('template user/assets/img/logo/JTICare blue.png') }}" alt="">
                             </a>
                         </div>
                         <div class="main-menu d-none d-lg-block flex-grow-1">
                                 <nav>
                                     <ul id="navigation" class="d-flex align-items-center justify-content-center">                                                                                          
-                                        <li><a href="#">Beranda</a></li>
+                                        <li><a href="{{ route('home.index') }}">Beranda</a></li>
                                         <li><a href="#">Donasi</a></li>
                                         <li><a href="#">Download</a></li>
                                         <li><a href="#">Tentang Kami</a>
@@ -72,3 +72,4 @@
 </div>
 <!-- Header End -->
 </header>
+
