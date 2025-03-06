@@ -22,7 +22,7 @@
                     <div class="col-xl-12 col-lg-12 d-flex align-items-center">
                         <div class="logo mr-4" style="margin-top: 10px;">
                             <a href="#">
-                                <img src="{{ asset('template user/assets/img/logo/logo.png') }}" alt="">
+                                <img src="{{ asset('template user/assets/img/logo/JTICare blue.png') }}" alt="">
                             </a>
                         </div>
                         <div class="main-menu d-none d-lg-block flex-grow-1">
@@ -57,7 +57,7 @@
                             </div>
                             <!-- Login Button -->
                             <div class="header-right-btn d-none d-lg-block ml-3" style="display: flex; align-items: center; padding: 5px;">
-                                <a href="{{ route('auth.login') }}" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>
+                                <a href="#" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>
                             </div>                            
                         </div>
                     </div>

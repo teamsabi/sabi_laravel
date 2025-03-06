@@ -7,9 +7,16 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-logo mb-20">
-                                <a href="#"><img src="{{ asset('template user/assets/img/logo/logo2_footer.png') }}" alt="TICare"></a>
+                                <a href="#"><img src="{{ asset('template user/assets/img/logo/JTICare white.png') }}" alt="TICare"></a>
                             </div>
-                            <p style="color: #ffffffb2;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Buletin</h4>
+                                <p style="color: #ffffffb2;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
@@ -20,19 +27,6 @@
                                     <li><p>Alamat: Jl. Mastrip, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121</p></li>
                                     <li><a href="#">Telepon: +62 858-0727-8580</a></li>
                                     <li><a href="#">Email: support@ticare.com</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Tautan Penting</h4>
-                                <ul>
-                                    <li><a href="#">Donasi</a></li>
-                                    <li><a href="#">Tentang Kami</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Hubungi Kami</a></li>
                                 </ul>
                             </div>
                         </div>
