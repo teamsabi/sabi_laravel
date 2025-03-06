@@ -64,23 +64,23 @@
 <body>
     <div class="registrasi-container">
         <h2>Registrasi</h2>
-        <form>
+        <form action="{{ route('auth.registrasi') }}" method="POST">
             <div class="mb-3 text-start">
                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" type="text"/>
+                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama" type="text"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email anda" type="email"/>
+                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="emailreg" type="email"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" type="number"/>
+                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_wa" type="number"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" type="password"/>
+                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'eyeIcon1')">
                         <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
@@ -89,7 +89,7 @@
             <div class="mb-3 text-start">
                 <label class="form-label" for="rePassword">Konfirmasi Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" type="password"/>
+                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" name="cpassword" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('rePassword', 'eyeIcon2')">
                         <i class="fas fa-eye" id="eyeIcon2"></i>
                     </span>

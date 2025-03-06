@@ -86,15 +86,18 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form>
+
+        @extends('pesan.alert')
+
+        <form action="{{ route('auth.login') }}" method="POST">
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email" type="email"/>
+                <input class="form-control" id="email" placeholder="Masukkan Email" name="email" value="{{ old('email') }}" type="email"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" type="password"/>
+                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" value="{{ old('password') }}" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword()">
                         <i class="fas fa-eye" id="eyeIcon"></i>
                     </span>

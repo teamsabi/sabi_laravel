@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
 
 // Halaman utama (Welcome)
 Route::get('/', function () {
@@ -70,3 +71,9 @@ Route::prefix('laporan')->group(function() {
 Route::get('/JTICare', function () {
     return view('user.home.index');
 })->name('home.index');
+
+Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');
+Route::post('/sesi',[AuthController::class, 'login']);
+Route::get('/reg',[AuthController::class,'create'])->name('auth.registrasi');
+Route::post('/reg',[AuthController::class, 'registrasi']);
+

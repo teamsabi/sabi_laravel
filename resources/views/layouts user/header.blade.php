@@ -57,7 +57,7 @@
                             </div>
                             <!-- Login Button -->
                             <div class="header-right-btn d-none d-lg-block ml-3" style="display: flex; align-items: center; padding: 5px;">
-                                <a href="#" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>
+                                <a href="{{ route('auth.login') }}" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>
                             </div>                            
                         </div>
                     </div>
