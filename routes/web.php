@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
+use PHPUnit\Util\Http\Downloader;
 
 // Halaman utama (Welcome)
 Route::get('/', function () {
@@ -81,6 +82,10 @@ Route::prefix('JTICare')->group(function () {
     Route::get('/donasi', function () {
         return view('user.donasi.index');
     })->name('donasi.index');
+
+    Route::get('/download', function () {
+        return view('user.download.index');
+    })->name('download.index');
 });
 
 Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');

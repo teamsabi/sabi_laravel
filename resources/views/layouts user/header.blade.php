@@ -30,7 +30,7 @@
                                 <ul id="navigation" class="d-flex align-items-center justify-content-center">                                                                                          
                                     <li><a href="{{ route('home.index') }}" style="font-weight: bold;">Beranda</a></li>
                                     <li><a href="{{ route('donasi.index') }}" style="font-weight: bold;">Donasi</a></li>
-                                    <li><a href="#" style="font-weight: bold;">Download</a></li>
+                                    <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
                                     <li><a href="#" style="font-weight: bold;">Tentang Kami</a>
                                         <ul class="submenu">
                                             <li><a href="#" style="font-weight: bold;">Tentang Kami</a></li>
