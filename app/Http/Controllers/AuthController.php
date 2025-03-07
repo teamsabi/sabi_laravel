@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AuthMail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -27,7 +30,17 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($infologin)){
-            return "Login Success";
+            if(Auth::user()->email_verified_at != null){
+                if(Auth::user()->role === 'admin'){
+                    return redirect()->route('admin')->with('success', 'Halo Admin, anda berhasil login');
+                }else if(Auth::user()->role === 'user'){
+                    return redirect()->route('user')->with('success', 'Anda berhasil login');
+                }
+            } else {
+                Auth::logout();
+                return redirect()->route('auth.login')->withErrors('Akun anda belum aktif. Harap verifikasi terlebih dahulu');
+            }
+
         } else{
             return redirect()->route('auth.login')->withErrors('Email atau Password salah');
         }
@@ -65,6 +78,27 @@ class AuthController extends Controller
             'verify_key' => $str,
         ];
 
+        User::create($inforegister);
 
+        $detail = [
+            'name' => $inforegister['nama_lengkap'],
+            'role' => 'user',
+            'website' => 'JTICare - Pendaftaran Akun JTICare Verify',
+            'url' => 'http://' .request()->getHttpHost() . "/" . "verify/" .$inforegister['verify_key'],
+        ];
+
+        Mail::to($inforegister['email'])->send(new AuthMail($detail));
+
+        return redirect()->route('auth.login')->with('success', 'Link Verifikasi telah dikirim ke email anda, Cek email anda untuk melakukan verifikasi');
+    }
+
+    function verify($verify_key){
+        $keyCheck = User::select('verify_key')
+        ->where('verify_key', $verify_key)
+        ->exists();
+
+        if($keyCheck){
+            $user = User::where('verify_key', $verify_key)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
+        }
     }
 }
