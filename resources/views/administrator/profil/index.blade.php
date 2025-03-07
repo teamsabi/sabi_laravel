@@ -10,26 +10,30 @@
             </div>
             <div class="card-body">
                 <div class="text-center mb-3">
-                    <img src="{{ asset('template/assets/img/profile.jpg') }}" alt="Foto Profil" class="img-thumbnail rounded-circle" width="180">
+                    <img src="{{ asset(Auth::user()->foto_profil ? 'storage/' . Auth::user()->foto_profil : 'template/assets/img/Foto Team/Syaiful.png') }}" 
+                         alt="Foto Profil" 
+                         class="img-thumbnail rounded-circle" 
+                         width="180">
                 </div>
                 <div class="text-center mb-3">
                     <label for="photo" class="text-primary" style="cursor: pointer; font-weight: bold; text-decoration: underline;">Ganti Foto</label>
-                    <input type="file" name="photo" id="photo" class="d-none" accept="image/*">
+                    <input type="file" name="foto_profil" id="photo" class="d-none" accept="image/*" form="updateProfileForm">
                 </div>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form id="updateProfileForm" action="{{ route('profil.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT') <!-- Gunakan method PUT untuk update -->
 
                     <div class="form-group mb-3">
-                        <label for="name">Nama Lengkap</label>
-                        <input type="text" name="name" class="form-control" value="Tiar Ganteng" required>
+                        <label for="nama_lengkap">Nama Lengkap</label>
+                        <input type="text" name="nama_lengkap" class="form-control" value="{{ Auth::user()->nama_lengkap }}" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" value="tiar@gmail.com" required>
+                        <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="phone">No WhatsApp</label>
-                        <input type="text" name="phone" class="form-control" value="081234567890">
+                        <label for="no_whatsapp">No WhatsApp</label>
+                        <input type="text" name="no_whatsapp" class="form-control" value="{{ Auth::user()->no_whatsapp }}">
                     </div>
                     <div class="form-group text-end mb-4">
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

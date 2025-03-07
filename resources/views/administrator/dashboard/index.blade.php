@@ -1,6 +1,21 @@
 @extends('app')
 @section('content')
 
+@if (Session::has('success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                title: "Berhasil!",
+                text: "{{ Session::get('success') }}",
+                icon: "success",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            });
+        });
+    </script>
+@endif
+
 <div class="row">
     <div class="col-sm-6 col-md-3">
         <div class="card card-stats card-round">

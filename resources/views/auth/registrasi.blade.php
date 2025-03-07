@@ -3,6 +3,7 @@
     <title>Registrasi - JTICare</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background-color: #4A90E2;
@@ -64,7 +65,6 @@
 <body>
     <div class="registrasi-container">
         <h2>Registrasi</h2>
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -82,25 +82,24 @@
                 </ul>
             </div>    
         @endif
-
-        <form action="{{ route('auth.registrasi') }}" method="POST">
+        <form id="registerForm" action="{{ route('auth.registrasi') }}" method="POST">
             @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama_lengkap" type="text"/>
+                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" type="text"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="email" type="email"/>
+                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="email" value="{{ old('email') }}" type="email"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_whatsapp" type="number"/>
+                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_whatsapp" value="{{ old('no_whatsapp') }}" type="number"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" type="password"/>
+                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" value="{{ old('password') }}" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'eyeIcon1')">
                         <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
@@ -140,6 +139,25 @@
                 eyeIcon.classList.add("fa-eye");
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("registerForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Apakah Anda Yakin?",
+                    text: "Apakah Anda yakin data sudah benar?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, Daftar!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

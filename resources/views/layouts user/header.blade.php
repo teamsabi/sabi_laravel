@@ -36,6 +36,14 @@
                                             <li><a href="#" style="font-weight: bold;">Tentang Kami</a></li>
                                             <li><a href="#" style="font-weight: bold;">FAQ</a></li>
                                             <li><a href="#" style="font-weight: bold;">Hubungi Kami</a></li>
+                                            <li>
+                                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                  </form>
+                                                  <a class="dropdown-item" href="#" onclick="confirmLogout(event)">
+                                                    Logout
+                                                  </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -71,4 +79,25 @@
 </div>
 <!-- Header End -->
 </header>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmLogout(event) {
+      event.preventDefault();
+  
+      Swal.fire({
+        title: 'Apakah Anda yakin ingin logout?',
+        text: "Anda harus login kembali untuk mengakses akun.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Logout!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('logout-form').submit();
+        }
+      });
+    }
+  </script>
 

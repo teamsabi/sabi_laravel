@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use PHPUnit\Util\Http\Downloader;
 
@@ -18,7 +19,7 @@ Route::get('/sesi', function () {
 })->name('auth.login');
 
 // Route untuk Registrasi
-Route::get('/registrasi', function () {
+Route::get('/reg', function () {
     return view('auth.registrasi');
 })->name('auth.registrasi');
 
@@ -90,19 +91,32 @@ Route::prefix('JTICare')->group(function () {
     })->name('download.index');
 });
 
-
-Route::middleware(['guest'])->group(function(){ 
-    Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');
-    Route::post('/sesi',[AuthController::class, 'login']);
-    Route::get('/reg',[AuthController::class,'create'])->name('auth.registrasi');
-    Route::post('/reg',[AuthController::class, 'register']);
+Route::middleware('guest')->group(function () {
+    Route::get('/sesi', [AuthController::class, 'index'])->name('auth.login');
+    Route::post('/sesi', [AuthController::class, 'login']);
+    Route::get('/reg', [AuthController::class, 'create'])->name('auth.registrasi');
+    Route::post('/reg', [AuthController::class, 'register']);
     Route::get('/verify/{verify_key}', [AuthController::class, 'verify']);
 });
 
-Route::middleware(['auth'])->group(function() {
-    Route::redirect('/home', '/dashboard');
-    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/user', [UserController::class, 'index'])->name('home.index');
+Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
+Route::get('/user', [UserController::class, 'index'])->name('home.index');
+
+
+Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::middleware(['auth'])->group(function () {
+    // Hanya admin yang bisa mengakses dashboard admin
+    Route::get('/admin', [AdminController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('dashboard');
+
+    // Hanya user biasa yang bisa mengakses halaman user
+    Route::get('/user', [UserController::class, 'index'])
+        ->middleware('role:user')
+        ->name('home.index');
 });
 
 

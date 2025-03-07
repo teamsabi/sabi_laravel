@@ -13,6 +13,7 @@
 <script src="{{asset('template/assets/js/kaiadmin.min.js')}}"></script>
 <script src="{{asset('template/assets/js/setting-demo.js')}}"></script>
 <script src="{{asset('template/assets/js/demo.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   var myBarChart = new Chart(barChart, {

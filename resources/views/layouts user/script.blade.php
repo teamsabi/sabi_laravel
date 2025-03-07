@@ -23,4 +23,5 @@
 <script src="{{ asset('template user/assets/js/jquery.ajaxchimp.min.js') }}"></script>	
 <script src="{{ asset('template user/assets/js/plugins.js') }}"></script>
 <script src="{{ asset('template user/assets/js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

@@ -193,7 +193,7 @@ Circles.create({
 $.notify({
 	icon: 'icon-bell',
 	title: 'JTICare',
-	message: 'Tiar ganteng 1 semesta woiii anjayyy',
+	message: 'Halo Admin, Selamat Datang di Dashboard Admin, Semoga Harimu Menyenangkan!!',
 },{
 	type: 'secondary',
 	placement: {
