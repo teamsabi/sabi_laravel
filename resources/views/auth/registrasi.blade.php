@@ -64,18 +64,38 @@
 <body>
     <div class="registrasi-container">
         <h2>Registrasi</h2>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+            </div>    
+        @endif
+
+        @if (Session::get('success'))
+            <div class="alert alert-success alert-dismissable fade show">
+                <ul>
+                    <li>{{ Session::get('success') }}</li>
+                </ul>
+            </div>    
+        @endif
+
         <form action="{{ route('auth.registrasi') }}" method="POST">
+            @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama" type="text"/>
+                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama_lengkap" type="text"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="emailreg" type="email"/>
+                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="email" type="email"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_wa" type="number"/>
+                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_whatsapp" type="number"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
@@ -89,7 +109,7 @@
             <div class="mb-3 text-start">
                 <label class="form-label" for="rePassword">Konfirmasi Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" name="cpassword" type="password"/>
+                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" name="confirm" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('rePassword', 'eyeIcon2')">
                         <i class="fas fa-eye" id="eyeIcon2"></i>
                     </span>
@@ -97,6 +117,7 @@
             </div>
             <button class="btn btn-primary" type="submit">Daftar</button>
         </form>
+        
         <div class="register-link">Sudah Punya Akun?
             <a href="{{ route('auth.login') }}">Masuk</a>
         </div>

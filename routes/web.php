@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use PHPUnit\Util\Http\Downloader;
 
 // Halaman utama (Welcome)
@@ -11,7 +13,7 @@ Route::get('/', function () {
 });
 
 // Route untuk Login
-Route::get('/login', function () {
+Route::get('/sesi', function () {
     return view('auth.login');
 })->name('auth.login');
 
@@ -88,8 +90,19 @@ Route::prefix('JTICare')->group(function () {
     })->name('download.index');
 });
 
-Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');
-Route::post('/sesi',[AuthController::class, 'login']);
-Route::get('/reg',[AuthController::class,'create'])->name('auth.registrasi');
-Route::post('/reg',[AuthController::class, 'registrasi']);
+
+Route::middleware(['guest'])->group(function(){ 
+    Route::get('/sesi',[AuthController::class,'index'])->name('auth.login');
+    Route::post('/sesi',[AuthController::class, 'login']);
+    Route::get('/reg',[AuthController::class,'create'])->name('auth.registrasi');
+    Route::post('/reg',[AuthController::class, 'register']);
+    Route::get('/verify/{verify_key}', [AuthController::class, 'verify']);
+});
+
+Route::middleware(['auth'])->group(function() {
+    Route::redirect('/home', '/dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/user', [UserController::class, 'index'])->name('home.index');
+});
+
 

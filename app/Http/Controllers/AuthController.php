@@ -17,34 +17,30 @@ class AuthController extends Controller
 
     function login(Request $request){
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ], [
             'email.required' => 'Email Wajib Diisi',
+            'email.email' => 'Format email tidak valid',
             'password.required' => 'Password Wajib Diisi',
         ]);
-
-        $infologin = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-
+    
+        $infologin = $request->only('email', 'password');
+    
         if (Auth::attempt($infologin)){
             if(Auth::user()->email_verified_at != null){
-                if(Auth::user()->role === 'admin'){
-                    return redirect()->route('admin')->with('success', 'Halo Admin, anda berhasil login');
-                }else if(Auth::user()->role === 'user'){
-                    return redirect()->route('user')->with('success', 'Anda berhasil login');
-                }
+                return Auth::user()->role === 'admin' 
+                    ? redirect()->route('dashboards')->with('success', 'Halo Admin, anda berhasil login')
+                    : redirect()->route('dashboard')->with('success', 'Anda berhasil login');
             } else {
                 Auth::logout();
                 return redirect()->route('auth.login')->withErrors('Akun anda belum aktif. Harap verifikasi terlebih dahulu');
             }
-
-        } else{
+        } else {
             return redirect()->route('auth.login')->withErrors('Email atau Password salah');
         }
     }
+    
 
     function create(){
         return view('auth/registrasi');
@@ -56,7 +52,7 @@ class AuthController extends Controller
 
         $request->validate([
             'nama_lengkap' => 'required|min:5',
-            'email' => 'required|unique:users,admin',
+            'email' => 'required|unique:users|email',
             'password' => 'required|min:6',
             'no_whatsapp' => 'required|min:10',
         ], [
@@ -80,14 +76,15 @@ class AuthController extends Controller
 
         User::create($inforegister);
 
-        $detail = [
+        $details = [
             'name' => $inforegister['nama_lengkap'],
             'role' => 'user',
+            'datetime' => date('Y-m-d H:i:s'),
             'website' => 'JTICare - Pendaftaran Akun JTICare Verify',
-            'url' => 'http://' .request()->getHttpHost() . "/" . "verify/" .$inforegister['verify_key'],
+            'url' => 'http://' . request()->getHttpHost() . "/" . "verify/" . $inforegister['verify_key'],
         ];
 
-        Mail::to($inforegister['email'])->send(new AuthMail($detail));
+        Mail::to($inforegister['email'])->send(new AuthMail($details));
 
         return redirect()->route('auth.login')->with('success', 'Link Verifikasi telah dikirim ke email anda, Cek email anda untuk melakukan verifikasi');
     }
@@ -99,6 +96,10 @@ class AuthController extends Controller
 
         if($keyCheck){
             $user = User::where('verify_key', $verify_key)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
+
+            return redirect()->route('auth.login')->with('success', 'Verifikasi Berhasil. Anda Sudah Aktif');
+        }else {
+            return redirect()->route('auth.login')->withErrors('Key tidak valid. Pastikan Telah melakukan register')->withInput();
         }
     }
 }

@@ -87,9 +87,26 @@
     <div class="login-container">
         <h2>Login</h2>
 
-        @extends('pesan.alert')
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+            </div>    
+        @endif
+
+        @if (Session::get('success'))
+            <div class="alert alert-success alert-dismissable fade show">
+                <ul>
+                    <li>{{ Session::get('success') }}</li>
+                </ul>
+            </div>    
+        @endif
 
         <form action="{{ route('auth.login') }}" method="POST">
+            @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
                 <input class="form-control" id="email" placeholder="Masukkan Email" name="email" value="{{ old('email') }}" type="email"/>
@@ -97,7 +114,7 @@
             <div class="mb-3 text-start">
                 <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" value="{{ old('password') }}" type="password"/>
+                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword()">
                         <i class="fas fa-eye" id="eyeIcon"></i>
                     </span>
@@ -106,6 +123,7 @@
             </div>
             <button class="btn btn-primary" type="submit">Masuk</button>
         </form>
+        
         <div class="register-link">Belum Punya Akun?
             <a href="{{ route('auth.registrasi') }}">Daftar</a>
         </div>
