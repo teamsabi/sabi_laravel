@@ -12,10 +12,10 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
                             <div class="footer-tittle">
                                 <h4>Buletin</h4>
-                                <p style="color: #ffffffb2;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
+                                <p style="color: #ffffffb2; text-align: justify;">JTICare hadir sebagai wadah kepedulian bagi mahasiswa dan keluarga. Setiap donasi Anda meringankan beban mereka dan membawa harapan baru. Mari bersama membangun solidaritas!</p>
                             </div>
                         </div>
                     </div>

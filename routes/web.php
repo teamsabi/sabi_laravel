@@ -93,6 +93,10 @@ Route::prefix('JTICare')->group(function () {
     Route::get('/about', function () {
         return view('user.about.index');
     })->name('about.index');
+
+    Route::get('/faq', function () {
+        return view('user.FAQ.index');
+    })->name('FAQ.index');
 });
 
 Route::middleware('guest')->group(function () {

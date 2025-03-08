@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
                 <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
                     <div class="cases-img text-center mb-3">
                         <img src="{{ asset('template user/assets/img/gallery/case1.png') }}" alt="" class="img-fluid rounded">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>      
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
                 <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
                     <div class="cases-img text-center mb-3">
                         <img src="{{ asset('template user/assets/img/gallery/case2.png') }}" alt="" class="img-fluid rounded">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>      
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
                 <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
                     <div class="cases-img text-center mb-3">
                         <img src="{{ asset('template user/assets/img/gallery/case3.png') }}" alt="" class="img-fluid rounded">
@@ -174,13 +174,13 @@
                     <div class="section-tittle mb-35">
                         <h2>Apa itu JTICare?</h2>
                     </div>
-                    <p style="text-align: justify;">JTI CARE adalah sebuah aplikasi yang memfasilitasi penggalangan dana untuk berbagai keperluan sosial, seperti bantuan bagi keluarga yang berduka, bantuan medis, dan aksi sosial lainnya. Dengan fitur yang transparan dan mudah digunakan, JTICare memungkinkan anggota komunitas untuk berkontribusi secara cepat dan tepat sasaran.</p>
+                    <p style="text-align: justify;">JTICARE adalah sebuah aplikasi yang memfasilitasi penggalangan dana untuk berbagai keperluan sosial, seperti bantuan bagi keluarga yang berduka, bantuan medis, dan aksi sosial lainnya. Dengan fitur yang transparan dan mudah digunakan, JTICare memungkinkan anggota komunitas untuk berkontribusi secara cepat dan tepat sasaran.</p>
                 </div>
                 <a href="{{ route('about.index') }}" class="btn" style="border-radius: 10px;">Tentang Kami</a>
             </div>
             <div class="col-lg-6 col-md-12">
                 <!-- about-img -->
-                <div class="about-img ">
+                <div class="about-img">
                     <div class="about-font-img d-none d-lg-block">
                         <img src="{{ asset('template user/assets/img/gallery/about2.png') }}" alt="">
                     </div>
