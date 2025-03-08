@@ -25,7 +25,8 @@
         }
         .registrasi-container h2 {
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
         }
         .form-control {
             margin-bottom: 15px;

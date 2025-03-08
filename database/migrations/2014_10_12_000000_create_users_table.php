@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_whatsapp')->unique();
             $table->string('foto_profil')->nullable();
+            $table->string('verify_key');
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();

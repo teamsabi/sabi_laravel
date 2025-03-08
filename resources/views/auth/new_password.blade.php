@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Login - JTICare</title>
+    <title>Lupa Password - JTICare</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 20px;
         }
-        .login-container {
+        .new-container {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
@@ -25,10 +25,10 @@
             max-width: 400px;
             box-sizing: border-box;
         }
-        .login-container h2 {
+        .new-container h2 {
             font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-size: 1.4rem;
         }
         .form-control {
             margin-bottom: 2px;
@@ -63,19 +63,20 @@
         }
 
         @media (max-width: 576px) {
-            .login-container {
+            .new-container {
                 padding: 20px;
                 width: 90%;
             }
-            .login-container h2 {
+            .new-container h2 {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
+    <div class="new-container">
+        <h2 style="text-align: left;">Kata Sandi Baru</h2>
+        <p style="text-align: left;  color: gray;">Masukan Kata Sandi baru</p>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -95,47 +96,47 @@
             </div>    
         @endif
 
-        <form action="{{ route('auth.login') }}" method="POST">
+        <form action="#" method="POST">
             @csrf
             <div class="mb-3 text-start">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email" name="email" value="{{ old('email') }}" type="email"/>
-            </div>
-            <div class="mb-3 text-start">
-                <label class="form-label" for="password">Kata Sandi</label>
+                <label class="form-label" for="newPassword">Kata Sandi Baru</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" type="password"/>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword()">
-                        <i class="fas fa-eye" id="eyeIcon"></i>
+                    <input class="form-control pe-5" id="newPassword" placeholder="Masukkan Kata Sandi Baru" name="newPassword" type="password"/>
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('newPassword', 'eyeIcon1')">
+                        <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
                 </div>
-                <a class="forgot-password" href="{{ route('auth.lupa_password') }}">Lupa Kata Sandi?</a>
             </div>
-            <button class="btn btn-primary" type="submit">Masuk</button>
+            <div class="mb-3 text-start">
+                <label class="form-label" for="repassword">Konfirmasi Kata Sandi</label>
+                <div class="position-relative">
+                    <input class="form-control pe-5" id="repassword" placeholder="Konfirmasi Kata Sandi Baru" name="repassword" type="password"/>
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('repassword', 'eyeIcon2')">
+                        <i class="fas fa-eye" id="eyeIcon2"></i>
+                    </span>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Ubah Kata Sandi</button>
         </form>
-        
-        <div class="register-link">Belum Punya Akun?
-            <a href="{{ route('auth.registrasi') }}">Daftar</a>
-        </div>
         <div class="logo">
             <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
         </div>
-    </div>
-
-    <script>
-        function togglePassword() {
-            let passwordInput = document.getElementById("password");
-            let eyeIcon = document.getElementById("eyeIcon");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
+        
+        <script>
+            function togglePassword(inputId, eyeIconId) {
+                let passwordInput = document.getElementById(inputId);
+                let eyeIcon = document.getElementById(eyeIconId);
+                
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    eyeIcon.classList.remove("fa-eye");
+                    eyeIcon.classList.add("fa-eye-slash");
+                } else {
+                    passwordInput.type = "password";
+                    eyeIcon.classList.remove("fa-eye-slash");
+                    eyeIcon.classList.add("fa-eye");
+                }
             }
-        }
-    </script>
-</body>
+        </script>
+    </body>
 </html>

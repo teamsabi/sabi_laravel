@@ -23,6 +23,26 @@ Route::get('/reg', function () {
     return view('auth.registrasi');
 })->name('auth.registrasi');
 
+// Route untuk Lupa Password
+Route::get('/lupa-password', function () {
+    return view('auth.lupa_password');
+})->name('auth.lupa_password');
+
+// Route untuk Lupa Password
+Route::prefix('lupa-password')->group(function() {
+    Route::get('/', function () {
+        return view('auth.lupa_password');
+    })->name('auth.lupa_password');
+
+    Route::get('/kode-otp', function () {
+        return view('auth.kode_otp');
+    })->name('auth.kode_otp');
+
+    Route::get('/new-password', function () {
+        return view('auth.new_password');
+    })->name('auth.new_password');
+});
+
 // Route untuk Profile
 Route::get('/profile', function () {
     return view('administrator.profil.index'); 
