@@ -10,7 +10,7 @@ use PHPUnit\Util\Http\Downloader;
 
 // Halaman utama (Welcome)
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home.index');
 });
 
 // Route untuk Login
@@ -29,7 +29,7 @@ Route::get('/profile', function () {
 })->name('profil.index');
 
 // Route untuk Dashboard
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('administrator.dashboard.index'); 
 })->name('dashboard');
 
@@ -60,6 +60,11 @@ Route::get('/data-donatur', function () {
     return view('administrator.data donatur.index'); 
 })->name('donatur.index');
 
+// Route untuk Profile User
+Route::get('/profile', function () {
+    return view('user.profil.index'); 
+})->name('profil.index');
+
 // Route untuk Laporan
 Route::prefix('laporan')->group(function() {
     Route::get('/',function () {
@@ -72,12 +77,12 @@ Route::prefix('laporan')->group(function() {
 });
 
 // Route untuk Halaman Index User
-Route::get('/JTICare', function () {
+Route::get('/user', function () {
     return view('user.home.index');
 })->name('home.index');
 
 // Route untuk Kategori Donasi
-Route::prefix('JTICare')->group(function () {
+Route::prefix('user')->group(function () {
     Route::get('/', function () {
         return view('user.home.index');
     })->name('home.index');

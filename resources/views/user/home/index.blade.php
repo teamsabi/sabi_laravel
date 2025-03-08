@@ -1,6 +1,17 @@
 @extends('app_user')
 @section('content')
 
+@if (Session::has('success'))
+    <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: "{{ Session::get('success') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
 <!-- Beranda Start-->
 <div class="slider-area">
     <div class="slider-active">

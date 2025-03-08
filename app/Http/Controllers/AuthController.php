@@ -27,13 +27,14 @@ class AuthController extends Controller
     
         $infologin = $request->only('email', 'password');
     
-        if (Auth::attempt($infologin)){
-            if(Auth::user()->email_verified_at != null){
-                $message = Auth::user()->role === 'admin' 
-                    ? 'Halo Admin, anda berhasil login'
-                    : 'Anda berhasil login';
-    
-                return Auth::user()->role === 'admin' 
+        if (Auth::attempt($infologin)) {
+            if (Auth::user()->email_verified_at != null) {
+                $user = Auth::user();
+                $message = $user->role === 'admin'
+                    ? 'Halo '. $user->nama_lengkap.', anda berhasil login sebagai admin'
+                    : 'Halo '. $user->nama_lengkap . ', selamat anda berhasil login';
+        
+                return $user->role === 'admin'
                     ? redirect()->route('dashboard')->with('success', $message)
                     : redirect()->route('home.index')->with('success', $message);
             } else {
