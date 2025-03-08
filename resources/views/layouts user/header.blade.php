@@ -33,7 +33,7 @@
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
                                     <li><a href="#" style="font-weight: bold;">Tentang Kami</a>
                                         <ul class="submenu">
-                                            <li><a href="#" style="font-weight: bold;">Tentang Kami</a></li>
+                                            <li><a href="{{ route('about.index') }}" style="font-weight: bold;">Tentang Kami</a></li>
                                             <li><a href="#" style="font-weight: bold;">FAQ</a></li>
                                             <li><a href="#" style="font-weight: bold;">Hubungi Kami</a></li>
                                             <li>

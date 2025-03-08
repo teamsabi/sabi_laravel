@@ -89,6 +89,10 @@ Route::prefix('JTICare')->group(function () {
     Route::get('/download', function () {
         return view('user.download.index');
     })->name('download.index');
+
+    Route::get('/about', function () {
+        return view('user.about.index');
+    })->name('about.index');
 });
 
 Route::middleware('guest')->group(function () {

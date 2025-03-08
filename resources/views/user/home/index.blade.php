@@ -131,8 +131,41 @@
 </div>
 <!-- Katalog Donasi End-->
 
+<!-- Jumlah Donatur & Donasi Start -->
+<div class="count-down-area section-bg" style="background-image: url('{{ asset('template user/assets/img/gallery/Cover About.png') }}'); background-size: cover; background-position: center;">
+    <div class="container">
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-lg-12 col-md-12">
+                <div class="count-down-wrapper">
+                    <div class="row justify-content-center text-white">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="single-counter text-center">
+                                <i class="fas fa-users fa-3x"></i>
+                                <p class="fw-bold fs-2 mb-0">
+                                    <span class="counter color-green">180</span>
+                                </p>
+                                <p class="mb-0">Orang Telah Berdonasi</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="single-counter text-center">
+                                <i class="fas fa-credit-card fa-3x"></i>
+                                <p class="fw-bold fs-2 mb-0">
+                                    Rp <span class="counter color-green">3,200,000</span>
+                                </p>
+                                <p class="mb-0">Dana Terkumpul</p>
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<!--? Jumlah Donatur & Donasi End-->
+
 <!--? Tentang Kami Start-->
-<section class="about-low-area section-padding2" style="padding-top: 30px;">
+<section class="about-low-area section-padding2" style="padding-top: 120px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-10">
@@ -141,9 +174,9 @@
                     <div class="section-tittle mb-35">
                         <h2>Apa itu JTICare?</h2>
                     </div>
-                    <p>JTI CARE adalah sebuah aplikasi yang memfasilitasi penggalangan dana untuk berbagai keperluan sosial, seperti bantuan bagi keluarga yang berduka, bantuan medis, dan aksi sosial lainnya. Dengan fitur yang transparan dan mudah digunakan, JTICare memungkinkan anggota komunitas untuk berkontribusi secara cepat dan tepat sasaran.</p>
+                    <p style="text-align: justify;">JTI CARE adalah sebuah aplikasi yang memfasilitasi penggalangan dana untuk berbagai keperluan sosial, seperti bantuan bagi keluarga yang berduka, bantuan medis, dan aksi sosial lainnya. Dengan fitur yang transparan dan mudah digunakan, JTICare memungkinkan anggota komunitas untuk berkontribusi secara cepat dan tepat sasaran.</p>
                 </div>
-                <a href="#" class="btn" style="border-radius: 10px;">Tentang Kami</a>
+                <a href="{{ route('about.index') }}" class="btn" style="border-radius: 10px;">Tentang Kami</a>
             </div>
             <div class="col-lg-6 col-md-12">
                 <!-- about-img -->
@@ -263,7 +296,7 @@
                         <div class="testimonial-caption">
                             <div class="testimonial-founder">
                                 <div class="founder-img mb-40">
-                                    <img src="{{ asset('template/assets/img/Foto Team/Putra.png') }}" 
+                                    <img src="{{ asset('template/assets/img/Foto Team/Ardy.png') }}" 
                                          class="rounded-circle img-fluid" width="150" height="150" alt="">
                                     <span>Achmad Sofyan Raditya Cahyadi</span>
                                     <p>Developer Mobile</p>
