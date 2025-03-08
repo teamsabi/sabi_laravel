@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
@@ -22,26 +23,6 @@ Route::get('/sesi', function () {
 Route::get('/reg', function () {
     return view('auth.registrasi');
 })->name('auth.registrasi');
-
-// Route untuk Lupa Password
-Route::get('/lupa-password', function () {
-    return view('auth.lupa_password');
-})->name('auth.lupa_password');
-
-// Route untuk Lupa Password
-Route::prefix('lupa-password')->group(function() {
-    Route::get('/', function () {
-        return view('auth.lupa_password');
-    })->name('auth.lupa_password');
-
-    Route::get('/kode-otp', function () {
-        return view('auth.kode_otp');
-    })->name('auth.kode_otp');
-
-    Route::get('/new-password', function () {
-        return view('auth.new_password');
-    })->name('auth.new_password');
-});
 
 // Route untuk Profile
 Route::get('/profile', function () {
@@ -152,4 +133,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('home.index');
 });
 
+Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
+Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('akun.destroy');
 

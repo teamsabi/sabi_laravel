@@ -38,101 +38,37 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($users as $user)
                         <tr>
-                            <td>Syaiful Amin</td>
-                            <td>ipul@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>-</td>
-                            <td>admin123</td>
-                            <td>Admin</td>
-                            <td>11-01-2025</td>
-                            <td>                              
+                            <td>{{ $user->nama_lengkap }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->no_whatsapp }}</td>
+                            <td>
+                                @if($user->foto_profil)
+                                    <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" width="40" class="rounded-circle">
+                                @else
+                                    <span>-</span>
+                                @endif
+                            </td>
+                            <td>****</td> {{-- Jangan tampilkan password untuk alasan keamanan --}}
+                            <td>{{ ucfirst($user->role) }}</td>
+                            <td>{{ $user->created_at->format('d-m-Y') }}</td>
+                            <td>
                                 <div class="form-button-action d-flex gap-2">
-                                    <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
+                                    <a href="{{ route('akun.edit', $user->id) }}" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil-alt text-white"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
+                                    </a>
+                                    <form action="{{ route('akun.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus akun ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
+                                            <i class="fa fa-trash text-white"></i>
+                                        </button>
+                                    </form>
                                 </div>
-                            </td>                                
+                            </td>
                         </tr>
-                        <tr>
-                            <td>Dwi Rasyari Putra</td>
-                            <td>putra@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>-</td>
-                            <td>admin123</td>
-                            <td>Admin</td>
-                            <td>11-01-2025</td>
-                            <td>                              
-                                <div class="form-button-action d-flex gap-2">
-                                    <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="fa fa-pencil-alt text-white"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
-                                </div>
-                            </td>                                
-                        </tr>
-                        <tr>
-                            <td>Nadhifatus Aulia</td>
-                            <td>nadhiu@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>-</td>
-                            <td>admin123</td>
-                            <td>Admin</td>
-                            <td>11-01-2025</td>
-                            <td>                              
-                                <div class="form-button-action d-flex gap-2">
-                                    <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"  style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="fa fa-pencil-alt text-white"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
-                                </div>
-                            </td>                                
-                        </tr>
-                        <tr>
-                            <td>Kariena Adelia</td>
-                            <td>karin@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>-</td>
-                            <td>admin123</td>
-                            <td>Admin</td>
-                            <td>11-01-2025</td>
-                            <td>                              
-                                <div class="form-button-action d-flex gap-2">
-                                    <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="fa fa-pencil-alt text-white"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
-                                </div>
-                            </td>                                
-                        </tr>
-                        <tr>
-                            <td>Achmad Sofyan</td>
-                            <td>ardy@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>-</td>
-                            <td>admin123</td>
-                            <td>Admin</td>
-                            <td>11-01-2025</td>
-                            <td>                              
-                                <div class="form-button-action d-flex gap-2">
-                                    <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="fa fa-pencil-alt text-white"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
-                                </div>
-                            </td>                                
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

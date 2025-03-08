@@ -73,4 +73,17 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: "{{ session('success') }}",
+        timer: 3000,
+        showConfirmButton: false
+    });
+</script>
+@endif
+
 @endsection
