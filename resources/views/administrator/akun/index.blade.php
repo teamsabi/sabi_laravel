@@ -58,13 +58,15 @@
                                     <a href="{{ route('akun.edit', $user->id) }}" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil-alt text-white"></i>
                                     </a>
-                                    <form action="{{ route('akun.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus akun ini?')">
+                                    <form id="delete-form-{{ $user->id }}" action="{{ route('akun.destroy', $user->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus">
-                                            <i class="fa fa-trash text-white"></i>
-                                        </button>
                                     </form>
+                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus"
+                                        onclick="confirmDelete({{ $user->id }})">
+                                        <i class="fa fa-trash text-white"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -75,4 +77,36 @@
         </div>
     </div>
 </div>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sukses!',
+        text: "{{ session('success') }}",
+        timer: 3000,
+        showConfirmButton: false
+    });
+</script>
+@endif
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(userId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin menghapus data?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${userId}`).submit();
+            }
+        });
+    }
+    </script>
 @endsection

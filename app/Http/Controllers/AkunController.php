@@ -24,6 +24,6 @@ class AkunController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('akun.index')->with('success', 'Akun berhasil dihapus.');
+        return redirect()->route('akun.index')->with('success', 'Data Akun berhasil dihapus.');
     }
 }
