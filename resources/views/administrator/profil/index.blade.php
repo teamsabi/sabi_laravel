@@ -10,10 +10,10 @@
             </div>
             <div class="card-body">
                 <div class="text-center mb-3">
-                    <img src="{{ asset(Auth::user()->foto_profil ? 'storage/' . Auth::user()->foto_profil : 'template/assets/img/Foto Team/Syaiful.png') }}" 
-                         alt="Foto Profil" 
-                         class="img-thumbnail rounded-circle" 
-                         width="180">
+                    <img src="{{ Auth::user()->foto_profil_url }}" 
+                    alt="Foto Profil" 
+                    class="img-thumbnail rounded-circle" 
+                    style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%;">
                 </div>
                 <div class="text-center mb-3">
                     <label for="photo" class="text-primary" style="cursor: pointer; font-weight: bold; text-decoration: underline;">Ganti Foto</label>
@@ -21,7 +21,7 @@
                 </div>
                 <form id="updateProfileForm" action="{{ route('profil.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT') <!-- Gunakan method PUT untuk update -->
+                    @method('PUT')
 
                     <div class="form-group mb-3">
                         <label for="nama_lengkap">Nama Lengkap</label>
@@ -43,5 +43,11 @@
         </div>
     </div>
 </div>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 @endsection
