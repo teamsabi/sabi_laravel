@@ -156,4 +156,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
 Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
 Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('akun.destroy');
+Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
+Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
+Route::post('/akun', [AkunController::class, 'store'])->name('akun.store');
+
 

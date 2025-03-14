@@ -33,14 +33,15 @@ class User extends Authenticatable
 
     public function setFotoProfilAttribute($value)
     {
-        if ($value) {
+        if ($value instanceof \Illuminate\Http\UploadedFile) {
+            // Hapus file lama jika ada
             if ($this->foto_profil && Storage::disk('public')->exists($this->foto_profil)) {
                 Storage::disk('public')->delete($this->foto_profil);
             }
-
+    
             $fileName = time() . '_' . $value->getClientOriginalName();
             $path = $value->storeAs('profile_pictures', $fileName, 'public');
-
+    
             $this->attributes['foto_profil'] = $path;
         }
     }

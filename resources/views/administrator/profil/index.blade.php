@@ -12,7 +12,7 @@
                 <div class="text-center mb-3">
                     <img src="{{ Auth::user()->foto_profil_url }}" 
                     alt="Foto Profil" 
-                    class="img-thumbnail rounded-circle" 
+                    class="img-thumbnail rounded-circle"
                     style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%;">
                 </div>
                 <div class="text-center mb-3">
