@@ -16,6 +16,7 @@
                         class="img-thumbnail rounded-circle"
                         style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%;">
                 </div>
+                
                 {{-- Input Ganti Foto --}}
                 <div class="text-center mb-3">
                     <label for="photo" class="text-primary" style="cursor: pointer; font-weight: bold; text-decoration: underline;">Ganti Foto</label>
@@ -50,7 +51,7 @@
 
                     {{-- Tombol Submit --}}
                     <div class="form-group text-end">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="btnSubmit">
                             <i class="fa fa-save me-1"></i> Simpan Perubahan
                         </button>
                     </div>
@@ -63,12 +64,14 @@
 {{-- Notifikasi SweetAlert --}}
 @if(session('success'))
 <script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Sukses!',
-        text: "{{ session('success') }}",
-        timer: 3000,
-        showConfirmButton: false
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: "{{ session('success') }}",
+            timer: 3000,
+            showConfirmButton: false
+        });
     });
 </script>
 @endif
@@ -85,5 +88,24 @@
             reader.readAsDataURL(file);
         }
     });
+
+    // Konfirmasi sebelum submit
+    document.getElementById('btnSubmit').addEventListener('click', function(event) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: "Data profil akan diperbarui!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Simpan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('updateProfileForm').submit(); // Submit form jika user konfirmasi
+            }
+        });
+    });
 </script>
+
 @endsection
