@@ -12,72 +12,80 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                <table id="basic-datatables" class="display table table-striped table-hover">
-                    <thead>
-                        <tr>
-                        <th>Nama Lengkap</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Foto Profil</th>
-                        <th>Password</th>
-                        <th>Role</th>
-                        <th>Tanggal Buat</th>
-                        <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                        <th>Nama Lengkap</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Foto Profil</th>
-                        <th>Password</th>
-                        <th>Role</th>
-                        <th>Tanggal Buat</th>
-                        <th>Aksi</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->nama_lengkap }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->no_whatsapp }}</td>
-                            <td>
-                                @if($user->foto_profil)
-                                    <img src="{{ asset('storage/' . $user->foto_profil) }}" alt="Foto Profil" width="40" class="rounded-circle">
-                                @else
-                                    <span>-</span>
-                                @endif
-                            </td>
-                            <td>****</td> {{-- Jangan tampilkan password untuk alasan keamanan --}}
-                            <td>{{ ucfirst($user->role) }}</td>
-                            <td>{{ $user->created_at->format('d-m-Y') }}</td>
-                            <td>
-                                <div class="form-button-action d-flex gap-2">
-                                    <a href="{{ route('akun.edit', $user->id) }}" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="fa fa-pencil-alt text-white"></i>
-                                    </a>
-                                    <form id="delete-form-{{ $user->id }}" action="{{ route('akun.destroy', $user->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                    <button type="button" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center"
-                                        style="width: 40px; height: 40px;" data-bs-toggle="tooltip" title="Hapus"
-                                        onclick="confirmDelete({{ $user->id }})">
-                                        <i class="fa fa-trash text-white"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    <table id="basic-datatables" class="display table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>No WhatsApp</th>
+                                <th>Foto Profil</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Tanggal Buat</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>No WhatsApp</th>
+                                <th>Foto Profil</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Tanggal Buat</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->nama_lengkap }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->no_whatsapp }}</td>
+                                <td>
+                                    <img src="{{ $user->foto_profil_url }}" 
+                                         alt="Foto Profil" 
+                                         width="40" 
+                                         class="rounded-circle">
+                                </td>
+                                <td>****</td>
+                                <td>{{ ucfirst($user->role) }}</td>
+                                <td>{{ $user->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    <div class="form-button-action d-flex gap-2">
+                                        <a href="{{ route('akun.edit', $user->id) }}" 
+                                           class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" 
+                                           style="width: 40px; height: 40px;" 
+                                           data-bs-toggle="tooltip" title="Edit">
+                                            <i class="fa fa-pencil-alt text-white"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $user->id }}" 
+                                              action="{{ route('akun.destroy', $user->id) }}" 
+                                              method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        <button type="button" 
+                                                class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" 
+                                                style="width: 40px; height: 40px;" 
+                                                data-bs-toggle="tooltip" title="Hapus"
+                                                onclick="confirmDelete({{ $user->id }})">
+                                            <i class="fa fa-trash text-white"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+{{-- Notifikasi SweetAlert --}}
 @if(session('success'))
 <script>
     Swal.fire({
@@ -108,5 +116,5 @@
             }
         });
     }
-    </script>
+</script>
 @endsection

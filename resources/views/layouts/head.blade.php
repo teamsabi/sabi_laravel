@@ -24,3 +24,4 @@
 <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('template/assets/css/kaiadmin.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('template/assets/css/demo.css') }}" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">

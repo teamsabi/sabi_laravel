@@ -137,7 +137,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/user', [UserController::class, 'index'])->name('home.index');
 
 
-Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
@@ -146,6 +146,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])
         ->middleware('role:admin')
         ->name('dashboard');
+
+    Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+    Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
 
     // Hanya user biasa yang bisa mengakses halaman user
     Route::get('/user', [UserController::class, 'index'])

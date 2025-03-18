@@ -72,15 +72,15 @@
                             <div class="col-sm-10">
                                 <select class="form-select" id="role" name="role" required>
                                     <option disabled {{ !isset($user) ? 'selected' : '' }}>Pilih Role</option>
-                                    <option value="Admin" {{ (isset($user) && $user->role == 'Admin') ? 'selected' : '' }}>Admin</option>
-                                    <option value="User" {{ (isset($user) && $user->role == 'User') ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ (isset($user) && $user->role == 'admin') ? 'selected' : '' }}>Admin</option>
+                                    <option value="user" {{ (isset($user) && $user->role == 'user') ? 'selected' : '' }}>User</option>
                                     <option value="" {{ empty($user->role) ? 'selected' : '' }}>Pilih Role</option>
                                 </select>
                             </div>
                         </div>
                     
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary" onclick="confirmUpdate()">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-save me-1"></i>
                                 {{ isset($user) ? 'Simpan Perubahan' : 'Simpan' }}
                             </button>
@@ -97,42 +97,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    function confirmUpdate() {
-        Swal.fire({
-            title: 'Apakah Anda yakin ingin mengubah data?',
-            text: "Perubahan ini akan disimpan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, simpan!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.querySelector('form').submit();
-            }
-        });
-    }
-
-    function confirmUpdate(event) {
-    event.preventDefault(); // Hentikan submit form langsung
-    Swal.fire({
-        title: 'Apakah Anda yakin ingin menyimpan data?',
-        text: "Perubahan ini akan disimpan!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, simpan!',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            event.target.closest('form').submit(); // Submit form setelah konfirmasi
-        }
-    });
-}
-</script>
 
 <script>
     // Fungsi untuk menampilkan preview foto setelah dipilih

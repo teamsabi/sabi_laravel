@@ -9,10 +9,15 @@ use App\Models\User;
 
 class ProfilController extends Controller
 {
+    function index(){
+        return view('administrator/profil/index');
+    }
+
+
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
-    
+        
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -20,19 +25,24 @@ class ProfilController extends Controller
             'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     
-        $user->nama_lengkap = $request->nama_lengkap;
-        $user->email = $request->email;
-        $user->no_whatsapp = $request->no_whatsapp;
-    
         if ($request->hasFile('foto_profil')) {
-            $user->foto_profil = $request->file('foto_profil');
+            if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+                Storage::disk('public')->delete($user->foto_profil);
+            }
+    
+            $namaFile = str_replace(' ', '_', strtolower($request->nama_lengkap)) . '.' . $request->file('foto_profil')->getClientOriginalExtension();
+            $path = $request->file('foto_profil')->storeAs('foto_profil', $namaFile, 'public');
         }
     
-        try {
-            $user->save();
-            return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
-        } catch (\Throwable $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        // Update data tanpa $user->save()
+        $user->update([
+            'nama_lengkap' => $request->nama_lengkap,
+            'email' => $request->email,
+            'no_whatsapp' => $request->no_whatsapp,
+            'foto_profil' => $path ?? $user->foto_profil,
+        ]);
+    
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
+        
 }
