@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <form action="{{ isset($user) ? route('akun.update', $user->id) : route('akun.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="formAkun" action="{{ isset($user) ? route('akun.update', $user->id) : route('akun.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @if(isset($user))
                             @method('PUT')
@@ -74,13 +74,12 @@
                                     <option disabled {{ !isset($user) ? 'selected' : '' }}>Pilih Role</option>
                                     <option value="admin" {{ (isset($user) && $user->role == 'admin') ? 'selected' : '' }}>Admin</option>
                                     <option value="user" {{ (isset($user) && $user->role == 'user') ? 'selected' : '' }}>User</option>
-                                    <option value="" {{ empty($user->role) ? 'selected' : '' }}>Pilih Role</option>
                                 </select>
                             </div>
                         </div>
                     
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" id="btnSubmit">
                                 <i class="fa fa-save me-1"></i>
                                 {{ isset($user) ? 'Simpan Perubahan' : 'Simpan' }}
                             </button>
@@ -95,11 +94,79 @@
     </div>
 </div>
 
+<!-- Modal untuk Cropper -->
+<div class="modal fade" id="cropperModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <img id="cropperImage" style="max-width: 100%;" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="cropImageBtn">Potong Gambar</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cropper.js -->
+<script>
+    let cropper;
+    const input = document.getElementById('foto_profil');
+    const modal = new bootstrap.Modal(document.getElementById('cropperModal'));
+    const cropperImage = document.getElementById('cropperImage');
+    const imgPreview = document.getElementById('imgPreview');
+
+    input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                cropperImage.src = event.target.result;
+                modal.show();
+
+                // Hancurkan cropper jika sudah ada
+                if (cropper) cropper.destroy();
+
+                // Inisialisasi cropper
+                cropper = new Cropper(cropperImage, {
+                    aspectRatio: 1, // Rasio 1:1
+                    viewMode: 1,
+                    autoCropArea: 1,
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('cropImageBtn').addEventListener('click', () => {
+        if (cropper) {
+            const canvas = cropper.getCroppedCanvas({
+                width: 500,
+                height: 500,
+            });
+
+            canvas.toBlob((blob) => {
+                const file = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+
+                imgPreview.src = URL.createObjectURL(file);
+                imgPreview.style.display = 'block';
+
+                modal.hide();
+            });
+        }
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
-    // Fungsi untuk menampilkan preview foto setelah dipilih
     document.getElementById('foto_profil').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -137,5 +204,29 @@
     });
 </script>
 @endif
+
+<script>
+    document.getElementById('btnSubmit').addEventListener('click', function(event) {
+        let isEdit = @json(isset($user));
+        let confirmText = isEdit 
+            ? 'Apakah Anda yakin ingin merubah data ini?' 
+            : 'Apakah Anda yakin ingin menyimpan data ini?';
+
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: confirmText,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Simpan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formAkun').submit(); // Gunakan ID form yang spesifik
+            }
+        });
+    });
+</script>
 
 @endsection

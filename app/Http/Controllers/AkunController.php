@@ -24,8 +24,14 @@ class AkunController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+    
+        // Hapus file foto profil jika ada
+        if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+            Storage::disk('public')->delete($user->foto_profil);
+        }
+    
         $user->delete();
-
+    
         return redirect()->route('akun.index')->with('success', 'Data Akun berhasil dihapus.');
     }
 
