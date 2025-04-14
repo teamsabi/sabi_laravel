@@ -94,76 +94,91 @@
     </div>
 </div>
 
-<!-- Modal untuk Cropper -->
-<div class="modal fade" id="cropperModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div>
-                    <img id="cropperImage" style="max-width: 100%;" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="cropImageBtn">Potong Gambar</button>
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            </div>
+<!-- Modal Cropper -->
+<div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
+      <div class="modal-content" style="width: 400px; height: 400px; margin: auto;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cropperModalLabel">Crop Foto Profil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
+        <div class="modal-body p-0">
+          <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+            <img id="imageCropper" style="max-width: 100%; max-height: 100%;" />
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary" id="cropButton">Crop & Simpan</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Cropper.js -->
-<script>
+  <script>
     let cropper;
-    const input = document.getElementById('foto_profil');
-    const modal = new bootstrap.Modal(document.getElementById('cropperModal'));
-    const cropperImage = document.getElementById('cropperImage');
+    const fotoInput = document.getElementById('foto_profil');
     const imgPreview = document.getElementById('imgPreview');
+    const imageCropper = document.getElementById('imageCropper');
 
-    input.addEventListener('change', (e) => {
-        const file = e.target.files[0];
+    fotoInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (event) => {
-                cropperImage.src = event.target.result;
+            reader.onload = function (e) {
+                imageCropper.src = e.target.result;
+
+                // Tampilkan modal setelah gambar di-load
+                const modal = new bootstrap.Modal(document.getElementById('cropperModal'));
                 modal.show();
 
-                // Hancurkan cropper jika sudah ada
-                if (cropper) cropper.destroy();
+                // Tunggu gambar render
+                imageCropper.onload = function () {
+                    // Hapus cropper sebelumnya jika ada
+                    if (cropper) {
+                        cropper.destroy();
+                    }
 
-                // Inisialisasi cropper
-                cropper = new Cropper(cropperImage, {
-                    aspectRatio: 1, // Rasio 1:1
-                    viewMode: 1,
-                    autoCropArea: 1,
-                });
+                    cropper = new Cropper(imageCropper, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        minCropBoxWidth: 500,
+                        minCropBoxHeight: 500
+                    });
+                };
             };
             reader.readAsDataURL(file);
         }
     });
 
-    document.getElementById('cropImageBtn').addEventListener('click', () => {
+    document.getElementById('cropButton').addEventListener('click', function () {
         if (cropper) {
             const canvas = cropper.getCroppedCanvas({
                 width: 500,
-                height: 500,
+                height: 500
             });
 
-            canvas.toBlob((blob) => {
-                const file = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
-                input.files = dataTransfer.files;
-
-                imgPreview.src = URL.createObjectURL(file);
+            // Tampilkan hasil preview
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                imgPreview.src = url;
                 imgPreview.style.display = 'block';
 
+                // Ganti input file dengan blob hasil crop
+                const fileInput = document.getElementById('foto_profil');
+                const dataTransfer = new DataTransfer();
+                const fileName = "cropped_" + Date.now() + ".png";
+                const croppedFile = new File([blob], fileName, { type: 'image/png' });
+                dataTransfer.items.add(croppedFile);
+                fileInput.files = dataTransfer.files;
+
+                // Tutup modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('cropperModal'));
                 modal.hide();
             });
         }
     });
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>

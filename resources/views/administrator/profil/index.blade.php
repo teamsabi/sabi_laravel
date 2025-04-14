@@ -51,7 +51,7 @@
 
                     {{-- Tombol Submit --}}
                     <div class="form-group text-end">
-                        <button type="button" class="btn btn-primary" id="btnSubmit">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fa fa-save me-1"></i> Simpan Perubahan
                         </button>
                     </div>
@@ -87,24 +87,6 @@
             };
             reader.readAsDataURL(file);
         }
-    });
-
-    // Konfirmasi sebelum submit
-    document.getElementById('btnSubmit').addEventListener('click', function(event) {
-        Swal.fire({
-            title: 'Apakah Anda Yakin?',
-            text: "Data profil akan diperbarui!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Simpan!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('updateProfileForm').submit(); // Submit form jika user konfirmasi
-            }
-        });
     });
 </script>
 
