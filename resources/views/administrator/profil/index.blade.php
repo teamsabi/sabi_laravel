@@ -61,6 +61,79 @@
     </div>
 </div>
 
+<!-- Modal Cropper -->
+<div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4" style="width: 600px; height: 600px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropperModalLabel">Crop Foto Profil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div style="width: 100%; height: 100%;">
+                    <img id="cropperImage" style="max-width: 100%; max-height: 100%;" />
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="btnCrop">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let cropper;
+    const cropperModal = new bootstrap.Modal(document.getElementById('cropperModal'));
+
+    document.getElementById('photo').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file && /^image\/\w+/.test(file.type)) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const img = document.getElementById('cropperImage');
+                img.src = reader.result;
+
+                cropperModal.show();
+
+                if (cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(img, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    autoCropArea: 1,
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('btnCrop').addEventListener('click', () => {
+        if (cropper) {
+            cropper.getCroppedCanvas({
+                width: 500,
+                height: 500,
+            }).toBlob(blob => {
+                const fileInput = document.getElementById('photo');
+                const file = new File([blob], "cropped.jpg", { type: "image/jpeg" });
+
+                // Buat objek DataTransfer untuk set ulang input file
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+
+                // Preview ke halaman
+                const url = URL.createObjectURL(blob);
+                document.getElementById('previewFotoProfil').src = url;
+
+                cropperModal.hide();
+            }, 'image/jpeg');
+        }
+    });
+</script>
+
 {{-- Notifikasi SweetAlert --}}
 @if(session('success'))
 <script>

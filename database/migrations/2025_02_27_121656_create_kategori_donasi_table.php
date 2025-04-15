@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('kategori_donasi', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->string('judul_donasi');
             $table->string('gambar');
             $table->text('deskripsi');
@@ -34,3 +35,4 @@ return new class extends Migration
         Schema::dropIfExists('kategori_donasi');
     }
 };
+

@@ -37,6 +37,7 @@
                         <div class="prices d-flex justify-content-between">
                             <p>Terkumpul:<span> Rp 130.000</span></p>
                             <p>Target:<span> Rp 500.000</span></p>
+                            <p>Jumlah Donatur:<span> 100</span></p>
                         </div>
                     </div>
                 </div>

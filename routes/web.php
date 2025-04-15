@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AkunController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\UserController;
 use PHPUnit\Util\Http\Downloader;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AkunController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\KategoriDonasiController;
 
 // Halaman utama (Welcome)
 Route::get('/', function () {
@@ -142,19 +143,21 @@ Route::get('/user', [UserController::class, 'index'])->name('home.index');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::middleware(['auth'])->group(function () {
-    // Hanya admin yang bisa mengakses dashboard admin
-    Route::get('/admin', [AdminController::class, 'index'])
-        ->middleware('role:admin')
-        ->name('dashboard');
+    // Kategori Donasi (hanya untuk user login)
+    Route::get('/kategori', [KategoriDonasiController::class, 'index'])->name('kategori.index');
+    Route::get('/kategori/create', [KategoriDonasiController::class, 'create'])->name('kategori.create');
+    Route::post('/kategori', [KategoriDonasiController::class, 'store'])->name('kategori.store');
+    Route::get('/kategori/{id}/edit', [KategoriDonasiController::class, 'edit'])->name('kategori.edit');
+    Route::put('/kategori/{id}', [KategoriDonasiController::class, 'update'])->name('kategori.update');
+    Route::delete('/kategori/{id}', [KategoriDonasiController::class, 'destroy'])->name('kategori.destroy');
 
-    Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+    // Yang lain (profil, dashboard, dsb)
+    Route::get('/admin', [AdminController::class, 'index'])->middleware('role:admin')->name('dashboard');
+    Route::get('/user', [UserController::class, 'index'])->middleware('role:user')->name('home.index');
     Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
-
-    // Hanya user biasa yang bisa mengakses halaman user
-    Route::get('/user', [UserController::class, 'index'])
-        ->middleware('role:user')
-        ->name('home.index');
+    Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
 });
+
 
 Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
 Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
@@ -162,5 +165,6 @@ Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('akun.dest
 Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
 Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
 Route::post('/akun', [AkunController::class, 'store'])->name('akun.store');
+
 
 
