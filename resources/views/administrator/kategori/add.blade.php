@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="form-tambah-kategori" action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
@@ -96,10 +96,20 @@
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                e.target.closest('form').submit();
+                document.getElementById('form-tambah-kategori').submit(); // ✅ Langsung submit form-nya
             }
         });
     });
 </script>
+
+@if ($errors->any())
+    <div class="alert alert-danger mt-2">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 @endsection

@@ -27,7 +27,7 @@ class KategoriDonasiController extends Controller
         $request->validate([
             'id_user' => 'required|exists:users,id',
             'judul_donasi' => 'required|string|max:255',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5000',
             'deskripsi' => 'required|string',
             'target_dana' => 'required|numeric|min:0',
             'dedline' => 'required|date|after:today',
@@ -61,7 +61,7 @@ class KategoriDonasiController extends Controller
     
         $request->validate([
             'judul_donasi' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:5000',
             'deskripsi' => 'required|string',
             'target_dana' => 'required|numeric|min:0',
             'dedline' => 'required|date',

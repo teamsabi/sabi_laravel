@@ -9,9 +9,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\KategoriDonasiController;
 use App\Http\Controllers\UserKategoriDonasiController;
 
-// =========================
 // Guest (belum login)
-// =========================
 Route::middleware('guest')->group(function () {
     Route::get('/sesi', [AuthController::class, 'index'])->name('auth.login');
     Route::post('/sesi', [AuthController::class, 'login']);
@@ -35,26 +33,19 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-// =========================
 // Logout
-// =========================
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// =========================
 // Halaman utama sebelum login
-// =========================
 Route::get('/', function () {
     return view('user.home.index');
 });
 
-// =========================
+
 // Authenticated User
-// =========================
 Route::middleware(['auth'])->group(function () {
 
-    // -------------------------
     // Role Admin
-    // -------------------------
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 
@@ -79,9 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
     });
 
-    // -------------------------
     // Role User
-    // -------------------------
     Route::middleware('role:user')->group(function () {
         Route::get('/user', [UserController::class, 'index'])->name('home.index');
 
@@ -97,9 +86,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/berdonasi', fn () => view('user.donasi.form_donasi'))->name('donasi.form_donasi');
     });
 
-    // -------------------------
     // Profil untuk semua yang login
-    // -------------------------
     Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
     Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
 });
