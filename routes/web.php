@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
+        Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
     });
 
     // -------------------------

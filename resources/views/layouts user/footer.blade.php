@@ -24,9 +24,9 @@
                             <div class="footer-tittle">
                                 <h4>Kontak Kami</h4>
                                 <ul>
-                                    <li><p>Alamat: Jl. Mastrip, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121</p></li>
+                                    <li><p><a href="#">Alamat: Jl. Mastrip, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121</p></li>
                                     <li><a href="#">Telepon: +62 858-0727-8580</a></li>
-                                    <li><a href="#">Email: support@ticare.com</a></li>
+                                    <li><a href="#">Email: sabiteam23@gamil.com</a></li>
                                 </ul>
                             </div>
                         </div>
