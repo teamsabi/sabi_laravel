@@ -53,7 +53,7 @@
                     </div>
                     <div class="cases-caption">
                         <p class="date text-muted">03 Maret 2025</p>
-                        <h3 class="text-start mb-1" style="font-weight: bold;"><a href="#">Donasi Ramadhan Berkah</a></h3>
+                        <h3 class="text-start mb-1" style="font-weight: bold;"><a href="{{ route('donasi.detail_donasi') }}">Donasi Ramadhan Berkah</a></h3>
                         <p class="text-start text-muted" style="margin-top: -40px;">Mari bersedekah di bulan yang suci ini.</p>
                         <!-- Progress Bar -->
                         <div class="mt-50"></div>

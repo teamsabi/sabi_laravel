@@ -93,6 +93,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
+        Route::get('/user/detail', fn () => view('user.donasi.detail_donasi'))->name('donasi.detail_donasi');
+        Route::get('/user/berdonasi', fn () => view('user.donasi.form_donasi'))->name('donasi.form_donasi');
     });
 
     // -------------------------

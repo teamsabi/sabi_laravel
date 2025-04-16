@@ -10,6 +10,6 @@
     </nav>
     <div class="copyright">
       2025, build with <i class="fa fa-heart heart text-danger"></i> by
-      <a href="http://www.instagram.com/superti4r">@superti4r</a>
+      <a href="http://www.instagram.com/team.okeee">@team.okeee</a>
     </div>
   </div>
