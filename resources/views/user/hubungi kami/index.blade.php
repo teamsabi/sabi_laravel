@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="name" style="font-weight: bold; font-size: 16px;">Nama</label>
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Masukkan nama anda" style="font-size: 14px; padding: 14px 16px; height: 50px;">
+                            <label for="nama" style="font-weight: bold; font-size: 16px;">Nama</label>
+                            <input class="form-control" name="nama" id="nama" type="text" placeholder="Masukkan nama anda" style="font-size: 14px; padding: 14px 16px; height: 50px;">
                         </div>
                     </div>
                     <div class="col-12">

@@ -64,8 +64,8 @@
         </div>
 
         @if ($kategoriDonasi->isEmpty())
-            <div class="text-center mt-5">
-                <h5>Belum ada kategori donasi yang tersedia.</h5>
+            <div class="col-12 text-center">
+                <p class="text-muted">Tidak ada kategori donasi yang tersedia.</p>
             </div>
         @endif
     </div>
