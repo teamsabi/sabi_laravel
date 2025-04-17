@@ -104,4 +104,10 @@ class KategoriDonasiController extends Controller
 
         return redirect()->route('kategori.index')->with('success', 'Kategori Donasi berhasil dihapus.');
     }
+
+    public function tampilTigaKategori()
+    {
+        $kategoriDonasi = KategoriDonasi::latest()->take(3)->get();
+        return view('user.home.index', compact('kategoriDonasi'));
+    }
 }

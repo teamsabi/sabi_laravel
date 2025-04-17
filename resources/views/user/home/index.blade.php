@@ -45,99 +45,67 @@
                 </div>
             </div>
         </div>
+        <!-- Menampilkan 3 kategori donasi terbaru -->
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
-                <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
-                    <div class="cases-img text-center mb-3">
-                        <img src="{{ asset('template user/assets/img/gallery/case1.png') }}" alt="" class="img-fluid rounded">
-                    </div>
-                    <div class="cases-caption">
-                        <p class="date text-muted">03 Maret 2025</p>
-                        <h3 class="text-start mb-1" style="font-weight: bold;"><a href="{{ route('donasi.detail_donasi') }}">Donasi Ramadhan Berkah</a></h3>
-                        <p class="text-start text-muted" style="margin-top: -40px;">Mari bersedekah di bulan yang suci ini.</p>
-                        <!-- Progress Bar -->
-                        <div class="mt-50"></div>
-                        <div class="single-skill mb-15">
-                            <div class="bar-progress">
-                                <div id="bar1" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
+            @if(isset($kategoriDonasi) && $kategoriDonasi->isNotEmpty())
+                @foreach($kategoriDonasi as $kategori)
+                    <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
+                        <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
+                            <div class="cases-img text-center mb-3">
+                                <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="" class="img-fluid rounded">
+                            </div>
+                            <div class="cases-caption">
+                                <p class="date text-muted">{{ \Carbon\Carbon::parse($kategori->tanggal_buat)->format('d F Y') }}</p>
+                                <h3 class="text-start mb-1" style="font-weight: bold;">
+                                    @if(Auth::check())
+                                        <a href="{{ route('donasi.detail_donasi', $kategori->id) }}">{{ $kategori->judul_donasi }}</a>
+                                    @else
+                                        <a href="{{ route('auth.login') }}" 
+                                           onclick="event.preventDefault(); 
+                                                    Swal.fire({
+                                                        title: 'Silakan login terlebih dahulu',
+                                                        text: 'Untuk melihat detail donasi.',
+                                                        icon: 'warning',
+                                                        confirmButtonText: 'OK'
+                                                    }).then(() => {
+                                                        window.location.href = '{{ route('auth.login') }}';
+                                                    })">
+                                           {{ $kategori->judul_donasi }}
+                                        </a>
+                                    @endif
+                                </h3>
+                                <p class="text-start text-muted" style="margin-top: -40px;">{{ Str::limit($kategori->deskripsi, 80) }}</p>
+                                <!-- Progress Bar -->
+                                <div class="mt-50"></div>
+                                <div class="single-skill mb-15">
+                                    <div class="bar-progress">
+                                        <div id="bar1" class="barfiller">
+                                            <div class="tipWrap">
+                                                <span class="tip"></span>
+                                            </div>
+                                            <span class="fill" data-percentage="70"></span>
+                                        </div>
                                     </div>
-                                    <span class="fill" data-percentage="70"></span>
+                                </div>
+                                <!-- / progress -->
+                                <div class="prices d-flex justify-content-between">
+                                    <p>Terkumpul :<span> Rp {{ number_format($kategori->terkumpul, 0, ',', '.') }}</span></p>
+                                    <p>Target :<span> Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</span></p>
+                                    <p>Jumlah Donatur :<span> {{ $kategori->jumlah_donatur }}</span></p>
                                 </div>
                             </div>
                         </div>
-                        <!-- / progress -->
-                        <div class="prices d-flex justify-content-between">
-                            <p>Terkumpul:<span> Rp 130.000</span></p>
-                            <p>Target:<span> Rp 500.000</span></p>
-                            <p>Jumlah Donasi:<span> 500</span></p>
-                        </div>
                     </div>
+                @endforeach
+            @else
+                <div class="col-12 text-center">
+                    <p class="text-muted">Tidak ada kategori donasi yang tersedia.</p>
                 </div>
-            </div>      
-            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
-                <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
-                    <div class="cases-img text-center mb-3">
-                        <img src="{{ asset('template user/assets/img/gallery/case2.png') }}" alt="" class="img-fluid rounded">
-                    </div>
-                    <div class="cases-caption">
-                        <p class="date text-muted">11 Januari 2025</p>
-                        <h3 class="text-start mb-1" style="font-weight: bold;"><a href="#">Berita Duka: Orangtua Asep Berpulang</a></h3>
-                        <p class="text-start text-muted" style="margin-top: -40px;">Berita duka, telah meninggal dunia Ayahanda dari teman kita Asep pada tanggal 11-01-2025</p>
-                        <!-- Progress Bar -->
-                        <div class="mt-50"></div>
-                        <div class="single-skill mb-15">
-                            <div class="bar-progress">
-                                <div id="bar2" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
-                                    </div>
-                                    <span class="fill" data-percentage="50"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / progress -->
-                        <div class="prices d-flex justify-content-between">
-                            <p>Terkumpul:<span> Rp 250.000</span></p>
-                            <p>Target:<span> Rp 500.000</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>      
-            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
-                <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
-                    <div class="cases-img text-center mb-3">
-                        <img src="{{ asset('template user/assets/img/gallery/case3.png') }}" alt="" class="img-fluid rounded">
-                    </div>
-                    <div class="cases-caption">
-                        <p class="date text-muted">20 Februari 2025</p>
-                        <h3 class="text-start mb-1" style="font-weight: bold;"><a href="#">Berita Duka: Orangtua Asup Berpulang</a></h3>
-                        <p class="text-start text-muted" style="margin-top: -40px;">Berita duka, telah meninggal dunia Ayahanda dari teman kita Asup pada tanggal 20-02-2025</p>
-                        <!-- Progress Bar -->
-                        <div class="mt-50"></div>
-                        <div class="single-skill mb-15">
-                            <div class="bar-progress">
-                                <div id="bar3" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
-                                    </div>
-                                    <span class="fill" data-percentage="50"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / progress -->
-                        <div class="prices d-flex justify-content-between">
-                            <p>Terkumpul:<span> Rp 250.000</span></p>
-                            <p>Target:<span> Rp 500.000</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>   
+            @endif
             <!-- Lihat Semua Button -->
             <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">
                 <a href="{{ route('donasi.index') }}" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
-            </div>                                
+            </div>                                 
         </div>
     </div>
 </div>

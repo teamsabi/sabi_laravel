@@ -36,7 +36,7 @@ class AuthController extends Controller
         
                 return $user->role === 'admin'
                     ? redirect()->route('dashboard')->with('success', $message)
-                    : redirect()->route('home.index')->with('success', $message);
+                    : redirect()->route('beranda.login')->with('success', $message);
             } else {
                 Auth::logout();
                 return redirect()->route('auth.login')->withErrors('Akun anda belum aktif. Harap verifikasi terlebih dahulu');

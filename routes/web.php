@@ -19,28 +19,17 @@ Route::middleware('guest')->group(function () {
 
     // Halaman Lupa Password
     Route::prefix('lupa-password')->group(function () {
-        Route::get('/', function () {
-            return view('auth.lupa_password');
-        })->name('auth.lupa_password');
-
-        Route::get('/kode-otp', function () {
-            return view('auth.kode_otp');
-        })->name('auth.kode_otp');
-
-        Route::get('/new-password', function () {
-            return view('auth.new_password');
-        })->name('auth.new_password');
+        Route::get('/', fn () => view('auth.lupa_password'))->name('auth.lupa_password');
+        Route::get('/kode-otp', fn () => view('auth.kode_otp'))->name('auth.kode_otp');
+        Route::get('/new-password', fn () => view('auth.new_password'))->name('auth.new_password');
     });
+
+    // Halaman utama sebelum login (untuk guest)
+    Route::get('/', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda');
 });
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-
-// Halaman utama sebelum login
-Route::get('/', function () {
-    return view('user.home.index');
-});
-
 
 // Authenticated User
 Route::middleware(['auth'])->group(function () {
@@ -82,8 +71,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
+
+        // Route yang ingin diamankan (Detail Donasi)
         Route::get('/user/detail', fn () => view('user.donasi.detail_donasi'))->name('donasi.detail_donasi');
+
+        // Form Donasi
         Route::get('/user/berdonasi', fn () => view('user.donasi.form_donasi'))->name('donasi.form_donasi');
+
+        // Halaman utama setelah login
+        Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
     });
 
     // Profil untuk semua yang login
