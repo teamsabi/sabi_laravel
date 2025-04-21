@@ -54,7 +54,7 @@ class AuthController extends Controller
     
 
     function create(){
-        return view('auth/registrasi');
+        return view('auth.registrasi');
     }
 
     function register(Request $request){
@@ -158,10 +158,26 @@ class AuthController extends Controller
 
         $resetLink = url('/lupa-password/new-password?token=' . $token);
 
-        // Mengirim email dengan link reset password
-        Mail::raw("Klik link ini untuk reset password: $resetLink", function ($message) use ($user) {
+        Mail::send([], [], function ($message) use ($user, $resetLink) {
             $message->to($user->email)
-                    ->subject('Reset Password');
+                    ->subject('Reset Password')
+                    ->html('
+                        <h3>Halo ' . e($user->nama_lengkap) . ',</h3>
+                        <p>Silakan klik tombol di bawah ini untuk mengatur ulang kata sandi Anda:</p>
+                        <a href="' . e($resetLink) . '" style="
+                            display: inline-block;
+                            padding: 10px 20px;
+                            font-size: 16px;
+                            color: white;
+                            background-color: #4A90E2;
+                            border-radius: 5px;
+                            text-decoration: none;
+                            margin-top: 10px;
+                        ">
+                            Reset Password
+                        </a>
+                        <p style="margin-top: 20px;">Jika kamu tidak meminta pengaturan ulang kata sandi, abaikan email ini.</p>
+                    ');
         });
 
         return back()->with('success', 'Link reset password telah dikirim ke email.');
