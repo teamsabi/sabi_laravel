@@ -6,15 +6,18 @@ use App\Mail\AuthMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\ResetPasswordToken;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
+
 
 class AuthController extends Controller
 {
     function index(){
-        return view('auth/login');
+        return view('auth.login');
     }
 
     function login(Request $request){
@@ -124,5 +127,89 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('auth.login')->with('success', 'Anda berhasil logout');
+    }
+
+    // Halaman Lupa Password
+    public function showForgotPasswordForm()
+    {
+        return view('auth.lupa_password');
+    }
+
+    // Kirim Link Reset Password
+    public function sendResetLink(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        $token = Str::random(64);
+
+        // Menyimpan token reset password ke database
+        ResetPasswordToken::create([
+            'user_id'    => $user->id,
+            'email'      => $user->email,
+            'token'      => $token,
+            'created_at' => now(),
+            'expired_at' => now()->addMinutes(30),
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
+
+        $resetLink = url('/lupa-password/new-password?token=' . $token);
+
+        // Mengirim email dengan link reset password
+        Mail::raw("Klik link ini untuk reset password: $resetLink", function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('Reset Password');
+        });
+
+        return back()->with('success', 'Link reset password telah dikirim ke email.');
+    }
+
+    // Tampilkan Form Password Baru
+    public function showResetForm(Request $request)
+    {
+        $token = $request->query('token');
+        $tokenData = ResetPasswordToken::where('token', $token)->first();
+
+        // Cek apakah token valid dan belum expired
+        if (!$tokenData || $tokenData->expired_at < now() || $tokenData->used_at !== null) {
+            return redirect()->route('auth.login')->withErrors('Token tidak valid atau sudah kedaluwarsa.');
+        }
+
+        return view('auth.new_password', [
+            'token' => $token,
+            'email' => $tokenData->email,
+        ]);
+    }
+
+    // Update Password Baru
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'token'    => 'required',
+            'email'    => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $tokenData = ResetPasswordToken::where('token', $request->token)
+            ->where('email', $request->email)
+            ->first();
+
+        // Cek apakah token valid dan belum expired
+        if (!$tokenData || $tokenData->expired_at < now() || $tokenData->used_at !== null) {
+            return redirect()->route('auth.login')->withErrors('Token tidak valid atau sudah kedaluwarsa.');
+        }
+
+        $user = User::where('email', $request->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Tandai token sebagai sudah digunakan
+        $tokenData->used_at = now();
+        $tokenData->save();
+
+        return redirect()->route('auth.login')->with('success', 'Password berhasil diubah. Silakan login.');
     }
 }

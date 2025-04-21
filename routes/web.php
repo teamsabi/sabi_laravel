@@ -17,12 +17,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/reg', [AuthController::class, 'register']);
     Route::get('/verify/{verify_key}', [AuthController::class, 'verify']);
 
-    // Halaman Lupa Password
-    Route::prefix('lupa-password')->group(function () {
-        Route::get('/', fn () => view('auth.lupa_password'))->name('auth.lupa_password');
-        Route::get('/kode-otp', fn () => view('auth.kode_otp'))->name('auth.kode_otp');
-        Route::get('/new-password', fn () => view('auth.new_password'))->name('auth.new_password');
-    });
+// Halaman Lupa Password
+Route::prefix('lupa-password')->group(function () {
+    Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
+    Route::post('/kirim', [AuthController::class, 'sendResetLink'])->name('auth.lupa_password.kirim');
+
+    Route::get('/new-password', [AuthController::class, 'showResetForm'])->name('auth.new_password');
+    Route::post('/new-password', [AuthController::class, 'updatePassword'])->name('auth.lupa_password.update');    
+});
 
     // Halaman utama sebelum login (untuk guest)
     Route::get('/', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda');

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Lupa Password - JTICare</title>
+    <title>Kata Sandi Baru - JTICare</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -96,21 +96,26 @@
             </div>    
         @endif
 
-        <form action="#" method="POST">
+        <!-- Form untuk mengubah password -->
+        <form action="{{ route('auth.lupa_password.update') }}" method="POST">
             @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="email" value="{{ $email }}">
+
             <div class="mb-3 text-start">
                 <label class="form-label" for="newPassword">Kata Sandi Baru</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="newPassword" placeholder="Masukkan Kata Sandi Baru" name="newPassword" type="password"/>
+                    <input class="form-control pe-5" id="newPassword" placeholder="Masukkan Kata Sandi Baru" name="password" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('newPassword', 'eyeIcon1')">
                         <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
                 </div>
             </div>
+
             <div class="mb-3 text-start">
                 <label class="form-label" for="repassword">Konfirmasi Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="repassword" placeholder="Konfirmasi Kata Sandi Baru" name="repassword" type="password"/>
+                    <input class="form-control pe-5" id="repassword" placeholder="Konfirmasi Kata Sandi Baru" name="password_confirmation" type="password"/>
                     <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('repassword', 'eyeIcon2')">
                         <i class="fas fa-eye" id="eyeIcon2"></i>
                     </span>
@@ -118,6 +123,7 @@
             </div>
             <button class="btn btn-primary" type="submit">Ubah Kata Sandi</button>
         </form>
+
         <div class="logo">
             <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
         </div>

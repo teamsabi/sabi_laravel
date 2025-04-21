@@ -96,7 +96,7 @@
             </div>    
         @endif
 
-        <form action="#" method="POST">
+        <form action="{{ route('auth.lupa_password.kirim') }}" method="POST">
             @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
