@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -42,7 +44,7 @@ class AuthController extends Controller
                 return redirect()->route('auth.login')->withErrors('Akun anda belum aktif. Harap verifikasi terlebih dahulu');
             }
         } else {
-            return redirect()->route('auth.login')->withErrors('Email atau Password salah');
+            return back()->withErrors(['login' => 'Email atau Password salah'])->withInput();
         }
     }
     
@@ -59,7 +61,7 @@ class AuthController extends Controller
         $request->validate([
             'nama_lengkap' => 'required|min:5',
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:6',
+            'no_whatsapp' => 'required|min:10|unique:users',
             'no_whatsapp' => 'required|min:10',
             'confirm' => 'required|same:password',
         ], [
@@ -93,7 +95,11 @@ class AuthController extends Controller
             'url' => 'http://' . request()->getHttpHost() . "/" . "verify/" . $inforegister['verify_key'],
         ];
     
-        Mail::to($inforegister['email'])->send(new AuthMail($details));
+        try {
+            Mail::to($inforegister['email'])->send(new AuthMail($details));
+        } catch (\Exception $e) {
+            return redirect()->route('auth.login')->withErrors('Gagal mengirim email verifikasi. Coba lagi nanti.');
+        }
     
         return redirect()->route('auth.login')->with('success', 'Link Verifikasi telah dikirim ke email anda, Cek email anda untuk melakukan verifikasi');
     }
