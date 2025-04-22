@@ -107,7 +107,7 @@
     <div class="login-card">
         <div class="left-section text-center">
             <div class="logo">
-                <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" width="100" />
+                <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" width="150" />
             </div>
             <dotlottie-player 
                 src="https://lottie.host/b4b6185d-9744-46a8-877a-3330d0e8b503/Me7dSX3vFn.lottie" 
@@ -122,20 +122,10 @@
             <p>Silahkan login menggunakan Email anda yang sudah terverifikasi.</p>
 
             @if ($errors->any())
-                <div class="alert alert-danger">
-                <ul class="mb-0">
+                <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
                     @foreach ($errors->all() as $item)
-                    <li>{{ $item }}</li>
+                        <div style="margin-bottom: 4px;">{{ $item }}</div>
                     @endforeach
-                </ul>
-                </div>
-            @endif
-
-            @if (Session::get('success'))
-                <div class="alert alert-success alert-dismissable fade show">
-                <ul class="mb-0">
-                    <li>{{ Session::get('success') }}</li>
-                </ul>
                 </div>
             @endif
 

@@ -122,7 +122,7 @@
     <div class="register-card">
         <div class="left-section text-center">
         <div class="logo">
-            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" />
+            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" style="width: 150px; height: auto;"/>
         </div>
         <dotlottie-player 
             src="https://lottie.host/b4b6185d-9744-46a8-877a-3330d0e8b503/Me7dSX3vFn.lottie" 
@@ -137,12 +137,10 @@
         <p>Silakan isi data berikut untuk membuat akun JTICare.</p>
 
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $item)
-                        <li>{{ $item }}</li>
-                    @endforeach
-                </ul>
+            <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
+                @foreach ($errors->all() as $item)
+                    <div style="margin-bottom: 2px;">{{ $item }}</div>
+                @endforeach
             </div>
         @endif
 
@@ -166,8 +164,8 @@
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" name="no_whatsapp" type="number" placeholder="Masukkan Nomor WhatsApp" value="{{ old('no_whatsapp') }}"/>
-            </div>
+                <input class="form-control" id="nomorWA" name="no_whatsapp" type="tel" placeholder="Masukkan Nomor WhatsApp" value="{{ old('no_whatsapp') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+            </div>            
             <div class="mb-3 text-start">
             <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
