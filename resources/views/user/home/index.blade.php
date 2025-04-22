@@ -50,7 +50,7 @@
             @if(isset($kategoriDonasi) && $kategoriDonasi->isNotEmpty())
                 @foreach($kategoriDonasi as $kategori)
                     <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
-                        <div class="single-cases mb-40 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
+                        <div class="single-cases mb-10 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
                             <div class="cases-img text-center mb-3">
                                 <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="" class="img-fluid rounded">
                             </div>
@@ -76,14 +76,14 @@
                                 </h3>
                                 <p class="text-start text-muted" style="margin-top: -40px;">{{ Str::limit($kategori->deskripsi, 80) }}</p>
                                 <!-- Progress Bar -->
-                                <div class="mt-50"></div>
+                                <div class="mt-20"></div>
                                 <div class="single-skill mb-15">
                                     <div class="bar-progress">
                                         <div id="bar1" class="barfiller">
                                             <div class="tipWrap">
                                                 <span class="tip"></span>
                                             </div>
-                                            <span class="fill" data-percentage="50"></span>
+                                            <span class="fill" data-percentage="30"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,9 @@
                                 <div class="prices d-flex justify-content-between">
                                     <p>Terkumpul :<span> Rp {{ number_format($kategori->terkumpul, 0, ',', '.') }}</span></p>
                                     <p>Target :<span> Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</span></p>
-                                    <p>Jumlah Donatur :<span> {{ $kategori->jumlah_donatur }}</span></p>
+                                </div>
+                                <div style="border-top: 1px solid #e0e0e0; margin-top: -5px; padding-top: 5px;">
+                                    <p><strong>Jumlah Donatur :<span> {{ $kategori->jumlah_donatur }}</span></strong></p>
                                 </div>
                             </div>
                         </div>
