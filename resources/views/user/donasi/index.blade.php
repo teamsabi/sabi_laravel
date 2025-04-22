@@ -18,18 +18,17 @@
         <div class="row">
             @foreach ($kategoriDonasi as $item)
             @php
-                // Hitung persentase donasi
                 $persen = $item->target_dana > 0 
                     ? round(($item->donasi_terkumpul / $item->target_dana) * 100) 
                     : 0;
-                $persen = min($persen, 100); // batasi max 100%
+                $persen = min($persen, 100);
             @endphp
-            <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 50px;">
-                <div class="single-cases mb-10 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
+                <div class="single-cases p-3 border rounded shadow w-100 d-flex flex-column" style="background-color: #f8f9fa;">
                     <div class="cases-img text-center mb-3">
                         <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Donasi" class="img-fluid rounded" style="height: 200px; object-fit: cover;">
                     </div>
-                    <div class="cases-caption">
+                    <div class="cases-caption flex-grow-1">
                         <p class="date text-muted">{{ date('d M Y', strtotime($item->tanggal_buat)) }}</p>
                         <h3 class="text-start mb-1" style="font-weight: bold;">
                             <a href="{{ route('donasi.detail', $item->id) }}">{{ $item->judul_donasi }}</a>
@@ -37,10 +36,10 @@
                         <p class="text-start text-muted" style="margin-top: -40px;">
                             {{ Str::limit($item->deskripsi, 100) }}
                         </p>
-
+        
                         <!-- Progress Bar -->
-                        <div class="mt-20"></div>
-                        <div class="single-skill mb-15">
+                        <div class="mt-3"></div>
+                        <div class="single-skill mb-2">
                             <div class="bar-progress">
                                 <div class="barfiller">
                                     <div class="tipWrap">
@@ -50,18 +49,19 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- / progress -->
+        
                         <div class="prices d-flex justify-content-between">
                             <p>Terkumpul :<span>Rp {{ number_format($item->donasi_terkumpul, 0, ',', '.') }}</span></p>
                             <p>Target :<span>Rp {{ number_format($item->target_dana, 0, ',', '.') }}</span></p>
                         </div>
                         <div style="border-top: 1px solid #e0e0e0; margin-top: -5px; padding-top: 5px;">
                             <p><strong>Jumlah Donatur :</strong> <span>{{ $item->jumlah_donatur ?? 0 }}</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
             @endforeach
-        </div>
+        </div>        
 
         @if ($kategoriDonasi->isEmpty())
             <div class="col-12 text-center">
