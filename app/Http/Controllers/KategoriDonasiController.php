@@ -110,4 +110,17 @@ class KategoriDonasiController extends Controller
         $kategoriDonasi = KategoriDonasi::latest()->take(3)->get();
         return view('user.home.index', compact('kategoriDonasi'));
     }
+
+    public function detail($id)
+    {
+        $kategori = KategoriDonasi::findOrFail($id);
+        return view('user.donasi.detail_donasi', compact('kategori'));
+    }
+
+    public function formDonasi($id)
+    {
+        $kategori = KategoriDonasi::findOrFail($id);
+        return view('user.donasi.form_donasi', compact('kategori'));
+    }
+
 }

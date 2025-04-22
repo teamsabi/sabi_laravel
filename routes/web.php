@@ -75,10 +75,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
 
         // Route yang ingin diamankan (Detail Donasi)
-        Route::get('/user/detail', fn () => view('user.donasi.detail_donasi'))->name('donasi.detail_donasi');
+        Route::get('/user/detail/{id}', [KategoriDonasiController::class, 'detail'])->name('donasi.detail');
+        
 
         // Form Donasi
-        Route::get('/user/berdonasi', fn () => view('user.donasi.form_donasi'))->name('donasi.form_donasi');
+        Route::get('/user/berdonasi/{id}', [KategoriDonasiController::class, 'formDonasi'])->name('donasi.form_donasi');
 
         // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');

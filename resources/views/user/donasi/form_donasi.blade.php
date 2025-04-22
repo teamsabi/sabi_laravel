@@ -15,28 +15,34 @@
                 <div class="row align-items-start mb-4">
                     <div class="col-lg-5 col-md-12 mb-4 text-center">
                         <div class="about-img">
-                            <img src="{{ asset('template user/assets/img/gallery/case1.png') }}" alt="" class="img-fluid" style="border-radius: 10px;">
+                            <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="{{ $kategori->judul_donasi }}" class="img-fluid" style="border-radius: 10px;">
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-12">
-                        <h5 class="card-title" style="font-size: 30px; font-weight: bold;">Ramadhan Berkah</h5>
-                        <p class="mb-3 text-muted" style="font-size: 18px;">Mari bersedekah di bulan yang suci ini.</p>
+                        <h5 class="card-title" style="font-size: 30px; font-weight: bold;">{{ $kategori->judul_donasi }}</h5>
+                        <p class="mb-3 text-muted" style="font-size: 18px;">{{ $kategori->deskripsi }}</p>
+
                         <!-- Progress -->
                         <div style="width: 100%; margin-bottom: 10px;">
                             <div class="bar-progress">
-                                <div id="bar1" class="barfiller">
+                                <div class="barfiller">
                                     <div class="tipWrap"><span class="tip"></span></div>
-                                    <span class="fill" data-percentage="70"></span>
+                                    <span class="fill" data-percentage="0"></span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div style="min-width: 130px;">
-                                <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp 130.000</h6>
-                                <small class="text-muted" style="font-size: 15px;">Dari target Rp 500.000</small>
+                                <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp 0</h6>
+                                <small class="text-muted" style="font-size: 15px;">Dari target Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</small>
                             </div>
                             <div class="text-end" style="min-width: 80px;">
-                                <span class="fw-bold" style="font-size: 25px; font-weight: bold;">20</span><br>
+                                @php
+                                    use Carbon\Carbon;
+                                    $hari_tersisa = Carbon::now()->diffInDays(Carbon::parse($kategori->dedline), false);
+                                @endphp
+                                <span class="fw-bold" style="font-size: 25px;">{{ $hari_tersisa > 0 ? $hari_tersisa : 0 }}</span><br>
                                 <small class="text-muted" style="font-size: 15px;">Hari lagi</small>
                             </div>
                         </div>

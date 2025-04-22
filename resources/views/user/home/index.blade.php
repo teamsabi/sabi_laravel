@@ -58,7 +58,7 @@
                                 <p class="date text-muted">{{ \Carbon\Carbon::parse($kategori->tanggal_buat)->format('d F Y') }}</p>
                                 <h3 class="text-start mb-1" style="font-weight: bold;">
                                     @if(Auth::check())
-                                        <a href="{{ route('donasi.detail_donasi', $kategori->id) }}">{{ $kategori->judul_donasi }}</a>
+                                        <a href="{{ route('donasi.detail', $kategori->id) }}">{{ $kategori->judul_donasi }}</a>
                                     @else
                                         <a href="{{ route('auth.login') }}" 
                                            onclick="event.preventDefault(); 
@@ -83,7 +83,7 @@
                                             <div class="tipWrap">
                                                 <span class="tip"></span>
                                             </div>
-                                            <span class="fill" data-percentage="70"></span>
+                                            <span class="fill" data-percentage="50"></span>
                                         </div>
                                     </div>
                                 </div>
