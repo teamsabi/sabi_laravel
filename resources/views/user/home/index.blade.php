@@ -3,11 +3,13 @@
 
 @if (Session::has('success'))
     <script>
-        Swal.fire({
-            title: 'Berhasil!',
-            text: "{{ Session::get('success') }}",
-            icon: 'success',
-            confirmButtonText: 'OK'
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Berhasil!',
+                text: "{{ Session::get('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
         });
     </script>
 @endif

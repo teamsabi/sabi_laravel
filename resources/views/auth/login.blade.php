@@ -1,38 +1,69 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Login - JTICare</title>
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
     <style>
         body {
-            background-color: #4A90E2;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .login-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
+
+        .login-card {
             width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
+            max-width: 900px;
+            display: flex;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        .login-container h2 {
+
+        .left-section, .right-section {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .left-section {
+            background-color: #f9f9ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-section .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .right-section h2 {
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 1.5rem;
         }
+
         .form-control {
-            margin-bottom: 2px;
+            margin-bottom: 10px;
         }
+
         .btn-primary {
             background-color: #4A90E2;
             border: none;
@@ -41,101 +72,115 @@
             font-size: 16px;
             border-radius: 8px;
         }
+
         .btn-primary:hover {
-            background-color: #357ABD;
-        }
-        .forgot-password {
-            text-align: right;
-            display: block;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-        .logo {
-            margin-top: 20px;
-        }
-        .logo img {
-            width: 150px;
-            height: auto;
-        }
-        .input-group-text {
-            cursor: pointer;
-            font-size: 16px;
+            kground-color: #357ABD;
         }
 
-        @media (max-width: 576px) {
-            .login-container {
-                padding: 20px;
-                width: 90%;
+        .forgot-password {
+            text-align: right;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                flex-direction: column;
             }
-            .login-container h2 {
-                font-size: 1.5rem;
+
+            .left-section {
+                padding: 30px 20px;
+            }
+
+            .right-section {
+                padding: 30px 20px;
+            }
+
+            .left-section .logo {
+                top: 10px;
+                left: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
+    <div class="login-card">
+        <div class="left-section text-center">
+            <div class="logo">
+                <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" width="100" />
+            </div>
+            <dotlottie-player 
+                src="https://lottie.host/b4b6185d-9744-46a8-877a-3330d0e8b503/Me7dSX3vFn.lottie" 
+                background="transparent" 
+                speed="1" 
+                style="width: 300px; height: 300px;" 
+                loop autoplay>
+            </dotlottie-player>
+        </div>
+        <div class="right-section">
+            <h2>Login</h2>
+            <p>Silahkan login menggunakan Email anda yang sudah terverifikasi.</p>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                <ul class="mb-0">
                     @foreach ($errors->all() as $item)
-                        <li>{{ $item }}</li>
+                    <li>{{ $item }}</li>
                     @endforeach
                 </ul>
-            </div>    
-        @endif
+                </div>
+            @endif
 
-        @if (Session::get('success'))
-            <div class="alert alert-success alert-dismissable fade show">
-                <ul>
+            @if (Session::get('success'))
+                <div class="alert alert-success alert-dismissable fade show">
+                <ul class="mb-0">
                     <li>{{ Session::get('success') }}</li>
                 </ul>
-            </div>    
-        @endif
-
-        <form action="{{ route('auth.login') }}" method="POST">
-            @csrf
-            <div class="mb-3 text-start">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email" name="email" value="{{ old('email') }}" type="email"/>
-            </div>
-            <div class="mb-3 text-start">
-                <label class="form-label" for="password">Kata Sandi</label>
-                <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" type="password"/>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword()">
-                        <i class="fas fa-eye" id="eyeIcon"></i>
-                    </span>
                 </div>
-                <a class="forgot-password" href="{{ route('auth.lupa_password') }}">Lupa Kata Sandi?</a>
+            @endif
+
+            <form action="{{ route('auth.login') }}" method="POST">
+                @csrf
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" value="{{ old('email') }}">
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="password">Kata Sandi</label>
+                    <div class="position-relative">
+                        <input type="password" class="form-control pe-5" id="password" name="password" placeholder="Masukkan Kata Sandi">
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()" style="cursor: pointer;">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </span>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="{{ route('auth.lupa_password') }}">Lupa Kata Sandi?</a>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Masuk</button>
+            </form>
+            <div class="mt-3 text-center">Belum Punya Akun? 
+                <a href="{{ route('auth.registrasi') }}">Daftar</a>
             </div>
-            <button class="btn btn-primary" type="submit">Masuk</button>
-        </form>
-        
-        <div class="register-link">Belum Punya Akun?
-            <a href="{{ route('auth.registrasi') }}">Daftar</a>
-        </div>
-        <div class="logo">
-            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
         </div>
     </div>
+</div>
 
-    <script>
-        function togglePassword() {
-            let passwordInput = document.getElementById("password");
-            let eyeIcon = document.getElementById("eyeIcon");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
+<script>
+    function togglePassword() {
+        let passwordInput = document.getElementById("password");
+        let eyeIcon = document.getElementById("eyeIcon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
         }
+    }
     </script>
 </body>
 </html>

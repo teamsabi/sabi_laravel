@@ -1,71 +1,141 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Registrasi - JTICare</title>
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+
     <style>
         body {
-            background-color: #4A90E2;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 15px;
         }
-        .registrasi-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
+
+        .register-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 900px;
+            display: flex;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        .registrasi-container h2 {
+
+        .left-section, .right-section {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .left-section {
+            background-color: #f9f9ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-section .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .left-section img {
+            width: 100px;
+        }
+
+        .right-section h2 {
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 1.5rem;
         }
+
         .form-control {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
+
         .btn-primary {
             background-color: #4A90E2;
             border: none;
             width: 100%;
             padding: 10px;
             font-size: 16px;
+            border-radius: 8px;
         }
+
         .btn-primary:hover {
             background-color: #357ABD;
         }
+
+        .login-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
         .login-link a {
             color: #4A90E2;
             text-decoration: none;
         }
+
         .login-link a:hover {
             text-decoration: underline;
         }
-        .logo {
-            margin-top: 20px;
-        }
-        .logo img {
-            width: 100%;
-            max-width: 150px;
-            height: auto;
-        }
-        .input-group-text {
-            cursor: pointer;
-            font-size: 14px;
+
+        @media (max-width: 768px) {
+            .register-card {
+                flex-direction: column;
+            }
+
+            .left-section {
+                padding: 30px 20px;
+            }
+
+            .right-section {
+                padding: 30px 20px;
+            }
+
+            .left-section .logo {
+                top: 10px;
+                left: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="registrasi-container">
+    <div class="register-card">
+        <div class="left-section text-center">
+        <div class="logo">
+            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" />
+        </div>
+        <dotlottie-player 
+            src="https://lottie.host/b4b6185d-9744-46a8-877a-3330d0e8b503/Me7dSX3vFn.lottie" 
+            background="transparent" 
+            speed="1" 
+            style="width: 300px; height: 300px;" 
+            loop autoplay>
+        </dotlottie-player>
+    </div>
+    <div class="right-section">
         <h2>Registrasi</h2>
+        <p>Silakan isi data berikut untuk membuat akun JTICare.</p>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -73,7 +143,7 @@
                         <li>{{ $item }}</li>
                     @endforeach
                 </ul>
-            </div>    
+            </div>
         @endif
 
         @if (Session::get('success'))
@@ -81,84 +151,82 @@
                 <ul>
                     <li>{{ Session::get('success') }}</li>
                 </ul>
-            </div>    
+            </div>
         @endif
+
         <form id="registerForm" action="{{ route('auth.registrasi') }}" method="POST">
             @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                <input class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" type="text"/>
+                <input class="form-control" id="namaLengkap" name="nama_lengkap" type="text" placeholder="Masukkan Nama Lengkap" value="{{ old('nama_lengkap') }}"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email anda" name="email" value="{{ old('email') }}" type="email"/>
+                <input class="form-control" id="email" name="email" type="email" placeholder="Masukkan Email anda" value="{{ old('email') }}"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" placeholder="Masukkan Nomor WhatsApp" name="no_whatsapp" value="{{ old('no_whatsapp') }}" type="number"/>
+                <input class="form-control" id="nomorWA" name="no_whatsapp" type="number" placeholder="Masukkan Nomor WhatsApp" value="{{ old('no_whatsapp') }}"/>
             </div>
             <div class="mb-3 text-start">
-                <label class="form-label" for="password">Kata Sandi</label>
+            <label class="form-label" for="password">Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="password" placeholder="Masukkan Kata Sandi" name="password" value="{{ old('password') }}" type="password"/>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('password', 'eyeIcon1')">
+                    <input class="form-control pe-5" id="password" name="password" type="password" placeholder="Masukkan Kata Sandi" value="{{ old('password') }}"/>
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword('password', 'eyeIcon1')" style="cursor: pointer;">
                         <i class="fas fa-eye" id="eyeIcon1"></i>
                     </span>
                 </div>
             </div>
             <div class="mb-3 text-start">
-                <label class="form-label" for="rePassword">Konfirmasi Kata Sandi</label>
+            <label class="form-label" for="rePassword">Konfirmasi Kata Sandi</label>
                 <div class="position-relative">
-                    <input class="form-control pe-5" id="rePassword" placeholder="Masukkan Kata Sandi" name="confirm" type="password"/>
-                    <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePassword('rePassword', 'eyeIcon2')">
-                        <i class="fas fa-eye" id="eyeIcon2"></i>
+                        <input class="form-control pe-5" id="rePassword" name="confirm" type="password" placeholder="Masukkan Ulang Kata Sandi"/>
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword('rePassword', 'eyeIcon2')" style="cursor: pointer;">
+                            <i class="fas fa-eye" id="eyeIcon2"></i>
                     </span>
                 </div>
             </div>
             <button class="btn btn-primary" type="submit">Daftar</button>
         </form>
-        
-        <div class="register-link">Sudah Punya Akun?
+        <div class="login-link">Sudah punya akun? 
             <a href="{{ route('auth.login') }}">Masuk</a>
         </div>
-        <div class="logo">
-            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
-        </div>
     </div>
+</div>
 
-    <script>
-        function togglePassword(inputId, iconId) {
-            let passwordInput = document.getElementById(inputId);
-            let eyeIcon = document.getElementById(iconId);
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
+<script>
+    function togglePassword(inputId, iconId) {
+        let input = document.getElementById(inputId);
+        let icon = document.getElementById(iconId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
         }
+    }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("registerForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: "Apakah Anda Yakin?",
-                    text: "Apakah Anda yakin data sudah benar?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, Daftar!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        event.target.submit();
-                    }
-                });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Apakah Anda Yakin?",
+                text: "Apakah Anda yakin data sudah benar?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Daftar!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
