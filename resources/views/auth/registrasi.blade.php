@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Registrasi - JTICare</title>
 
+    <!-- Icon Di atas -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/assets/img/Favicon.png') }}">
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -156,15 +159,15 @@
             @csrf
             <div class="mb-3 text-start">
                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                <input class="form-control" id="namaLengkap" name="nama_lengkap" type="text" placeholder="Masukkan Nama Lengkap" value="{{ old('nama_lengkap') }}"/>
+                <input class="form-control" id="namaLengkap" name="nama_lengkap" type="text" placeholder="Masukkan Nama Lengkap Anda" value="{{ old('nama_lengkap') }}"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" name="email" type="email" placeholder="Masukkan Email anda" value="{{ old('email') }}"/>
+                <input class="form-control" id="email" name="email" type="email" placeholder="Masukkan Email Anda" value="{{ old('email') }}"/>
             </div>
             <div class="mb-3 text-start">
                 <label class="form-label" for="nomorWA">Nomor WhatsApp</label>
-                <input class="form-control" id="nomorWA" name="no_whatsapp" type="tel" placeholder="Masukkan Nomor WhatsApp" value="{{ old('no_whatsapp') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                <input class="form-control" id="nomorWA" name="no_whatsapp" type="tel" placeholder="Masukkan Nomor WhatsApp Anda" value="{{ old('no_whatsapp') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
             </div>            
             <div class="mb-3 text-start">
             <label class="form-label" for="password">Kata Sandi</label>

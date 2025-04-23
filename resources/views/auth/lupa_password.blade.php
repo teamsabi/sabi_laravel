@@ -1,38 +1,72 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lupa Password - JTICare</title>
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Icon Di atas -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/assets/img/Favicon.png') }}">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
     <style>
         body {
-            background-color: #4A90E2;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .lupaPw-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
+
+        .reset-card {
             width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
+            max-width: 900px;
+            display: flex;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        .lupaPw-container h2 {
+
+        .left-section, .right-section {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+        }
+
+        .left-section {
+            background-color: #f9f9ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-section .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .right-section h2 {
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 1.4rem;
         }
+
         .form-control {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
+
         .btn-primary {
             background-color: #4A90E2;
             border: none;
@@ -41,76 +75,87 @@
             font-size: 16px;
             border-radius: 8px;
         }
+
         .btn-primary:hover {
             background-color: #357ABD;
         }
-        .forgot-password {
-            text-align: right;
-            display: block;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-        .logo {
-            margin-top: 20px;
-        }
-        .logo img {
-            width: 150px;
-            height: auto;
-        }
-        .input-group-text {
-            cursor: pointer;
+
+        .custom-kembali {
+            background-color: #adadad;
+            color: white; /* Tetap putih dari awal */
+            border: none;
+            width: 100%;
+            padding: 10px;
             font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
-        @media (max-width: 576px) {
-            .lupaPw-container {
-                padding: 20px;
-                width: 90%;
+        .custom-kembali:hover {
+            background-color: #8c8c8c; /* Hanya bg yang berubah */
+            color: white; /* Tetap putih saat hover */
+        }
+
+        @media (max-width: 768px) {
+            .reset-card {
+                flex-direction: column;
             }
-            .lupaPw-container h2 {
-                font-size: 1.5rem;
+
+            .left-section, .right-section {
+                padding: 30px 20px;
+            }
+
+            .left-section .logo {
+                top: 10px;
+                left: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="lupaPw-container">
-        <h2 style="text-align: left;">Lupa Password</h2>
-        <p style="text-align: left;  color: gray;">Silahkan masukan alamat email anda  di bawah ini untuk mengubah Kata Sandi anda</p>
+    <div class="reset-card">
+        <div class="left-section text-center">
+            <div class="logo">
+                <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo" width="150" />
+            </div>
+            <dotlottie-player 
+                src="https://lottie.host/6f2b73c5-58e9-4cc8-b12d-19a68de0d8aa/9tRXQOHyfg.lottie" 
+                background="transparent" 
+                speed="1" 
+                style="width: 300px; height: 300px" 
+                loop autoplay>
+            </dotlottie-player>
+        </div>
+        <div class="right-section">
+            <h2>Lupa Kata Sandi</h2>
+            <p>Silahkan masukkan alamat Email anda di bawah ini untuk mengubah Kata Sandi anda</p>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
+            @if ($errors->any())
+                <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
                     @foreach ($errors->all() as $item)
-                        <li>{{ $item }}</li>
+                        <div style="margin-bottom: 4px;">{{ $item }}</div>
                     @endforeach
-                </ul>
-            </div>    
-        @endif
+                </div>
+            @endif
 
-        @if (Session::get('success'))
-            <div class="alert alert-success alert-dismissable fade show">
-                <ul>
-                    <li>{{ Session::get('success') }}</li>
-                </ul>
-            </div>    
-        @endif
+            @if (Session::get('success'))
+                <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
+                    <div style="margin-bottom: 4px;">{{ Session::get('success') }}</div>
+                </div>
+            @endif
 
-        <form action="{{ route('auth.lupa_password.kirim') }}" method="POST">
-            @csrf
-            <div class="mb-3 text-start">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" id="email" placeholder="Masukkan Email" name="email" value="{{ old('email') }}" type="email"/>
-            </div>
-            <div class="d-flex gap-2">
-                <a href="{{ route('auth.login') }}" class="btn btn-primary" type="button" style="background-color: rgb(173, 173, 173); border: none;">Kembali</a>
-                <button class="btn btn-primary" type="submit">Kirim</button>
-            </div>
-        </form>
-        <div class="logo">
-            <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="logo"/>
+            <form action="{{ route('auth.lupa_password.kirim') }}" method="POST">
+                @csrf
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" id="email" placeholder="Masukkan Email Anda" name="email" value="{{ old('email') }}" type="email" />
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('auth.login') }}" class="btn custom-kembali">Kembali</a>
+                    <button class="btn btn-primary" type="submit">Kirim</button>
+                </div>
+            </form>
         </div>
     </div>
-
 </body>
 </html>

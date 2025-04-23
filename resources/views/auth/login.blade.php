@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Login - JTICare</title>
 
+    <!-- Icon Di atas -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/assets/img/Favicon.png') }}">
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -133,13 +136,13 @@
                 @csrf
                 <div class="mb-3 text-start">
                     <label class="form-label" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" value="{{ old('email') }}">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Anda" value="{{ old('email') }}">
                 </div>
 
                 <div class="mb-3 text-start">
                     <label class="form-label" for="password">Kata Sandi</label>
                     <div class="position-relative">
-                        <input type="password" class="form-control pe-5" id="password" name="password" placeholder="Masukkan Kata Sandi">
+                        <input type="password" class="form-control pe-5" id="password" name="password" placeholder="Masukkan Kata Sandi Anda">
                         <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()" style="cursor: pointer;">
                             <i class="fas fa-eye" id="eyeIcon"></i>
                         </span>
