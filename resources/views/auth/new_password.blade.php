@@ -5,7 +5,7 @@
     <title>Kata Sandi Baru - JTICare</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Icon Di atas -->
+        <!-- Icon Di atas -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/assets/img/Favicon.png') }}">
 
     <!-- Bootstrap -->

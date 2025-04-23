@@ -7,7 +7,7 @@
                         <div class="header-info-left d-flex">
                             <ul>     
                                 <li>Telepon: +62 858-0727-8580</li>
-                                <li>Email: sabiteam23@gamil.com</li>
+                                <li>Email: sabiteam23@gmail.com</li>
                             </ul>
                         </div>
                         <div class="header-info-right d-flex align-items-center"></div>
@@ -58,29 +58,27 @@
                         <!-- Login Button dan User Profil -->
                         <div class="header-right-btn d-none d-lg-block ml-3">
                             @auth
-                                <!-- Jika User Sudah Login -->
-                                <div class="dropdown">
-                                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
-                                        <span class="ml-2" style="color: black; font-size: 16px;">Hi, <strong>{{ Auth::user()->nama_lengkap }}</strong></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="userDropdown">
-                                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profil.index') }}">
-                                            <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="40" height="40" class="rounded-circle mr-2">
-                                            <div>
-                                                <strong>{{ Auth::user()->nama_lengkap }}</strong><br>
-                                                <span style="font-size: 14px; color: #6c757d;">{{ Auth::user()->email }}</span>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{ route('profil.index') }}">Profil</a>
-                                        <a class="dropdown-item" href="#">Pengaturan Akun</a>
-                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                        <a class="dropdown-item" href="#" onclick="confirmLogout(event)">Logout</a>
+                            <!-- Jika User Sudah Login -->
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
+                                    <span class="ml-2" style="color: black; font-size: 16px;">Hi, <strong>{{ Auth::user()->nama_lengkap }}</strong></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="userDropdown" style="min-width: 260px; padding: 0;">
+                                    <div class="p-3 d-flex align-items-center" style="border-bottom: 1px solid #e0e0e0;">
+                                        <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="50" height="50" class="rounded-circle mr-3">
+                                        <div>
+                                            <strong style="font-size: 15px;">{{ Auth::user()->nama_lengkap }}</strong><br>
+                                            <span style="font-size: 12px; color: #6c757d;">{{ Auth::user()->email }}</span>
+                                        </div>
                                     </div>
+                                    <a class="dropdown-item" href="{{ route('user.profil.index') }}" style="font-size: 13px; padding: 8px 20px 4px;">Profil</a>
+                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="#" onclick="confirmLogout(event)" style="font-size: 13px; padding: 4px 20px 10px;">Logout</a>
                                 </div>
+                            </div>
                             @else
                                 <!-- Jika User Belum Login -->
                                 <a href="{{ route('auth.login') }}" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>

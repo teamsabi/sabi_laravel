@@ -17,7 +17,6 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
-
 <script>
   var myBarChart = new Chart(barChart, {
     type: "bar",

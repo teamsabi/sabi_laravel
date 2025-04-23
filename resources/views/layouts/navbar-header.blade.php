@@ -38,7 +38,6 @@
             <li>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('profil.index') }}">Profil</a>
-              <a class="dropdown-item" href="#">Pengaturan Akun</a>
               <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                 @csrf
               </form>

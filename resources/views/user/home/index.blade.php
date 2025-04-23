@@ -51,14 +51,20 @@
         <div class="row">
             @if(isset($kategoriDonasi) && $kategoriDonasi->isNotEmpty())
                 @foreach($kategoriDonasi as $kategori)
-                    <div class="col-lg-4 col-md-6 col-sm-6" style="padding-bottom: 30px;">
-                        <div class="single-cases mb-10 p-3 border rounded shadow h-100 d-flex flex-column" style="background-color: #f8f9fa; min-height: 280px; position: relative;">
+                    @php
+                        $persen = $kategori->target_dana > 0 
+                            ? round(($kategori->terkumpul / $kategori->target_dana) * 100) 
+                            : 0;
+                        $persen = min($persen, 100);
+                    @endphp
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
+                        <div class="single-cases p-3 border rounded shadow w-100 d-flex flex-column" style="background-color: #f8f9fa;">
                             <div class="cases-img text-center mb-3">
-                                <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="" class="img-fluid rounded">
+                                <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="Gambar Donasi" class="img-fluid rounded" style="height: 200px; object-fit: cover;">
                             </div>
-                            <div class="cases-caption">
-                                <p class="date text-muted">{{ \Carbon\Carbon::parse($kategori->tanggal_buat)->format('d F Y') }}</p>
-                                <h3 class="text-start mb-1" style="font-weight: bold;">
+                            <div class="cases-caption flex-grow-1">
+                                <p class="date text-muted">{{ \Carbon\Carbon::parse($kategori->tanggal_buat)->format('d M Y') }}</p>
+                                <h3 class="text-start mb-1 fw-bold">
                                     @if(Auth::check())
                                         <a href="{{ route('donasi.detail', $kategori->id) }}">{{ $kategori->judul_donasi }}</a>
                                     @else
@@ -76,26 +82,29 @@
                                         </a>
                                     @endif
                                 </h3>
-                                <p class="text-start text-muted" style="margin-top: -40px;">{{ Str::limit($kategori->deskripsi, 80) }}</p>
+                                <p class="text-start text-muted" style="margin-top: -40px;">
+                                    {{ Str::limit($kategori->deskripsi, 100) }}
+                                </p>
+        
                                 <!-- Progress Bar -->
-                                <div class="mt-20"></div>
-                                <div class="single-skill mb-15">
+                                <div class="mt-3"></div>
+                                <div class="single-skill mb-2">
                                     <div class="bar-progress">
-                                        <div id="bar1" class="barfiller">
+                                        <div class="barfiller">
                                             <div class="tipWrap">
-                                                <span class="tip"></span>
+                                                <span class="tip">{{ $persen }}%</span>
                                             </div>
-                                            <span class="fill" data-percentage="30"></span>
+                                            <span class="fill" data-percentage="{{ $persen }}" style="width: {{ $persen }}%; background: #1d8cf8;"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- / progress -->
+        
                                 <div class="prices d-flex justify-content-between">
                                     <p>Terkumpul :<span> Rp {{ number_format($kategori->terkumpul, 0, ',', '.') }}</span></p>
                                     <p>Target :<span> Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</span></p>
                                 </div>
                                 <div style="border-top: 1px solid #e0e0e0; margin-top: -5px; padding-top: 5px;">
-                                    <p><strong>Jumlah Donatur :<span> {{ $kategori->jumlah_donatur }}</span></strong></p>
+                                    <p><strong>Jumlah Donatur :</strong> <span>{{ $kategori->jumlah_donatur }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -106,11 +115,11 @@
                     <p class="text-muted">Tidak ada kategori donasi yang tersedia.</p>
                 </div>
             @endif
-            <!-- Lihat Semua Button -->
-            <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">
-                <a href="{{ route('donasi.index') }}" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
-            </div>                                 
-        </div>
+        </div>        
+        <!-- Lihat Semua Button -->
+        <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">
+            <a href="{{ route('donasi.index') }}" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
+        </div>                                 
     </div>
 </div>
 <!-- Katalog Donasi End-->

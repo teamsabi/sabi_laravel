@@ -1,5 +1,4 @@
 @extends('app_user')
-
 @section('content')
 
 <div class="our-cases-area" style="padding-top: 50px; padding-bottom: 50px;">

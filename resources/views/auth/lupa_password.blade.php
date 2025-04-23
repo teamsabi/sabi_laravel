@@ -139,7 +139,7 @@
             @endif
 
             @if (Session::get('success'))
-                <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
+                <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 7px 11px; border-radius: 6px; font-size: 12px; margin-bottom: 11px; width: fit-content; max-width: 100%;">
                     <div style="margin-bottom: 4px;">{{ Session::get('success') }}</div>
                 </div>
             @endif

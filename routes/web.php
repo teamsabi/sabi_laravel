@@ -59,6 +59,14 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Donatur
         Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
+    
+        // Profil untuk Admin
+        Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
+        Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+
+        Route::get('/profile/pengaturan-akun', function () {
+            return view('administrator.profil.pengaturan-akun');
+        })->name('admin.profil.pengaturan-akun');
     });
 
     // Role User
@@ -83,9 +91,15 @@ Route::middleware(['auth'])->group(function () {
 
         // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
+        
+        //Profil untuk User
+        Route::get('/profil', function () {
+            return view('user.profil.index');
+        })->name('user.profil.index');
+        
+        Route::get('/profil/pengaturan-akun', function () {
+            return view('user.profil.pengaturan-akun');
+        })->name('user.profil.pengaturan-akun');
     });
-
-    // Profil untuk semua yang login
-    Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
-    Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+    
 });
