@@ -24,11 +24,11 @@
                     class="rounded-circle border shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
                 <div class="ms-4 d-flex flex-column">
                     <div class="ms-4 d-flex flex-column">
-                        <button class="btn btn-sm mb-2" style="width: 100px; background-color: #b4b3b3; color: white; font-size: 12px;">Ganti Foto</button>
+                        <label for="photo" class="btn btn-sm mb-2" style="width: 100px; background-color: #dfdfdf; color: white; font-size: 12px;">Ganti Foto</label>
+                        <input type="file" name="foto_profil" id="photo" class="d-none" accept="image/*" form="updateProfileForm">
                         <button class="btn btn-sm btn-danger" style="width: 100px; font-size: 12px;">Hapus Foto</button>
                     </div>                    
                 </div>
-                <input type="file" name="foto_profil" id="photo" class="d-none" accept="image/*" form="updateProfileForm">
             </div>
             <!-- Form -->
             <form id="updateProfileForm" action="{{ route('profil.update') }}" method="POST" enctype="multipart/form-data">
