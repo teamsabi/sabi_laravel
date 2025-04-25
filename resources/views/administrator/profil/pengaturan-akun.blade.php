@@ -36,7 +36,14 @@
                 @csrf
                 <div id="inputEmailBaru" style="display: none;" class="mt-3 mb-4">
                     <label for="emailBaru" class="form-label">Email baru</label>
-                    <input type="email" id="emailBaru" name="emailBaru" class="form-control mb-3" placeholder="Masukkan email baru">
+
+                    <!-- Menampilkan pesan error di atas input email -->
+                    @error('emailBaru')
+                        <div class="text-danger mb-2">{{ $message }}</div>
+                    @enderror
+                    
+                    <input type="email" id="emailBaru" name="emailBaru" class="form-control mb-3" placeholder="Masukkan email baru" value="{{ old('emailBaru') }}">
+
                     <button type="button" id="btnGantiEmail" class="btn btn-primary">
                         <i class="fa fa-save me-1"></i> Ganti
                     </button>
@@ -51,11 +58,11 @@
                 <div class="row">
                     <!-- Kata Sandi Baru -->
                     <div class="col-md-6 mb-3">
-                        <label for="newPassword" class="form-label">Kata sandi baru</label>
+                        <label for="currentPassword" class="form-label">Kata sandi anda saat ini</label>
                         <div class="input-group">
-                            <input type="password" id="newPassword" class="form-control">
+                            <input type="password" id="currentPassword" class="form-control">
                             <span class="input-group-text bg-white">
-                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('newPassword', this)">
+                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
                                     <i class="fa fa-eye"></i>
                                 </button>
                             </span>
@@ -64,11 +71,11 @@
 
                     <!-- Kata Sandi Saat Ini -->
                     <div class="col-md-6 mb-3">
-                        <label for="currentPassword" class="form-label">Kata sandi saat ini</label>
+                        <label for="newPassword" class="form-label">Kata sandi baru</label>
                         <div class="input-group">
-                            <input type="password" id="currentPassword" class="form-control">
+                            <input type="password" id="newPassword" class="form-control">
                             <span class="input-group-text bg-white">
-                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
+                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('newPassword', this)">
                                     <i class="fa fa-eye"></i>
                                 </button>
                             </span>

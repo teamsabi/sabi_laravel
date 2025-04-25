@@ -189,7 +189,6 @@ class AuthController extends Controller
         $token = $request->query('token');
         $tokenData = ResetPasswordToken::where('token', $token)->first();
 
-        // Cek apakah token valid dan belum expired
         if (!$tokenData || $tokenData->expired_at < now() || $tokenData->used_at !== null) {
             return redirect()->route('auth.login')->withErrors('Token tidak valid atau sudah kedaluwarsa.');
         }
@@ -200,7 +199,6 @@ class AuthController extends Controller
         ]);
     }
 
-    // Update Password Baru
     public function updatePassword(Request $request)
     {
         $request->validate([
@@ -213,7 +211,6 @@ class AuthController extends Controller
             ->where('email', $request->email)
             ->first();
 
-        // Cek apakah token valid dan belum expired
         if (!$tokenData || $tokenData->expired_at < now() || $tokenData->used_at !== null) {
             return redirect()->route('auth.login')->withErrors('Token tidak valid atau sudah kedaluwarsa.');
         }
@@ -222,7 +219,6 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        // Tandai token sebagai sudah digunakan
         $tokenData->used_at = now();
         $tokenData->save();
 
@@ -248,7 +244,6 @@ class AuthController extends Controller
             'email_verified_at' => null
         ]);
 
-        // Kirim email verifikasi
         $details = [
             'name' => $user->nama_lengkap,
             'role' => $user->role,
@@ -276,7 +271,7 @@ class AuthController extends Controller
         }
     
         $user->email_verified_at = now();
-        $user->save(); // <-- Ini penting!
+        $user->save();
     
         return redirect()->route('auth.login')->with('success', 'Akun anda berhasil diverifikasi. Silahkan login');
     }
