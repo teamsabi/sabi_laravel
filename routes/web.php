@@ -17,6 +17,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/reg', [AuthController::class, 'register']);
     Route::get('/verify/{verify_key}', [AuthController::class, 'verify']);
 
+    Route::get('/verify-email-baru/{verify_key}', [AuthController::class, 'verifyNewEmail'])->name('auth.verify_email_baru');
+
 // Halaman Lupa Password
 Route::prefix('lupa-password')->group(function () {
     Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
@@ -59,14 +61,16 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Donatur
         Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
-    
-        // Profil untuk Admin
+
+        // Profil Admin
         Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
         Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
-
         Route::get('/profile/pengaturan-akun', function () {
             return view('administrator.profil.pengaturan-akun');
         })->name('admin.profil.pengaturan-akun');
+
+        // Ganti Email Admin via AuthController
+        Route::post('/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('update.email');
     });
 
     // Role User

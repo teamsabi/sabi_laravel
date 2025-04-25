@@ -25,14 +25,26 @@
                     <div>
                         Akun email anda <strong>{{ old('email', Auth::user()->email) }}</strong>
                     </div>
-                    <a href="#" class="text-primary text-decoration-none">Ganti</a>
+                    <a href="#" id="gantiEmailBtn" class="text-primary text-decoration-none">Ganti Email</a>
                 </div>
             </div>
 
             <hr>
 
+            <!-- Form Ganti Email -->
+            <form id="formGantiEmail" method="POST" action="{{ route('update.email') }}">
+                @csrf
+                <div id="inputEmailBaru" style="display: none;" class="mt-3 mb-4">
+                    <label for="emailBaru" class="form-label">Email baru</label>
+                    <input type="email" id="emailBaru" name="emailBaru" class="form-control mb-3" placeholder="Masukkan email baru">
+                    <button type="button" id="btnGantiEmail" class="btn btn-primary">
+                        <i class="fa fa-save me-1"></i> Ganti
+                    </button>
+                </div>
+            </form>
+
             <!-- Kata Sandi -->
-            <div class="mb-4">
+            <div class="mb-5">
                 <label class="form-label fw-bold">Kata sandi</label>
                 <p class="text-muted small">*Masukkan Kata Sandi anda saat ini untuk membuat kata sandi baru</p>
 
@@ -49,6 +61,8 @@
                             </span>
                         </div>
                     </div>
+
+                    <!-- Kata Sandi Saat Ini -->
                     <div class="col-md-6 mb-3">
                         <label for="currentPassword" class="form-label">Kata sandi saat ini</label>
                         <div class="input-group">
@@ -60,14 +74,18 @@
                             </span>
                         </div>
                     </div>
-                </div>                
+                </div>
+
                 <div class="d-flex justify-content-start align-items-center mb-3">
                     <div class="me-2">Lupa kata sandi lama?</div>
                     <a href="#" class="text-primary text-decoration-none">Atur ulang kata sandi</a>
-                </div>                
+                </div>
+
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save me-1"></i> Simpan Perubahan
                 </button>
+            </div>
+
             <hr>
 
             <!-- Hapus Akun -->
@@ -80,6 +98,8 @@
     </div>
 </div>
 
+<!-- Script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function togglePassword(inputId, btn) {
         const input = document.getElementById(inputId);
@@ -94,6 +114,35 @@
             icon.classList.add("fa-eye");
         }
     }
+
+    document.getElementById('gantiEmailBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        const inputEmail = document.getElementById('inputEmailBaru');
+        inputEmail.style.display = inputEmail.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.getElementById('btnGantiEmail').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Anda akan mengganti akun email ini dengan yang baru",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, ganti email!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Sedang memproses...',
+                    text: 'Akun email anda sedang dibuild kembali menjadi email yang baru. Silahkan cek di gmail akun anda yang baru untuk verifikasi email.',
+                    icon: 'info'
+                }).then(() => {
+                    document.getElementById('formGantiEmail').submit();
+                });
+            }
+        });
+    });
 </script>
 
 @endsection

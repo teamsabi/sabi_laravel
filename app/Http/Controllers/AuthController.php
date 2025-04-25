@@ -228,4 +228,56 @@ class AuthController extends Controller
 
         return redirect()->route('auth.login')->with('success', 'Password berhasil diubah. Silakan login.');
     }
+
+    public function updateEmail(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'emailBaru' => 'required|email|unique:users,email',
+        ], [
+            'emailBaru.required' => 'Email baru wajib diisi',
+            'emailBaru.email' => 'Format email tidak valid',
+            'emailBaru.unique' => 'Email ini sudah terdaftar',
+        ]);
+
+        $verify_key = Str::random(100);
+
+        $user->update([
+            'email' => $request->emailBaru,
+            'verify_key' => $verify_key,
+            'email_verified_at' => null
+        ]);
+
+        // Kirim email verifikasi
+        $details = [
+            'name' => $user->nama_lengkap,
+            'role' => $user->role,
+            'datetime' => now(),
+            'website' => 'JTICare - Verifikasi Email Baru',
+            'url' => url("/verify-email-baru/{$verify_key}"),
+        ];
+
+        try {
+            Mail::to($request->emailBaru)->send(new AuthMail($details));
+        } catch (\Exception $e) {
+            return redirect()->route('auth.login')->withErrors('Gagal mengirim email verifikasi. Coba lagi nanti.');
+        }
+
+        Auth::logout();
+        return redirect()->route('auth.login')->with('success', 'Akun email anda sedang dibuild kembali menjadi email yang baru. Silahkan cek email baru anda untuk verifikasi.');
+    }
+
+    public function verifyNewEmail($verify_key)
+    {
+        $user = User::where('verify_key', $verify_key)->first();
+    
+        if (!$user) {
+            return redirect()->route('auth.login')->withErrors('Key verifikasi tidak valid');
+        }
+    
+        $user->email_verified_at = now();
+        $user->save(); // <-- Ini penting!
+    
+        return redirect()->route('auth.login')->with('success', 'Akun anda berhasil diverifikasi. Silahkan login');
+    }
 }
