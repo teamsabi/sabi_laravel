@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 
 class ProfilController extends Controller
 {
@@ -43,6 +44,34 @@ class ProfilController extends Controller
         ]);
     
         return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+    
+        // Validasi password saat ini dan password baru
+        $request->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8',
+        ], [
+            'currentPassword.required' => 'Password saat ini wajib diisi',
+            'newPassword.required' => 'Password baru wajib diisi',
+            'newPassword.min' => 'Password baru minimal 8 karakter',
+        ]);
+    
+        // Verifikasi password saat ini
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return back()->withErrors(['currentPassword' => 'Password saat ini tidak cocok']);
+        }
+    
+        // Update password baru
+        $user->update([
+            'password' => Hash::make($request->newPassword),
+        ]);
+    
+        // Mengirim SweetAlert Info bahwa password berhasil diperbarui
+        return redirect()->route('admin.profil.pengaturan-akun')->with('success', 'Password Anda berhasil diperbarui');
     }
         
 }

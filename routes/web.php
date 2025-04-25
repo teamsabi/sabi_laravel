@@ -71,6 +71,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Ganti Email Admin via AuthController
         Route::post('/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('update.email');
+
+        // Ganti Password baru
+        Route::post('/update-password', [ProfilController::class, 'updatePassword'])->name('update.password');
     });
 
     // Role User

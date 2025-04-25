@@ -50,47 +50,56 @@
                 </div>
             </form>
 
-            <!-- Kata Sandi -->
+            <!-- Form Ganti Password -->
             <div class="mb-5">
                 <label class="form-label fw-bold">Kata sandi</label>
                 <p class="text-muted small">*Masukkan Kata Sandi anda saat ini untuk membuat kata sandi baru</p>
 
-                <div class="row">
-                    <!-- Kata Sandi Baru -->
-                    <div class="col-md-6 mb-3">
-                        <label for="currentPassword" class="form-label">Kata sandi anda saat ini</label>
-                        <div class="input-group">
-                            <input type="password" id="currentPassword" class="form-control">
-                            <span class="input-group-text bg-white">
-                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
-                                    <i class="fa fa-eye"></i>
-                                </button>
-                            </span>
+                <form id="formGantiPassword" method="POST" action="{{ route('update.password') }}">
+                    @csrf
+                    <div class="row">
+                        <!-- Kata Sandi Saat Ini -->
+                        <div class="col-md-6 mb-3">
+                            <label for="currentPassword" class="form-label">Kata sandi anda saat ini</label>
+                            <div class="input-group">
+                                <input type="password" id="currentPassword" class="form-control" name="currentPassword">
+                                <span class="input-group-text bg-white">
+                                    <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            @error('currentPassword')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Kata Sandi Baru -->
+                        <div class="col-md-6 mb-3">
+                            <label for="newPassword" class="form-label">Kata sandi baru</label>
+                            <div class="input-group">
+                                <input type="password" id="newPassword" class="form-control" name="newPassword">
+                                <span class="input-group-text bg-white">
+                                    <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('newPassword', this)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            @error('newPassword')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
-                    <!-- Kata Sandi Saat Ini -->
-                    <div class="col-md-6 mb-3">
-                        <label for="newPassword" class="form-label">Kata sandi baru</label>
-                        <div class="input-group">
-                            <input type="password" id="newPassword" class="form-control">
-                            <span class="input-group-text bg-white">
-                                <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('newPassword', this)">
-                                    <i class="fa fa-eye"></i>
-                                </button>
-                            </span>
-                        </div>
+                    <div class="d-flex justify-content-start align-items-center mb-3">
+                        <div class="me-2">Lupa kata sandi lama?</div>
+                        <a href="#" class="text-primary text-decoration-none">Atur ulang kata sandi</a>
                     </div>
-                </div>
 
-                <div class="d-flex justify-content-start align-items-center mb-3">
-                    <div class="me-2">Lupa kata sandi lama?</div>
-                    <a href="#" class="text-primary text-decoration-none">Atur ulang kata sandi</a>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save me-1"></i> Simpan Perubahan
-                </button>
+                    <button type="submit" id="btnGantiPassword" class="btn btn-primary">
+                        <i class="fa fa-save me-1"></i> Simpan Perubahan
+                    </button>
+                </form>
             </div>
 
             <hr>
@@ -122,6 +131,7 @@
         }
     }
 
+    // Fungsi untuk mengganti email
     document.getElementById('gantiEmailBtn').addEventListener('click', function(event) {
         event.preventDefault();
         const inputEmail = document.getElementById('inputEmailBaru');
@@ -150,6 +160,45 @@
             }
         });
     });
+
+    // Fungsi untuk mengganti password
+    document.getElementById('btnGantiPassword').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Password Anda akan diganti dengan password baru",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, ganti password!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Sedang memproses...',
+                    text: 'Password anda sedang diperbarui.',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading(); // Tampilkan loading
+                    }
+                });
+
+                // Setelah SweetAlert selesai loading, kirim form
+                document.getElementById('formGantiPassword').submit(); // Kirim form setelah SweetAlert selesai
+            }
+        });
+    });
+
+    // Menampilkan SweetAlert ketika password berhasil diperbarui
+    @if(session('success'))
+        Swal.fire({
+            title: 'Sukses!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
 </script>
 
 @endsection
