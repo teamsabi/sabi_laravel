@@ -105,9 +105,10 @@
             <hr>
 
             <!-- Hapus Akun -->
-            <div class="mb-3">
+            <div class="mb-1">
                 <label class="form-label fw-bold">Hapus akun</label>
                 <p>Apakah anda yakin ingin menghapus akun?</p>
+                <p class="text-muted small">jika anda menghapus akun, akun anda akan di hapus di data kami dan anda perlu registrasi kembali!!</p>
                 <a href="#" class="text-danger text-decoration-none">Saya ingin menghapus akun</a>
             </div>
         </div>
