@@ -62,7 +62,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="currentPassword" class="form-label">Kata sandi anda saat ini</label>
                             <div class="input-group">
-                                <input type="password" id="currentPassword" class="form-control" name="currentPassword">
+                                <input type="password" id="currentPassword" class="form-control" placeholder="Masukkan kata sandi lama" sname="currentPassword">
                                 <span class="input-group-text bg-white">
                                     <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
                                         <i class="fa fa-eye"></i>
@@ -78,7 +78,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="newPassword" class="form-label">Kata sandi baru</label>
                             <div class="input-group">
-                                <input type="password" id="newPassword" class="form-control" name="newPassword">
+                                <input type="password" id="newPassword" class="form-control" placeholder="Masukkan kata sandi baru" name="newPassword">
                                 <span class="input-group-text bg-white">
                                     <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('newPassword', this)">
                                         <i class="fa fa-eye"></i>
@@ -107,8 +107,8 @@
             <!-- Hapus Akun -->
             <div class="mb-1">
                 <label class="form-label fw-bold">Hapus akun</label>
-                <p>Apakah anda yakin ingin menghapus akun?</p>
-                <p class="text-muted small">jika anda menghapus akun, akun anda akan di hapus di data kami dan anda perlu registrasi kembali!!</p>
+                <p class="mb-1">Apakah anda yakin ingin menghapus akun?</p>
+                <p class="text-muted small mb-1">jika anda menghapus akun, akun anda akan di hapus di data kami dan anda perlu registrasi kembali!!</p>
                 <a href="#" class="text-danger text-decoration-none">Saya ingin menghapus akun</a>
             </div>
         </div>

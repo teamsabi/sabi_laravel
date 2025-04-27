@@ -47,7 +47,7 @@
                 <div class="mb-4">
                     <label for="no_whatsapp" class="form-label">Nomor WhatsApp</label>
                     <input type="text" name="no_whatsapp" class="form-control"
-                        value="{{ old('no_whatsapp', Auth::user()->no_whatsapp) }}">
+                        value="{{ old('no_whatsapp', Auth::user()->no_whatsapp) }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save me-1"></i> Simpan Perubahan

@@ -105,7 +105,7 @@ Route::middleware(['auth'])->group(function () {
         })->name('user.profil.index');
         
         Route::get('/profil/pengaturan-akun', function () {
-            return view('user.profil.pengaturan-akun');
+            return view('user.profil.pengaturan_akun');
         })->name('user.profil.pengaturan-akun');
     });
     

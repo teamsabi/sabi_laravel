@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="#" class="btn btn-primary w-100" style="border-radius: 10px;">Bayar Sekarang</a>
+                    <a href="#" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Bayar Sekarang</a>
                 </div>
             </div>
         </div>

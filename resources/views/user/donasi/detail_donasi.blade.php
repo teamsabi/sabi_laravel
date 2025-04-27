@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('donasi.form_donasi', ['id' => $kategori->id]) }}" class="btn btn-primary w-100" style="font-size: 15px;">Donasi Sekarang</a>
+                    <a href="{{ route('donasi.form_donasi', ['id' => $kategori->id]) }}" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Donasi Sekarang</a>
                 </div>
             </div>
         </div>

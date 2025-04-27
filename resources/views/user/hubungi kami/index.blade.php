@@ -36,8 +36,7 @@
                             <textarea class="form-control w-100" name="pesan" id="pesan" cols="30" rows="9" placeholder="Tulis pesan anda di sini" style="font-size: 14px; padding: 14px 16px;"></textarea>
                         </div>
                     </div>
-                    <div class="header-center-btn"
-                        style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 30px;">
+                    <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 30px;">
                         <a href="#" class="btn btn-primary center" style="border-radius: 10px; font-size: 18px;">Kirim</a>
                     </div>
                 </div>
