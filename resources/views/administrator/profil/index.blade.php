@@ -24,10 +24,10 @@
                     class="rounded-circle border shadow-sm" style="width: 90px; height: 90px; object-fit: cover;">
                 <div class="ms-4 d-flex flex-column">
                     <div class="ms-4 d-flex flex-column">
-                        <label for="photo" class="btn btn-sm mb-2" style="width: 100px; background-color: #dfdfdf; color: white; font-size: 12px;">Ganti Foto</label>
+                        <label for="photo" class="btn btn-sm btn-primary mb-2" style="font-size: 12px; color: white !important;">Ganti Foto</label>
                         <input type="file" name="foto_profil" id="photo" class="d-none" accept="image/*" form="updateProfileForm">
                         <button class="btn btn-sm btn-danger" style="width: 100px; font-size: 12px;">Hapus Foto</button>
-                    </div>                    
+                    </div>                                                    
                 </div>
             </div>
             <!-- Form -->

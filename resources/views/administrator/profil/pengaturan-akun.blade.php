@@ -29,8 +29,6 @@
                 </div>
             </div>
 
-            <hr>
-
             <!-- Form Ganti Email -->
             <form id="formGantiEmail" method="POST" action="{{ route('update.email') }}">
                 @csrf
@@ -50,6 +48,8 @@
                 </div>
             </form>
 
+            <hr>
+            
             <!-- Form Ganti Password -->
             <div class="mb-5">
                 <label class="form-label fw-bold">Kata sandi</label>

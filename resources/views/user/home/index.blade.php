@@ -25,7 +25,7 @@
                             <h1 data-animation="fadeInUp" data-delay=".6s">Wujudkan kepedulian<br> melalui donasi</h1>
                             <P data-animation="fadeInUp" data-delay=".8s" >Aplikasi donasi yang memudahkan mahasiswa dan alumni berkontribusi bagi kemajuan Jurusan Teknologi Informasi.</P>
                             <div class="hero__btn">
-                                <a href="#" class="btn hero-btn mb-10"  data-animation="fadeInLeft" data-delay=".8s" style="border-radius: 10px;">Donasi Sekarang</a>
+                                <a href="{{ route('auth.login') }}" class="btn hero-btn mb-10"  data-animation="fadeInLeft" data-delay=".8s" style="border-radius: 10px;">Masuk</a>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
 <!-- Beranda End-->
 
 <!-- Katalog Donasi Start-->
-<div class="our-cases-area" style="padding-bottom: 20px;">
+<div class="our-cases-area" style="padding-bottom: 20px; padding-top: 30px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">

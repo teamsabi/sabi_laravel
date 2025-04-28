@@ -25,8 +25,27 @@
                     <small class="text-muted" style="font-size: 14px; font-weight: bold;">Email</small><br>
                     <span style="font-size: 16px;">Akun email anda <strong>{{ Auth::user()->email }}</strong></span>
                 </div>
-                <a href="#" class="text-primary" style="font-size: 14px; font-weight: 600;">Ganti Email</a>
+                <a href="#" id="gantiEmailBtn" class="text-primary" style="font-size: 14px; font-weight: 600;">Ganti Email</a>
             </div>
+
+            <!-- Form Ganti Email -->
+            <form id="formGantiEmail" method="POST" action="{{ route('update.email') }}">
+                @csrf
+                <div id="inputEmailBaru" style="display: none;" class="mt-3 mb-4">
+                    <label for="emailBaru" class="form-label" style="font-size: 13px;">Email baru</label>
+
+                    <!-- Menampilkan pesan error di atas input email -->
+                    @error('emailBaru')
+                        <div class="text-danger mb-2">{{ $message }}</div>
+                    @enderror
+                    
+                    <input type="email" id="emailBaru" name="emailBaru" class="form-control" placeholder="Masukkan email baru" style="height: 40px; font-size: 14px;" value="{{ old('emailBaru') }}">
+
+                    <button type="button" id="btnGantiEmail" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 6px; font-size: 14px; padding: 12px 20px;">
+                        <i class="fa fa-save" style="margin-right: 6px;"></i> Ganti
+                    </button>
+                </div>
+            </form>
 
             <hr>
 
@@ -58,14 +77,12 @@
                             </div>
                         </div>
                     </div>
-            
                     <div class="me-2" style="font-size: 14px;">Lupa kata sandi lama?
                         <a href="#" class="text-primary" style="font-size: 14px;">Atur ulang kata sandi</a>
                     </div>
                 </div>
-            
-                <button type="submit" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 10px; font-size: 14px; padding: 12px 20px;">
-                    <i class="fa fa-save me-2"></i> Simpan Perubahan
+                <button type="submit" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 6px; font-size: 14px; padding: 12px 20px;">
+                    <i class="fa fa-save" style="margin-right: 6px;"></i> Simpan Perubahan
                 </button>
             </form>
 
@@ -97,6 +114,36 @@
             icon.classList.add("fa-eye");
         }
     }
+
+    // Fungsi untuk mengganti email
+    document.getElementById('gantiEmailBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        const inputEmail = document.getElementById('inputEmailBaru');
+        inputEmail.style.display = inputEmail.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.getElementById('btnGantiEmail').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Anda akan mengganti akun email ini dengan yang baru",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, ganti email!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Sedang memproses...',
+                    text: 'Akun email anda sedang dibuild kembali menjadi email yang baru. Silahkan cek di gmail akun anda yang baru untuk verifikasi email.',
+                    icon: 'info'
+                }).then(() => {
+                    document.getElementById('formGantiEmail').submit();
+                });
+            }
+        });
+    });
 </script>
 
 @endsection

@@ -80,8 +80,6 @@
                                 </div>
                             </div>
                             @else
-                                <!-- Jika User Belum Login -->
-                                <a href="{{ route('auth.login') }}" class="btn btn-primary" style="border-radius: 10px;">Masuk</a>
                             @endauth
                         </div>                            
                     </div>
