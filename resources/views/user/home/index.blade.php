@@ -23,9 +23,13 @@
                     <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
                         <div class="hero__caption">
                             <h1 data-animation="fadeInUp" data-delay=".6s">Wujudkan kepedulian<br> melalui donasi</h1>
-                            <P data-animation="fadeInUp" data-delay=".8s" >Aplikasi donasi yang memudahkan mahasiswa dan alumni berkontribusi bagi kemajuan Jurusan Teknologi Informasi.</P>
+                            <p data-animation="fadeInUp" data-delay=".8s">Aplikasi donasi yang memudahkan mahasiswa dan alumni berkontribusi bagi kemajuan Jurusan Teknologi Informasi.</p>
                             <div class="hero__btn">
-                                <a href="{{ route('auth.login') }}" class="btn hero-btn mb-10"  data-animation="fadeInLeft" data-delay=".8s" style="border-radius: 10px;">Masuk</a>
+                                @guest
+                                    <a href="{{ route('auth.login') }}" class="btn hero-btn mb-10" data-animation="fadeInLeft" data-delay=".8s" style="border-radius: 10px;">Masuk</a>
+                                @else
+                                    <a href="{{ route('donasi.index') }}" class="btn hero-btn mb-10" data-animation="fadeInLeft" data-delay=".8s" style="border-radius: 10px;">Donasi Sekarang</a>
+                                @endguest
                             </div>
                         </div>
                     </div>

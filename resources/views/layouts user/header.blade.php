@@ -27,7 +27,27 @@
                         </div>
                         <div class="main-menu d-none d-lg-block flex-grow-1">
                             <nav>
-                                <ul id="navigation" class="d-flex align-items-center justify-content-center">                                                                                          
+                                <ul id="navigation" class="d-flex align-items-center justify-content-center">  
+                                    <!-- Ini hanya muncul di MOBILE -->
+                                    @auth
+                                    <li class="d-block d-lg-none">
+                                        <a href="#" style="font-weight: bold; display: flex; align-items: center;">
+                                            <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="30" height="30" class="rounded-circle mr-2">
+                                            <span>{{ Auth::user()->nama_lengkap }}</span>
+                                        </a>
+                                        <ul class="submenu">
+                                            <li><a href="{{ route('user.profil.index') }}">Profil</a></li>
+                                            <li>
+                                                <a href="#" onclick="confirmLogout(event)">Logout</a>
+                                                <form id="logout-form-mobile" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    @endauth
+                                
+                                    <!-- Menu lainnya-->
                                     <li><a href="{{ route('beranda.login') }}" style="font-weight: bold;">Beranda</a></li>
                                     <li><a href="{{ route('donasi.index') }}" style="font-weight: bold;">Donasi</a></li>
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
@@ -38,7 +58,7 @@
                                             <li><a href="{{ route('hubungi kami.index') }}" style="font-weight: bold;">Hubungi Kami</a></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul>                                                                
                             </nav>
                         </div>
                         <!-- Search Button -->
@@ -58,7 +78,7 @@
                         <!-- Login Button dan User Profil -->
                         <div class="header-right-btn d-none d-lg-block ml-3">
                             @auth
-                            <!-- Jika User Sudah Login -->
+                            <!-- Ini hanya muncul di DESKTOP -->
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
@@ -73,15 +93,14 @@
                                         </div>
                                     </div>
                                     <a class="dropdown-item" href="{{ route('user.profil.index') }}" style="font-size: 13px; padding: 8px 20px 4px;">Profil</a>
-                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form-desktop" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                     <a class="dropdown-item" href="#" onclick="confirmLogout(event)" style="font-size: 13px; padding: 4px 20px 10px;">Logout</a>
                                 </div>
                             </div>
-                            @else
                             @endauth
-                        </div>                            
+                        </div>                                                 
                     </div>
                 </div>
                 <!-- Mobile Menu -->
@@ -97,22 +116,24 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function confirmLogout(event) {
-      event.preventDefault();
-  
-      Swal.fire({
-        title: 'Apakah Anda yakin ingin logout?',
-        text: "Anda harus login kembali untuk mengakses akun.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Logout!',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          document.getElementById('logout-form').submit();
-        }
-      });
+        event.preventDefault();
+        Swal.fire({
+            title: 'Apakah Anda yakin ingin logout?',
+            text: "Anda harus login kembali untuk mengakses akun.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (document.getElementById('logout-form-desktop')) {
+                    document.getElementById('logout-form-desktop').submit();
+                } else if (document.getElementById('logout-form-mobile')) {
+                    document.getElementById('logout-form-mobile').submit();
+                }
+            }
+        });
     }
-  </script>
-
+</script>
