@@ -109,7 +109,11 @@
                 <label class="form-label fw-bold">Hapus akun</label>
                 <p class="mb-1">Apakah anda yakin ingin menghapus akun?</p>
                 <p class="text-muted small mb-1">jika anda menghapus akun, akun anda akan di hapus di data kami dan anda perlu registrasi kembali!!</p>
-                <a href="#" class="text-danger text-decoration-none">Saya ingin menghapus akun</a>
+                <a href="#" id="btnHapusAkun" class="text-danger" style="font-size: 14px;">Hapus akun</a>
+                <form id="formHapusAkun" action="{{ route('admin.hapus-akun') }}" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
             </div>
         </div>
     </div>
@@ -186,6 +190,33 @@
                 });
 
                 document.getElementById('formGantiPassword').submit();
+            }
+        });
+    });
+
+    document.getElementById('btnHapusAkun').addEventListener('click', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin ingin menghapus akun?',
+            text: "Jika anda menghapus akun, akun anda akan dihapus secara permanen dan anda perlu registrasi kembali!!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus akun!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Menghapus akun...',
+                    text: 'Silahkan tunggu sebentar',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                setTimeout(() => {
+                    document.getElementById('formHapusAkun').submit();
+                }, 1500);
             }
         });
     });

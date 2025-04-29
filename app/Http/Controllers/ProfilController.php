@@ -114,19 +114,15 @@ class ProfilController extends Controller
     public function hapusAkun()
     {
         $user = Auth::user();
-    
-        // Hapus file foto profil jika ada
+
         if ($user->foto_profil && Storage::exists('public/foto_profil/' . $user->foto_profil)) {
             Storage::delete('public/foto_profil/' . $user->foto_profil);
         }
-    
-        // Logout dulu agar session bersih
+
         Auth::logout();
-    
-        // Hapus akun setelah logout
+
         $user->delete();
-    
-        // Redirect ke login dengan flash message
+
         return redirect()->route('auth.login')->with('akun_dihapus', 'Akun anda berhasil dihapus, anda dapat melakukan registrasi kembali apabila ingin membuat akun baru lagi.');
     }      
 }

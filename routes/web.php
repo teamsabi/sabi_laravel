@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
 
         // Ganti Password baru
         Route::post('/update-password', [ProfilController::class, 'updatePassword'])->name('update.password');
+
+        Route::delete('/admin/hapus-akun', [ProfilController::class, 'hapusAkun'])->name('admin.hapus-akun');
     });
 
     // Role User
