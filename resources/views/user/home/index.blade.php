@@ -210,7 +210,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 d-flex justify-content-end">
+                <div class="col-xl-6 col-lg-6 col-md-6 d-none d-md-flex justify-content-end">
                     <div style="transform: scale(1.5); transform-origin: right;">
                         <img src="{{ asset('template user/assets/img/gallery/MockupHP3.png') }}" alt="JTICare App"
                             style="max-width: 90px; height: auto;">
@@ -308,5 +308,5 @@
     </div>
 </div>
 <!-- Team End -->
-
+  
 @endsection
