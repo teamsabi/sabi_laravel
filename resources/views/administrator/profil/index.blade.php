@@ -26,7 +26,7 @@
                     <div class="ms-4 d-flex flex-column">
                         <label for="photo" class="btn btn-sm btn-primary mb-2" style="font-size: 12px; color: white !important;">Ganti Foto</label>
                         <input type="file" name="foto_profil" id="photo" class="d-none" accept="image/*" form="updateProfileForm">
-                        <button class="btn btn-sm btn-danger" style="width: 100px; font-size: 12px;">Hapus Foto</button>
+                        <button id="hapusFotoBtn" type="button" class="btn btn-sm btn-danger" style="width: 100px; font-size: 12px;">Hapus Foto</button>
                     </div>                                                    
                 </div>
             </div>
@@ -83,6 +83,42 @@
             };
             reader.readAsDataURL(file);
         }
+    });
+</script>
+
+<script>
+    document.getElementById('hapusFotoBtn').addEventListener('click', function () {
+        Swal.fire({
+            title: 'Hapus Foto Profil?',
+            text: 'Foto profil Anda akan dihapus dan diganti dengan default.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("{{ route('profil.hapus-foto') }}", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('previewFotoProfil').src = '{{ asset('template/assets/img/default.png') }}';
+                        Swal.fire('Berhasil!', 'Foto profil berhasil dihapus.', 'success');
+                    } else {
+                        Swal.fire('Gagal', 'Terjadi kesalahan saat menghapus foto.', 'error');
+                    }
+                })
+                .catch(() => {
+                    Swal.fire('Error', 'Gagal menghubungi server.', 'error');
+                });
+            }
+        });
     });
 </script>
 

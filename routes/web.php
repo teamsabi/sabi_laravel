@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
         // Profil Admin
         Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
         Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
+        Route::put('/admin/profil/hapus-foto', [ProfilController::class, 'hapusFoto'])->name('profil.hapus-foto');
         Route::get('/profile/pengaturan-akun', function () {
             return view('administrator.profil.pengaturan-akun');
         })->name('admin.profil.pengaturan-akun');
@@ -100,9 +101,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
         
         //Profil untuk User
-        Route::get('/profil', function () {
-            return view('user.profil.index');
-        })->name('user.profil.index');
+        Route::get('/profil', [ProfilController::class, 'user'])->name('user.profil.index');
+        Route::put('user/profil/update', [ProfilController::class, 'updateProfile'])->name('user.profil.update');
+        Route::put('/user/profil/hapus-foto', [ProfilController::class, 'hapusFoto'])->name('user.profil.hapus-foto');
         
         Route::get('/profil/pengaturan-akun', function () {
             return view('user.profil.pengaturan_akun');

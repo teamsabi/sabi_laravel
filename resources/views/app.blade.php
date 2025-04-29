@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         @include('layouts.head')
+
+        @stack('styles')
     </head>
   <body>
     <div class="wrapper">
@@ -37,6 +39,8 @@
     </div>
 
    @include('layouts.script')
+
+   @stack('scripts')
 
   </body>
 </html>

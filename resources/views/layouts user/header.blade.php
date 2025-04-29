@@ -81,12 +81,12 @@
                             <!-- Ini hanya muncul di DESKTOP -->
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
+                                    <img src="{{ Auth::user()->foto_profil ? asset('storage/' . Auth::user()->foto_profil) : asset('template/assets/img/default.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
                                     <span class="ml-2" style="color: black; font-size: 16px;">Hi, <strong>{{ Auth::user()->nama_lengkap }}</strong></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="userDropdown" style="min-width: 260px; padding: 0;">
                                     <div class="p-3 d-flex align-items-center" style="border-bottom: 1px solid #e0e0e0;">
-                                        <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="50" height="50" class="rounded-circle mr-3">
+                                        <img src="{{ Auth::user()->foto_profil ? asset('storage/' . Auth::user()->foto_profil) : asset('template/assets/img/default.png') }}" alt="Profile" width="50" height="50" class="rounded-circle mr-3">
                                         <div>
                                             <strong style="font-size: 15px;">{{ Auth::user()->nama_lengkap }}</strong><br>
                                             <span style="font-size: 12px; color: #6c757d;">{{ Auth::user()->email }}</span>

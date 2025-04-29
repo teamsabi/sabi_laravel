@@ -14,6 +14,10 @@ class ProfilController extends Controller
         return view('administrator.profil.index');
     }
 
+    function user(){
+        return view('user.profil.index');
+    }
+
 
     public function updateProfile(Request $request)
     {
@@ -35,7 +39,6 @@ class ProfilController extends Controller
             $path = $request->file('foto_profil')->storeAs('foto_profil', $namaFile, 'public');
         }
     
-        // Update data tanpa $user->save()
         $user->update([
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
@@ -49,8 +52,7 @@ class ProfilController extends Controller
     public function updatePassword(Request $request)
     {
         $user = Auth::user();
-    
-        // Validasi password saat ini dan password baru
+
         $request->validate([
             'currentPassword' => 'required',
             'newPassword' => 'required|min:8',
@@ -59,19 +61,30 @@ class ProfilController extends Controller
             'newPassword.required' => 'Password baru wajib diisi',
             'newPassword.min' => 'Password baru minimal 8 karakter',
         ]);
-    
-        // Verifikasi password saat ini
+
         if (!Hash::check($request->currentPassword, $user->password)) {
             return back()->withErrors(['currentPassword' => 'Password saat ini tidak cocok']);
         }
-    
-        // Update password baru
+
         $user->update([
             'password' => Hash::make($request->newPassword),
         ]);
-    
-        // Mengirim SweetAlert Info bahwa password berhasil diperbarui
+
         return redirect()->route('admin.profil.pengaturan-akun')->with('success', 'Password Anda berhasil diperbarui');
     }
+
+        public function hapusFoto(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user->foto_profil) {
+            Storage::delete($user->foto_profil);
+            $user->foto_profil = null;
+            $user->save();
+        }
+
+        return response()->json(['success' => true]);
+    }
+
         
 }
