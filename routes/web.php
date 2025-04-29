@@ -108,6 +108,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profil/pengaturan-akun', function () {
             return view('user.profil.pengaturan_akun');
         })->name('user.profil.pengaturan-akun');
+
+        Route::post('user/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('user.update.email');
+
+        Route::post('/user/update-password', [ProfilController::class, 'updatePasswordUser'])->name('user.update.password');
     });
     
 });

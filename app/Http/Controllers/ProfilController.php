@@ -73,6 +73,30 @@ class ProfilController extends Controller
         return redirect()->route('admin.profil.pengaturan-akun')->with('success', 'Password Anda berhasil diperbarui');
     }
 
+    public function updatePasswordUser(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8',
+        ], [
+            'currentPassword.required' => 'Password saat ini wajib diisi',
+            'newPassword.required' => 'Password baru wajib diisi',
+            'newPassword.min' => 'Password baru minimal 8 karakter',
+        ]);
+
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return back()->withErrors(['currentPassword' => 'Password saat ini tidak cocok']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->newPassword),
+        ]);
+
+        return redirect()->route('user.profil.pengaturan-akun')->with('success', 'Password Anda berhasil diperbarui');
+    }
+
         public function hapusFoto(Request $request)
     {
         $user = Auth::user();

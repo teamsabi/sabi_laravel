@@ -62,7 +62,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="currentPassword" class="form-label">Kata sandi anda saat ini</label>
                             <div class="input-group">
-                                <input type="password" id="currentPassword" class="form-control" placeholder="Masukkan kata sandi lama" sname="currentPassword">
+                                <input type="password" id="currentPassword" class="form-control" placeholder="Masukkan kata sandi lama" name="currentPassword">
                                 <span class="input-group-text bg-white">
                                     <button type="button" class="btn p-0 border-0 text-muted" onclick="togglePassword('currentPassword', this)">
                                         <i class="fa fa-eye"></i>
@@ -181,12 +181,11 @@
                     icon: 'info',
                     allowOutsideClick: false,
                     didOpen: () => {
-                        Swal.showLoading(); // Tampilkan loading
+                        Swal.showLoading();
                     }
                 });
 
-                // Setelah SweetAlert selesai loading, kirim form
-                document.getElementById('formGantiPassword').submit(); // Kirim form setelah SweetAlert selesai
+                document.getElementById('formGantiPassword').submit();
             }
         });
     });

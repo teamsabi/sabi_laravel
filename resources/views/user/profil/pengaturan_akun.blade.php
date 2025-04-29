@@ -29,7 +29,7 @@
             </div>
 
             <!-- Form Ganti Email -->
-            <form id="formGantiEmail" method="POST" action="{{ route('update.email') }}">
+            <form id="formGantiEmail" method="POST" action="{{ route('user.update.email') }}">
                 @csrf
                 <div id="inputEmailBaru" style="display: none;" class="mt-3 mb-4">
                     <label for="emailBaru" class="form-label" style="font-size: 13px;">Email baru</label>
@@ -50,7 +50,8 @@
             <hr>
 
             <!-- Kata Sandi -->
-            <form>
+            <form id="formGantiPassword" method="POST" action="{{ route('user.update.password') }}">
+                @csrf
                 <div class="mb-3">
                     <label class="form-label" style="font-size: 14px; font-weight: bold;">Kata Sandi</label>
                     <p class="text-muted mb-2" style="font-size: 12px;">*Masukkan Kata Sandi anda saat ini untuk membuat kata sandi baru</p>
@@ -59,29 +60,35 @@
                         <div class="col-md-6 mb-3">
                             <label for="currentPassword" class="form-label" style="font-size: 13px;">Kata sandi anda saat ini</label>
                             <div class="input-group">
-                                <input type="password" id="currentPassword" class="form-control" placeholder="Masukkan kata sandi lama" style="height: 40px; font-size: 14px;">
+                                <input type="password" id="currentPassword" class="form-control" placeholder="Masukkan kata sandi lama" name="currentPassword" style="height: 40px; font-size: 14px;">
                                 <span class="input-group-text" onclick="togglePassword('currentPassword')" style="cursor: pointer;">
                                     <i class="fa fa-eye" id="iconCurrentPassword" style="font-size: 15px;"></i>
                                 </span>
                             </div>
+                            @error('currentPassword')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
             
                         <!-- Kata sandi baru -->
                         <div class="col-md-6 mb-3">
                             <label for="newPassword" class="form-label" style="font-size: 13px;">Kata sandi baru</label>
                             <div class="input-group">
-                                <input type="password" id="newPassword" class="form-control" placeholder="Masukkan kata sandi baru" style="height: 40px; font-size: 14px;">
+                                <input type="password" id="newPassword" class="form-control" placeholder="Masukkan kata sandi baru" name="newPassword" style="height: 40px; font-size: 14px;">
                                 <span class="input-group-text" onclick="togglePassword('newPassword')" style="cursor: pointer;">
                                     <i class="fa fa-eye" id="iconNewPassword" style="font-size: 15px;"></i>
                                 </span>
                             </div>
+                            @error('newPassword')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="me-2" style="font-size: 14px;">Lupa kata sandi lama?
                         <a href="#" class="text-primary" style="font-size: 14px;">Atur ulang kata sandi</a>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 6px; font-size: 14px; padding: 12px 20px;">
+                <button type="submit" id="btnGantiPassword" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 6px; font-size: 14px; padding: 12px 20px;">
                     <i class="fa fa-save" style="margin-right: 6px;"></i> Simpan Perubahan
                 </button>
             </form>
@@ -144,6 +151,43 @@
             }
         });
     });
+
+    // Fungsi untuk mengganti password
+    document.getElementById('btnGantiPassword').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Password Anda akan diganti dengan password baru",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, ganti password!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Sedang memproses...',
+                    text: 'Password anda sedang diperbarui.',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                document.getElementById('formGantiPassword').submit();
+            }
+        });
+    });
+
+    @if(session('success'))
+        Swal.fire({
+            title: 'Sukses!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
 </script>
 
 @endsection
