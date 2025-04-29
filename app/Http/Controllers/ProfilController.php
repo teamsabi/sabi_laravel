@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
@@ -110,5 +111,22 @@ class ProfilController extends Controller
         return response()->json(['success' => true]);
     }
 
-        
+    public function hapusAkun()
+    {
+        $user = Auth::user();
+    
+        // Hapus file foto profil jika ada
+        if ($user->foto_profil && Storage::exists('public/foto_profil/' . $user->foto_profil)) {
+            Storage::delete('public/foto_profil/' . $user->foto_profil);
+        }
+    
+        // Logout dulu agar session bersih
+        Auth::logout();
+    
+        // Hapus akun setelah logout
+        $user->delete();
+    
+        // Redirect ke login dengan flash message
+        return redirect()->route('auth.login')->with('akun_dihapus', 'Akun anda berhasil dihapus, anda dapat melakukan registrasi kembali apabila ingin membuat akun baru lagi.');
+    }      
 }

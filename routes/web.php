@@ -112,6 +112,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('user/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('user.update.email');
 
         Route::post('/user/update-password', [ProfilController::class, 'updatePasswordUser'])->name('user.update.password');
+
+        Route::delete('/user/hapus-akun', [ProfilController::class, 'hapusAkun'])->name('user.hapus-akun');
     });
     
 });

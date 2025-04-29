@@ -160,20 +160,34 @@
     </div>
 </div>
 
-<script>
-    function togglePassword() {
-        let passwordInput = document.getElementById("password");
-        let eyeIcon = document.getElementById("eyeIcon");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("fa-eye");
-            eyeIcon.classList.add("fa-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("fa-eye-slash");
-            eyeIcon.classList.add("fa-eye");
+    <script>
+        function togglePassword() {
+            let passwordInput = document.getElementById("password");
+            let eyeIcon = document.getElementById("eyeIcon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
         }
-    }
     </script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('akun_dihapus'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('akun_dihapus') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 </body>
 </html>

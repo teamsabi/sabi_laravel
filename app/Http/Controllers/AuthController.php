@@ -47,7 +47,7 @@ class AuthController extends Controller
                 return redirect()->route('auth.login')->withErrors('Akun anda belum aktif. Harap verifikasi terlebih dahulu');
             }
         } else {
-            return back()->withErrors(['login' => 'Email atau Password salah'])->withInput();
+            return back()->withErrors(['auth.login' => 'Email atau Password salah'])->withInput();
         }
     }
     
