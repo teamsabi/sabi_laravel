@@ -116,7 +116,7 @@ class AuthController extends Controller
         if($keyCheck){
             $user = User::where('verify_key', $verify_key)->update(['email_verified_at' => date('Y-m-d H:i:s')]);
 
-            return redirect()->route('auth.login')->with('success', 'Verifikasi Berhasil. Anda Sudah Aktif');
+            return redirect()->route('auth.login')->with('success', 'Verifikasi Berhasil. Akun Anda Sudah Aktif');
         }else {
             return redirect()->route('auth.login')->withErrors('Key tidak valid. Pastikan Telah melakukan register')->withInput();
         }

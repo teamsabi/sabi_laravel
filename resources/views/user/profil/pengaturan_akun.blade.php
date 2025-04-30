@@ -204,7 +204,6 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Logout dan redirect ke halaman lupa password
                 fetch("{{ route('auth.logout') }}", {
                     method: "POST",
                     headers: {
