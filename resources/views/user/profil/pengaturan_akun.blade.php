@@ -74,7 +74,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="me-2" style="font-size: 14px;">Lupa kata sandi lama? <a href="#" class="text-primary" style="font-size: 14px;">Atur ulang kata sandi</a></div>
+                    <div class="me-2" style="font-size: 14px;">Lupa kata sandi lama? <a href="#" class="text-primary" id="aturUlangPassword" style="font-size: 14px;">Atur ulang kata sandi</a></div>
                 </div>
                 <button type="submit" id="btnGantiPassword" class="btn btn-primary mt-3 d-flex align-items-center" style="border-radius: 6px; font-size: 14px; padding: 12px 20px;">
                     <i class="fa fa-save me-2"></i> Simpan Perubahan
@@ -189,6 +189,31 @@
                 setTimeout(() => {
                     document.getElementById('formHapusAkun').submit();
                 }, 1500);
+            }
+        });
+    });
+
+    document.getElementById('aturUlangPassword').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda akan mengatur ulang kata sandi dan keluar dari akun.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, atur ulang!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Logout dan redirect ke halaman lupa password
+                fetch("{{ route('auth.logout') }}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(() => {
+                    window.location.href = "{{ route('auth.lupa_password') }}";
+                });
             }
         });
     });

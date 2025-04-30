@@ -19,14 +19,14 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/verify-email-baru/{verify_key}', [AuthController::class, 'verifyNewEmail'])->name('auth.verify_email_baru');
 
-// Halaman Lupa Password
-Route::prefix('lupa-password')->group(function () {
-    Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
-    Route::post('/kirim', [AuthController::class, 'sendResetLink'])->name('auth.lupa_password.kirim');
+    // Halaman Lupa Password
+    Route::prefix('lupa-password')->group(function () {
+        Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
+        Route::post('/kirim', [AuthController::class, 'sendResetLink'])->name('auth.lupa_password.kirim');
 
-    Route::get('/new-password', [AuthController::class, 'showResetForm'])->name('auth.new_password');
-    Route::post('/new-password', [AuthController::class, 'updatePassword'])->name('auth.lupa_password.update');    
-});
+        Route::get('/new-password', [AuthController::class, 'showResetForm'])->name('auth.new_password');
+        Route::post('/new-password', [AuthController::class, 'updatePassword'])->name('auth.lupa_password.update');    
+    });
 
     // Halaman utama sebelum login (untuk guest)
     Route::get('/', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda');

@@ -48,7 +48,7 @@
                             <td>Rp 10.000</td>
                             <td>QRIS</td>
                             <td class="text-center">
-                                <span class="badge badge-success">Complete</span>
+                                <span class="badge badge-success">Berhasil</span>
                             </td>
                             <td>11-01-2025</td>                         
                         </tr>
@@ -59,7 +59,7 @@
                             <td>Rp 3.000</td>
                             <td>DANA</td>
                             <td class="text-center">
-                                <span class="badge badge-success">Complete</span>
+                                <span class="badge badge-success">Berhasil</span>
                             </td>   
                             <td>11-01-2025</td>                           
                         </tr>

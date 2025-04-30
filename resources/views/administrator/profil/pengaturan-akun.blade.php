@@ -93,7 +93,7 @@
 
                     <div class="d-flex justify-content-start align-items-center mb-3">
                         <div class="me-2">Lupa kata sandi lama?</div>
-                        <a href="#" class="text-primary text-decoration-none">Atur ulang kata sandi</a>
+                        <a href="#" id="aturUlangPassword" class="text-primary text-decoration-none">Atur ulang kata sandi</a>
                     </div>
 
                     <button type="submit" id="btnGantiPassword" class="btn btn-primary">
@@ -217,6 +217,31 @@
                 setTimeout(() => {
                     document.getElementById('formHapusAkun').submit();
                 }, 1500);
+            }
+        });
+    });
+
+    document.getElementById('aturUlangPassword').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda akan mengatur ulang kata sandi dan keluar dari akun.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, atur ulang!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Logout dan redirect ke halaman lupa password
+                fetch("{{ route('auth.logout') }}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(() => {
+                    window.location.href = "{{ route('auth.lupa_password') }}";
+                });
             }
         });
     });
