@@ -75,7 +75,7 @@
                     <h5 class="card-title mb-15" style="font-size: 20px; font-weight: bold;">Data Donatur</h5>
                     <div class="mb-3">
                         <div class="input-group mb-2">
-                            <input class="form-control" name="nama" id="nama" type="text" placeholder="Masukkan nama anda (opsional)" style="font-size: 14px; padding: 14px 16px; height: 50px;">
+                            <input class="form-control" name="nama" id="nama" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->nama_lengkap }}" readonly>
                         </div>
                         <div class="form-check mt-2" style="display: flex; align-items: center; line-height: 2;">
                             <input class="form-check-input" type="checkbox" id="default-checkbox" style="border: 1px solid #ccc; width: 13px; height: 13px; margin-top: 0;">
@@ -83,8 +83,8 @@
                         </div>                                             
                     </div>
                     <div class="mb-3 d-flex">
-                        <input class="form-control" name="email" id="email" type="email" placeholder="Masukkan email anda" style="font-size: 14px; padding: 14px 16px; height: 50px;">   
-                        <input class="form-control" name="telepon" id="telepon" type="text" placeholder="0" style="font-size: 14px; padding: 14px 16px; height: 50px; margin-left: 10px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input class="form-control" name="email" id="email" type="email" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->email }}" readonly>   
+                        <input class="form-control" name="telepon" id="telepon" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px; margin-left: 10px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ Auth::user()->no_whatsapp }}" readonly>
                     </div>                    
                 </div>
 
