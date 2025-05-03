@@ -32,7 +32,7 @@
                                     @auth
                                     <li class="d-block d-lg-none">
                                         <a href="#" style="font-weight: bold; display: flex; align-items: center;">
-                                            <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Profile" width="30" height="30" class="rounded-circle mr-2">
+                                            <img src="{{ Auth::user()->foto_profil ? asset('storage/' . Auth::user()->foto_profil) : asset('template/assets/img/default.png') }}" alt="Profile" width="30" height="30" class="rounded-circle mr-2">
                                             <span>{{ Auth::user()->nama_lengkap }}</span>
                                         </a>
                                         <ul class="submenu">
@@ -50,6 +50,7 @@
                                     <!-- Menu lainnya-->
                                     <li><a href="{{ route('beranda.login') }}" style="font-weight: bold;">Beranda</a></li>
                                     <li><a href="{{ route('donasi.index') }}" style="font-weight: bold;">Donasi</a></li>
+                                    <li><a href="{{ route('dokumentasi.index') }}" style="font-weight: bold;">Dokumentasi</a></li>
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
                                     <li><a href="#" style="font-weight: bold;">Tentang Kami</a>
                                         <ul class="submenu">

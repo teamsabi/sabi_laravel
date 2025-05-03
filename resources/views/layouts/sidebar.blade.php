@@ -57,6 +57,13 @@
               <span class="badge badge-success">4</span>
             </a>
           </li>
+          <li class="nav-item {{ request()->routeIs('dokumentasi.index') ? 'active' : '' }}">
+            <a href="{{ route('dokumentasi.index') }}">
+              <i class="fas fa-folder-open"></i>
+              <p>Dokumentasi</p>
+              <span class="badge badge-success">4</span>
+            </a>
+          </li>
           <li class="nav-item {{ request()->routeIs('laporan.index') ? 'active' : '' }}">
             <a href="{{ route('laporan.index') }}">
               <i class="fas fa-print"></i>

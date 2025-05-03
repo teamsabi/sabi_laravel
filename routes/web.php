@@ -62,6 +62,15 @@ Route::middleware(['auth'])->group(function () {
         // Data Donatur
         Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
 
+        // Dokumentasi
+        Route::get('/dokumentasi', function () {
+            return view('administrator.dokumentasi.index');
+        })->name('dokumentasi.index');
+
+        Route::get('/dokumentasi/create', function () {
+            return view('administrator.dokumentasi.add');
+        })->name('dokumentasi.add');
+
         // Profil Admin
         Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
         Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
@@ -87,6 +96,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/donasi', [UserKategoriDonasiController::class, 'index'])->name('donasi.index');
 
         // Halaman Lain
+        Route::get('/dokumentasi', function () {
+            return view('user.dokumentasi.index');
+        })->name('dokumentasi.index');
+
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
