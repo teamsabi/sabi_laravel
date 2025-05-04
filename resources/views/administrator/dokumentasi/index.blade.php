@@ -18,7 +18,7 @@
                                 <th>Judul</th>
                                 <th>Tanggal Penyerahan</th>
                                 <th>Kategori Donasi</th>
-                                <th>Nama Penerima</th>
+                                <th>Penerima Donasi</th>
                                 <th>Deskripsi</th>
                                 <th>Bukti</th>
                                 <th>Aksi</th>
@@ -29,7 +29,7 @@
                                 <th>Judul</th>
                                 <th>Tanggal Penyerahan</th>
                                 <th>Kategori Donasi</th>
-                                <th>Nama Penerima</th>
+                                <th>Penerima Donasi</th>
                                 <th>Deskripsi</th>
                                 <th>Bukti</th>
                                 <th>Aksi</th>
@@ -40,7 +40,7 @@
                                 <td>Donasi untuk Keluarga Asep</td>
                                 <td>2025-04-13</td>
                                 <td>Ayah Asep Berpulang</td>
-                                <td>Asep</td>
+                                <td>Keluarga Asep</td>
                                 <td>Bantuan dana diserahkan langsung oleh tim JTI CARE di rumah duka.</td>
                                 <td>-</td>
                                 <td>

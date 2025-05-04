@@ -100,6 +100,10 @@ Route::middleware(['auth'])->group(function () {
             return view('user.dokumentasi.index');
         })->name('dokumentasi.index');
 
+        Route::get('/dokumentasi/detail', function () {
+            return view('user.dokumentasi.detail_dokumentasi');
+        })->name('dokumentasi.detail');
+
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
