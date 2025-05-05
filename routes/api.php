@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Login & Register
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/verify/{verify_key}', [AuthController::class, 'verify']);
+Route::get('/verify-email-baru/{verify_key}', [AuthController::class, 'verifyNewEmail']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Reset Password
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
+Route::post('/reset-password', [AuthController::class, 'updatePassword']);
+
+// Ganti email & logout (butuh token login)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/ganti-email', [AuthController::class, 'updateEmail']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
