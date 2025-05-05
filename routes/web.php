@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\KategoriDonasiController;
 use App\Http\Controllers\UserKategoriDonasiController;
 
@@ -64,13 +65,12 @@ Route::middleware(['auth'])->group(function () {
 
         // Dokumentasi
         Route::prefix('dokumentasi')->name('admin.dokumentasi.')->group(function () {
-            Route::get('/', function () {
-                return view('administrator.dokumentasi.index');
-            })->name('index');
-
-            Route::get('/create', function () {
-                return view('administrator.dokumentasi.add');
-            })->name('add');
+            Route::get('/', [DokumentasiController::class, 'index'])->name('index');
+            Route::get('/create', [DokumentasiController::class, 'create'])->name('add');
+            Route::post('/store', [DokumentasiController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [DokumentasiController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [DokumentasiController::class, 'update'])->name('update');
+            Route::delete('/{id}', [DokumentasiController::class, 'destroy'])->name('destroy');
         });
 
         // Profil Admin

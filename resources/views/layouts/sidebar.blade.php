@@ -47,7 +47,6 @@
             <a href="{{ route('kategori.index') }}">
               <i class="fas fa-list"></i>
               <p>Kategori Donasi</p>
-              <span class="badge badge-success">9</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('donatur.index') ? 'active' : '' }}">
@@ -61,7 +60,6 @@
             <a href="{{ route('admin.dokumentasi.index') }}">
               <i class="fas fa-folder-open"></i>
               <p>Dokumentasi</p>
-              <span class="badge badge-success">4</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('laporan.index') ? 'active' : '' }}">

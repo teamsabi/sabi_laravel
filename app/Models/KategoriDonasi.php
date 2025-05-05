@@ -12,7 +12,7 @@ class KategoriDonasi extends Model
     protected $table = 'kategori_donasi';
 
     protected $fillable = [
-        'id_user',              // ⬅️ Tambahkan ini
+        'id_user',
         'judul_donasi',
         'gambar',
         'deskripsi',
@@ -23,4 +23,20 @@ class KategoriDonasi extends Model
         'tanggal_buat',
         'status',
     ];
+
+    /**
+     * Relasi ke tabel users
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    /**
+     * Relasi ke tabel dokumentasi_penyerahan
+     */
+    public function dokumentasi()
+    {
+        return $this->hasMany(DokumentasiPenyerahan::class, 'kategori_donasi_id');
+    }
 }
