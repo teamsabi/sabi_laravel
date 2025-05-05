@@ -50,7 +50,7 @@
                                     <!-- Menu lainnya-->
                                     <li><a href="{{ route('beranda.login') }}" style="font-weight: bold;">Beranda</a></li>
                                     <li><a href="{{ route('donasi.index') }}" style="font-weight: bold;">Donasi</a></li>
-                                    <li><a href="{{ route('dokumentasi.index') }}" style="font-weight: bold;">Dokumentasi</a></li>
+                                    <li><a href="{{ route('user.dokumentasi.index') }}" style="font-weight: bold;">Dokumentasi</a></li>
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
                                     <li><a href="#" style="font-weight: bold;">Tentang Kami</a>
                                         <ul class="submenu">

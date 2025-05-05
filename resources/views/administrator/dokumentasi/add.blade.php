@@ -61,7 +61,7 @@
                             <button type="button" id="btn-simpan" class="btn btn-primary">
                                 <i class="fa fa-save me-1"></i> Simpan
                             </button>
-                            <a href="{{ route('dokumentasi.index') }}" class="btn btn-danger">
+                            <a href="{{ route('admin.dokumentasi.index') }}" class="btn btn-danger">
                                 <i class="fa fa-arrow-left me-1"></i> Kembali
                             </a>                            
                         </div>
