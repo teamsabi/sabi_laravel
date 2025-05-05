@@ -11,23 +11,25 @@
                 </div>
             </div>
         </div>
-        <!-- Menampilkan 3 kategori donasi terbaru -->
         <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
-            <div class="single-cases p-3 border rounded shadow w-100 d-flex flex-column" style="background-color: #f8f9fa;">
-                <div class="cases-img text-center mb-3">
-                    <img src="{{ asset('template/assets/img/Foto Team/Syaiful.png') }}" alt="Gambar Dokumentasi" class="img-fluid rounded" style="height: 200px; object-fit: cover;">
+            @foreach($dokumentasi as $item)
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4 d-flex">
+                    <div class="single-cases p-3 border rounded shadow w-100 d-flex flex-column" style="background-color: #f8f9fa;">
+                        <div class="cases-img text-center mb-3">
+                            <img src="{{ asset('storage/'.$item->bukti) }}" alt="Gambar Dokumentasi" class="img-fluid rounded" style="height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="cases-caption flex-grow-1">
+                            <p class="date text-muted">{{ \Carbon\Carbon::parse($item->tgl_penyerahan)->format('d F Y') }}</p>
+                            <h3 class="text-start mb-1 fw-bold">
+                                <a href="{{ route('user.dokumentasi.show', $item->id) }}">{{ $item->judul_dokumentasi }}</a>
+                            </h3>
+                            <p class="text-start text-muted" style="margin-top: -30px;">
+                                {{ Str::limit($item->deskripsi, 100) }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cases-caption flex-grow-1">
-                    <p class="date text-muted">13 Apr 2025</p>
-                    <h3 class="text-start mb-1 fw-bold">
-                        <a href="{{ route('user.dokumentasi.detail') }}">Bantuan untuk Keluarga Asep</a>
-                    </h3>
-                    <p class="text-start text-muted" style="margin-top: -30px;">
-                        Trims.
-                    </p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

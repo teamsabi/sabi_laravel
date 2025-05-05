@@ -100,4 +100,23 @@ class DokumentasiController extends Controller
 
         return redirect()->route('admin.dokumentasi.index')->with('success', 'Dokumentasi berhasil dihapus.');
     }
+
+    public function showuser()
+    {
+        $dokumentasi = DokumentasiPenyerahan::all();
+
+        return view('user.dokumentasi.index', compact('dokumentasi'));
+    }
+
+    public function show($id)
+    {
+        $dokumentasi = DokumentasiPenyerahan::findOrFail($id);
+
+        $dokumentasiLainnya = DokumentasiPenyerahan::where('id', '!=', $id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('user.dokumentasi.detail_dokumentasi', compact('dokumentasi', 'dokumentasiLainnya'));
+    }
 }

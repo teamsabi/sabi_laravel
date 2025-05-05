@@ -98,13 +98,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/donasi', [UserKategoriDonasiController::class, 'index'])->name('donasi.index');
 
         // Halaman Lain
-        Route::get('/user/dokumentasi', function () {
-            return view('user.dokumentasi.index');
-        })->name('user.dokumentasi.index');
-        
-        Route::get('/user/dokumentasi/detail', function () {
-            return view('user.dokumentasi.detail_dokumentasi');
-        })->name('user.dokumentasi.detail');        
+        Route::get('/user/dokumentasi', [DokumentasiController::class, 'showuser'])->name('user.dokumentasi.index');
+        Route::get('/user/dokumentasi/{id}', [DokumentasiController::class, 'show'])->name('user.dokumentasi.show');       
 
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
