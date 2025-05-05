@@ -8,10 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class KategoriDonasiController extends Controller
 {
-    // Tampilkan semua data kategori donasi
     public function index()
     {
+        // Ambil semua data kategori donasi
         $kategoriDonasi = KategoriDonasi::all();
+    
+        // Loop untuk mengecek dedline dan update status jika lewat
+        foreach ($kategoriDonasi as $kategori) {
+            if (strtotime($kategori->dedline) < strtotime(now()) && strtolower($kategori->status) === 'aktif') {
+                $kategori->update(['status' => 'nonaktif']);
+            }
+        }
+    
         return view('administrator.kategori.index', compact('kategoriDonasi'));
     }
 
@@ -42,7 +50,7 @@ class KategoriDonasiController extends Controller
             'deskripsi' => $request->deskripsi,
             'target_dana' => $request->target_dana,
             'dedline' => $request->dedline,
-            'tanggal_buat' => now(), // otomatis tanggal hari ini
+            'tanggal_buat' => now(),
         ]);
     
         return redirect()->route('kategori.index')->with('success', 'Kategori Donasi berhasil ditambahkan.');
