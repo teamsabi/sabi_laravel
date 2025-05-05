@@ -63,13 +63,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
 
         // Dokumentasi
-        Route::get('/dokumentasi', function () {
-            return view('administrator.dokumentasi.index');
-        })->name('dokumentasi.index');
+        Route::prefix('dokumentasi')->name('admin.dokumentasi.')->group(function () {
+            Route::get('/', function () {
+                return view('administrator.dokumentasi.index');
+            })->name('index');
 
-        Route::get('/dokumentasi/create', function () {
-            return view('administrator.dokumentasi.add');
-        })->name('dokumentasi.add');
+            Route::get('/create', function () {
+                return view('administrator.dokumentasi.add');
+            })->name('add');
+        });
 
         // Profil Admin
         Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
@@ -96,13 +98,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/donasi', [UserKategoriDonasiController::class, 'index'])->name('donasi.index');
 
         // Halaman Lain
-        Route::get('/dokumentasi', function () {
+        Route::get('/user/dokumentasi', function () {
             return view('user.dokumentasi.index');
-        })->name('dokumentasi.index');
-
-        Route::get('/dokumentasi/detail', function () {
+        })->name('user.dokumentasi.index');
+        
+        Route::get('/user/dokumentasi/detail', function () {
             return view('user.dokumentasi.detail_dokumentasi');
-        })->name('dokumentasi.detail');
+        })->name('user.dokumentasi.detail');        
 
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
         Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');

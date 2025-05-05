@@ -21,7 +21,7 @@
                 <div class="cases-caption flex-grow-1">
                     <p class="date text-muted">13 Apr 2025</p>
                     <h3 class="text-start mb-1 fw-bold">
-                        <a href="{{ route('dokumentasi.detail') }}">Bantuan untuk Keluarga Asep</a>
+                        <a href="{{ route('user.dokumentasi.detail') }}">Bantuan untuk Keluarga Asep</a>
                     </h3>
                     <p class="text-start text-muted" style="margin-top: -30px;">
                         Trims.

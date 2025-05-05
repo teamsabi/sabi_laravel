@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dokumentasi.index') ? 'active' : '' }}">
-            <a href="{{ route('dokumentasi.index') }}">
+            <a href="{{ route('admin.dokumentasi.index') }}">
               <i class="fas fa-folder-open"></i>
               <p>Dokumentasi</p>
               <span class="badge badge-success">4</span>

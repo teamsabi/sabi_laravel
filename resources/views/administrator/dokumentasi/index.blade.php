@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title mb-0">Dokumentasi Penyerahan</h4>
-                <a href="{{ route('dokumentasi.add') }}" class="btn btn-primary btn-round">
+                <a href="{{ route('admin.dokumentasi.add') }}" class="btn btn-primary btn-round">
                     <i class="fa fa-plus me-1"></i> Tambah
                 </a>
             </div>
