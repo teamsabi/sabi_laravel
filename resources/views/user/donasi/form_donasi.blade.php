@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a href="#" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Bayar</a>
+                    <a href="{{ route('user.donasi.detail_transaksi') }}" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Lanjut Pembayaran</a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
 @extends('app_user')
-
 @section('content')
 
 <div class="container mt-5">

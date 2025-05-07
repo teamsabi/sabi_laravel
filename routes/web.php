@@ -111,14 +111,17 @@ Route::middleware(['auth'])->group(function () {
 
         // Route yang ingin diamankan (Detail Donasi)
         Route::get('/user/detail/{id}', [KategoriDonasiController::class, 'detail'])->name('donasi.detail');
-        
 
         // Form Donasi
         Route::get('/user/berdonasi/{id}', [KategoriDonasiController::class, 'formDonasi'])->name('donasi.form_donasi');
 
+        // Detail Transaksi
+        Route::get('/donasi/detail-transaksi', function () {
+            return view('user.donasi.detail_transaksi');
+        })->name('user.donasi.detail_transaksi');        
+
         // Proses pembayaran Midtrans (via AJAX)
         Route::post('/user/donasi/midtrans', [PaymentDonasiController::class, 'createCharge'])->name('donasi.midtrans');
-
 
         // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
