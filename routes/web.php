@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DokumentasiController;
+use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\KategoriDonasiController;
 use App\Http\Controllers\UserKategoriDonasiController;
 
@@ -35,6 +36,8 @@ Route::middleware('guest')->group(function () {
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+// Route::post('/user/berdonasi/callback', [PaymentDonasiController::class, 'midtransCallback']);
 
 // Authenticated User
 Route::middleware(['auth'])->group(function () {
@@ -112,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
 
         // Form Donasi
         Route::get('/user/berdonasi/{id}', [KategoriDonasiController::class, 'formDonasi'])->name('donasi.form_donasi');
+
+        // Proses pembayaran Midtrans (via AJAX)
+        Route::post('/user/donasi/midtrans', [PaymentDonasiController::class, 'createCharge'])->name('donasi.midtrans');
+
 
         // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
