@@ -186,10 +186,10 @@
                 <!-- about-img -->
                 <div class="about-img">
                     <div class="about-font-img d-none d-lg-block">
-                        <img src="{{ asset('template user/assets/img/gallery/about2.png') }}" alt="">
+                        <img src="{{ asset('template user/assets/img/gallery/Donasi1.png') }}" alt="">
                     </div>
                     <div class="about-back-img ">
-                        <img src="{{ asset('template user/assets/img/gallery/about1.png') }}" alt="">
+                        <img src="{{ asset('template user/assets/img/gallery/Donasi2.png') }}" alt="">
                     </div>
                 </div>
             </div>

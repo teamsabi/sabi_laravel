@@ -126,6 +126,11 @@ Route::middleware(['auth'])->group(function () {
         // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
         
+        // Tranparansi
+        Route::get('/tranparansi', function () {
+            return view('user.transparansi.index');
+        })->name('user.transparansi.index');     
+
         //Profil untuk User
         Route::get('/profil', [ProfilController::class, 'user'])->name('user.profil.index');
         Route::put('user/profil/update', [ProfilController::class, 'updateProfile'])->name('user.profil.update');
