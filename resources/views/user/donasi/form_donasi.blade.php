@@ -12,6 +12,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-12">
+
                 {{-- Informasi Kategori Donasi --}}
                 <div class="row align-items-start mb-4">
                     <div class="col-lg-5 text-center">
@@ -23,7 +24,10 @@
 
                         <div style="width: 100%; margin-bottom: 10px;">
                             <div class="bar-progress">
-                                <div class="barfiller"><div class="tipWrap"><span class="tip"></span></div><span class="fill" data-percentage="0"></span></div>
+                                <div class="barfiller">
+                                    <div class="tipWrap"><span class="tip"></span></div>
+                                    <span class="fill" data-percentage="0"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -44,43 +48,73 @@
                     </div>
                 </div>
 
-                {{-- Pilih Nominal Donasi --}}
-                <div class="card p-4 mb-4" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); background-color: #fff;">
-                    <h5 class="card-title mb-15" style="font-size: 20px; font-weight: bold;">Pilih Nominal Donasi</h5>
-                    <div class="d-flex flex-wrap gap-2 mb-3" style="gap: 15px;">
-                        @foreach ([1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000] as $nominal)
-                            <button type="button" class="genric-btn default circle btn-nominal" style="font-size: 15px; font-weight: 600; color: rgba(0, 0, 0, 0.7); border: 1px solid #ccc;" data-nominal="{{ $nominal }}">
-                                Rp {{ number_format($nominal, 0, ',', '.') }}
-                            </button>
-                        @endforeach
-                    </div>
-                    <p class="text-muted">Atau nominal lainnya (kelipatan ribuan)</p>
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border rounded-start" style="font-size: 18px; font-weight: bold;">Rp</span>
-                            <input class="form-control" name="nominal" id="nominal" type="text" style="font-size: 18px; font-weight: bold; padding: 14px 16px; height: 60px;">
-                        </div>
-                    </div>
-                </div>
+                {{-- FORM DONASI --}}
+                <form action="{{ route('donasi.pay') }}" method="POST" id="formDonasi">
+                    @csrf
+                    <input type="hidden" name="kategori_donasi_id" value="{{ $kategori->id }}">
 
-                {{-- Data Donatur --}}
-                <div class="card p-4 mb-4" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); background-color: #fff;">
-                    <h5 class="card-title mb-15" style="font-size: 20px; font-weight: bold;">Data Donatur</h5>
-                    <div class="mb-3">
-                        <div class="input-group mb-2">
-                            <input class="form-control" name="nama" id="nama" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->nama_lengkap }}" readonly>
+                    {{-- Nominal Donasi --}}
+                    <div class="card p-4 mb-4" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); background-color: #fff;">
+                        <h5 class="card-title mb-15" style="font-size: 20px; font-weight: bold;">Pilih Nominal Donasi</h5>
+                        <div class="d-flex flex-wrap gap-2 mb-3" style="gap: 15px;">
+                            @foreach ([1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000] as $nominal)
+                                <button type="button" class="genric-btn default circle btn-nominal" style="font-size: 15px; font-weight: 600; color: rgba(0, 0, 0, 0.7); border: 1px solid #ccc;" data-nominal="{{ $nominal }}">
+                                    Rp {{ number_format($nominal, 0, ',', '.') }}
+                                </button>
+                            @endforeach
+                        </div>
+                        <p class="text-muted">Atau nominal lainnya (kelipatan ribuan)</p>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border rounded-start" style="font-size: 18px; font-weight: bold;">Rp</span>
+                                <input class="form-control" name="nominal" id="nominal" type="text" style="font-size: 18px; font-weight: bold; padding: 14px 16px; height: 60px;">
+                            </div>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex gap-2">
-                        <input class="form-control" name="email" id="email" type="email" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->email }}" readonly>
-                        <input class="form-control" name="telepon" id="telepon" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px; margin-left: 10px;" value="{{ Auth::user()->no_whatsapp }}" readonly>
+
+                    {{-- Data Donatur --}}
+                    <div class="card p-4 mb-4" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); background-color: #fff;">
+                        <h5 class="card-title mb-15" style="font-size: 20px; font-weight: bold;">Data Donatur</h5>
+                        <div class="mb-3">
+                            <div class="input-group mb-2">
+                                <input class="form-control" name="nama" id="nama" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->nama_lengkap }}" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex gap-2">
+                            <input class="form-control" name="email" id="email" type="email" style="font-size: 14px; padding: 14px 16px; height: 50px;" value="{{ Auth::user()->email }}" readonly>
+                            <input class="form-control" name="telepon" id="telepon" type="text" style="font-size: 14px; padding: 14px 16px; height: 50px; margin-left: 10px;" value="{{ Auth::user()->no_whatsapp }}" readonly>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <a href="{{ route('user.donasi.detail_transaksi') }}" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Lanjut Pembayaran</a>
-                </div>
+
+                    <div class="mt-3">
+                        <button type="submit" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Lanjut Pembayaran</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Saat tombol nominal diklik
+    document.querySelectorAll('.btn-nominal').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const nominal = this.dataset.nominal;
+            document.getElementById('nominal').value = parseInt(nominal).toLocaleString('id-ID');
+        });
+    });
+
+    // Format input saat user mengetik nominal manual
+    const nominalInput = document.getElementById('nominal');
+
+    nominalInput.addEventListener('input', function () {
+        let value = this.value.replace(/\D/g, ''); // Hanya angka
+        if (!value) {
+            this.value = '';
+            return;
+        }
+        this.value = parseInt(value).toLocaleString('id-ID');
+    });
+</script>
+
 @endsection
