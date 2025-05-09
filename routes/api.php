@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\PaymentDonasiController;
+use App\Http\Controllers\Api\KategoriDonasiApiController;
 
 // Login & Register
 Route::post('/login', [AuthController::class, 'login']);
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handle']);
+
+Route::get('/kategori-donasi', [KategoriDonasiApiController::class, 'index']);
