@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\PaymentDonasiController;
 
 // Login & Register
 Route::post('/login', [AuthController::class, 'login']);
@@ -18,3 +19,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/ganti-email', [AuthController::class, 'updateEmail']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handle']);

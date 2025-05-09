@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Midtrans\Snap;
-use Midtrans\Config as MidtransConfig;
-use App\Models\MidtransTransaction;
+use Midtrans\Notification;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\MidtransTransaction;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Config as MidtransConfig;
 
 class PaymentDonasiController extends Controller
 {
@@ -57,6 +58,30 @@ class PaymentDonasiController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', 'Terjadi kesalahan saat memproses pembayaran.');
         }
+    }
+
+    public function handle(Request $request)
+    {
+        $notif = new Notification();
+
+        $orderId = $notif->order_id;
+
+        $transaction = MidtransTransaction::where('order_id', $orderId)->first();
+
+        if (!$transaction) {
+            return response()->json(['message' => 'Transaction not found'], 404);
+        }
+
+        $transaction->update([
+            'payment_type' => $notif->payment_type,
+            'transaction_status' => $notif->transaction_status,
+            'fraud_status' => $notif->fraud_status ?? null,
+            'bank' => $notif->va_numbers[0]->bank ?? null,
+            'va_number' => $notif->va_numbers[0]->va_number ?? null,
+            'pdf_url' => $notif->pdf_url ?? null,
+        ]);
+
+        return response()->json(['message' => 'Callback handled successfully']);
     }
     
 }
