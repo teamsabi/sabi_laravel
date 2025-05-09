@@ -21,7 +21,7 @@
                             <th>{{ \App\Models\KategoriDonasi::find($request->kategori_donasi_id)->judul_donasi }}</th>
                         </tr>
                         <tr>
-                            <td>Nama</td>
+                            <td>Nama Donatur</td>
                             <th>{{ $request->nama }}</th>
                         </tr>
                         <tr>
@@ -34,7 +34,6 @@
                         </tr>
                         <tr>
                             <td>Nominal</td>
-                            <!-- Tampilkan nominal dengan format yang benar -->
                             <th>{{ $formattedNominal }}</th>
                         </tr>
                     </table>
