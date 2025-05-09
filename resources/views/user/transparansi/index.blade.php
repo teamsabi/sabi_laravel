@@ -1,93 +1,144 @@
 @extends('app_user')
+
 @section('content')
-
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h2>Laporan Donasi</h2>
-        <p style="font-size: 18px; font-weight: bold;">Informasi donasi kepada penerima secara real-time</p>
-    </div>
-
-    <!-- Tombol Filter -->
-    <div class="d-flex justify-content-end mb-3">
-        <button class="genric-btn info" type="button" data-bs-toggle="collapse" data-bs-target="#filterForm">
-            <i class="fas fa-filter me-1"></i> Filter
-        </button>
-    </div>
-
-    <!-- Form Filter -->
-    <div class="collapse mb-3" id="filterForm">
-        <form>
-            <div class="row">
-                <div class="col-md-4 mb-2">
-                    <select class="form-control">
-                        <option value="">-- Bulan --</option>
-                        <option value="1">Januari</option>
-                        <option value="2">Februari</option>
-                        <option value="3">Maret</option>
-                        <option value="4">April</option>
-                        <option value="5">Mei</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">Agustus</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">Desember</option>
-                    </select>
-                </div>
-                <div class="col-md-4 mb-2">
-                    <select class="form-control">
-                        <option value="">-- Tahun --</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                    </select>
-                </div>
-                <div class="col-md-4 mb-2 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary w-100">Terapkan</button>
-                    <button type="reset" class="btn btn-secondary w-100">Reset</button>
+<div class="our-cases-area py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
+                <div class="section-tittle text-center mb-5">
+                    <h2>Laporan Donasi</h2>
+                    <p style="font-size: 18px; font-weight: bold;">
+                    Informasi donasi kepada penerima secara real - time.
+                    </p>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <!-- Tabel Donasi -->
-    <div class="table-responsive">
-        <table class="table table-bordered text-center">
-            <thead class="table-primary">
-                <tr>
-                    <th>Tanggal</th>
-                    <th>Kategori Donasi</th>
-                    <th>Nama Penerima</th>
-                    <th>Jumlah</th>
-                    <th>Keterangan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>08 Mei 2025</td>
-                    <td>Ayah Asep Berpulang</td>
-                    <td>Keluarga Asep</td>
-                    <td>Rp 1.250.000</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>08 Mei 2025</td>
-                    <td>Ayah Asep Berpulang</td>
-                    <td>Keluarga Asep</td>
-                    <td>Rp 1.250.000</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>08 Mei 2025</td>
-                    <td>Ayah Asep Berpulang</td>
-                    <td>Keluarga Asep</td>
-                    <td>Rp 1.250.000</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Tombol Filter -->
+        <div class="mb-4" style="display: flex; justify-content: flex-end;">
+            <button class="genric-btn info d-flex align-items-center gap-2" style="border-radius: 8px;  gap: 8px;" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content p-4">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fw-bold" id="filterModalLabel">Filter</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="filter-form">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="filter-month" class="form-label text-muted">Bulan</label>
+                                    <select id="filter-month" name="month" class="form-select">
+                                        <option value="">-- Pilih Bulan --</option>
+                                        @for ($m = 1; $m <= 12; $m++)
+                                            <option value="{{ $m }}">{{ DateTime::createFromFormat('!m', $m)->format('F') }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="filter-year" class="form-label text-muted">Tahun</label>
+                                    <select id="filter-year" name="year" class="form-select">
+                                        <option value="">-- Pilih Tahun --</option>
+                                        @for ($y = 2023; $y <= now()->year; $y++)
+                                            <option value="{{ $y }}">{{ $y }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-end">
+                        <button type="button" class="genric-btn info-border" style="border-radius: 8px;" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" form="filter-form" class="genric-btn info" style="border-radius: 8px;">Terapkan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabel Laporan -->
+        <div class="table-responsive table-custom mt-3">
+            <table class="table text-center mb-0" id="donation-table">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Kategori Donasi</th>
+                        <th>Nama Penerima</th>
+                        <th>Jumlah</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Kategori Donasi</th>
+                        <th>Nama Penerima</th>
+                        <th>Jumlah</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>5 Mei 2025</td>
+                        <td>Ayah Asep Berpulang</td>
+                        <td>Keluarga Asep</td>
+                        <td>Rp 1.750.000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5 Mei 2025</td>
+                        <td>Ayah Asep Berpulang</td>
+                        <td>Keluarga Asep</td>
+                        <td>Rp 1.750.000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5 Mei 2025</td>
+                        <td>Ayah Asep Berpulang</td>
+                        <td>Keluarga Asep</td>
+                        <td>Rp 1.750.000</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<!-- Script Modal Submit -->
+<script>
+  document.getElementById('filter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const month = document.getElementById('filter-month').value;
+    const year = document.getElementById('filter-year').value;
+    
+    console.log('Bulan:', month, 'Tahun:', year);
+
+    // Filter tabel berdasarkan bulan dan tahun
+    const rows = document.querySelectorAll('#donation-table tbody tr');
+    
+    rows.forEach(row => {
+        const date = row.getAttribute('data-date');
+        const rowMonth = new Date(date).getMonth() + 1;  // getMonth() returns 0-based index (Jan = 0)
+        const rowYear = new Date(date).getFullYear();
+        
+        if ((month && rowMonth !== parseInt(month)) || (year && rowYear !== parseInt(year))) {
+            row.style.display = 'none';  // Sembunyikan baris yang tidak sesuai
+        } else {
+            row.style.display = '';  // Tampilkan baris yang sesuai
+        }
+    });
+
+    // Tutup modal setelah filter diterapkan
+    const modalEl = document.getElementById('filterModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  });
+</script>
 
 @endsection

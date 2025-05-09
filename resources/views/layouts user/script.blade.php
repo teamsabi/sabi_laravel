@@ -24,6 +24,7 @@
 <script src="{{ asset('template user/assets/js/plugins.js') }}"></script>
 <script src="{{ asset('template user/assets/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Script agar tombol isi input otomatis -->
 <script>
