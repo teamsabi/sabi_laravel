@@ -50,12 +50,16 @@
                                     <!-- Menu lainnya-->
                                     <li><a href="{{ route('beranda.login') }}" style="font-weight: bold;">Beranda</a></li>
                                     <li><a href="{{ route('donasi.index') }}" style="font-weight: bold;">Donasi</a></li>
-                                    <li><a href="{{ route('user.dokumentasi.index') }}" style="font-weight: bold;">Dokumentasi</a></li>
+                                    <li><a href="#" style="font-weight: bold;">Dokumentasi</a>
+                                        <ul class="submenu">
+                                            <li><a href="{{ route('user.dokumentasi.index') }}" style="font-weight: bold;">Galeri Dokumentasi</a></li>
+                                            <li><a href="{{ route('user.transparansi.index') }}" style="font-weight: bold;">Transparansi</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>
                                     <li><a href="#" style="font-weight: bold;">Tentang Kami</a>
                                         <ul class="submenu">
                                             <li><a href="{{ route('about.index') }}" style="font-weight: bold;">Tentang Kami</a></li>
-                                            <li><a href="{{ route('user.transparansi.index') }}" style="font-weight: bold;">Tranparansi</a></li>
                                             <li><a href="{{ route('FAQ.index') }}" style="font-weight: bold;">FAQ</a></li>
                                             <li><a href="{{ route('hubungi kami.index') }}" style="font-weight: bold;">Hubungi Kami</a></li>
                                         </ul>
