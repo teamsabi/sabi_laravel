@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Laporan
         Route::prefix('laporan')->group(function () {
-            Route::get('/', fn () => view('administrator.laporan.index'))->name('laporan.index');
+            Route::get('/', [KategoriDonasiController::class, 'laporanIndex'])->name('laporan.index');
             Route::get('/riwayat', fn () => view('administrator.laporan.history'))->name('laporan.riwayat');
         });
 
