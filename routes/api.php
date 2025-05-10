@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handle']);
-
 Route::get('/kategori-donasi', [KategoriDonasiApiController::class, 'index']);
+
+Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handleCallback']);

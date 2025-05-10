@@ -51,7 +51,24 @@
 
 <script>
     document.getElementById('pay-button').addEventListener('click', function () {
-        snap.pay('{{ $snapToken }}');
+        snap.pay('{{ $snapToken }}', {
+            onSuccess: function (result) {
+                const nominal = '{{ $request->nominal }}';
+                const judulDonasi = `{{ \App\Models\KategoriDonasi::find($request->kategori_donasi_id)->judul_donasi }}`;
+                
+                const pesan = encodeURIComponent(`Anda berhasil melakukan donasi sebesar Rp${nominal} ke kategori donasi ${judulDonasi}`);
+                window.location.href = "{{ route('donasi.index') }}?pesan=" + pesan;
+            },
+            onPending: function (result) {
+                console.log("Menunggu pembayaran...");
+            },
+            onError: function (result) {
+                alert("Terjadi kesalahan saat pembayaran.");
+            },
+            onClose: function () {
+                alert('Anda menutup popup sebelum menyelesaikan pembayaran.');
+            }
+        });
     });
 </script>
 

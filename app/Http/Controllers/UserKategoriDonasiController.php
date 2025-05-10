@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\KategoriDonasi;
 
 class UserKategoriDonasiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kategoriDonasi = KategoriDonasi::all(); // Atau bisa pakai paginate
-        return view('user.donasi.index', compact('kategoriDonasi'));
+        $kategoriDonasi = KategoriDonasi::all();
+        $pesan = $request->query('pesan'); // Ambil pesan dari URL jika ada
+    
+        return view('user.donasi.index', compact('kategoriDonasi', 'pesan'));
     }
 }

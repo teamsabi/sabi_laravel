@@ -3,6 +3,7 @@
 
 <div class="our-cases-area" style="padding-top: 50px; padding-bottom: 50px;">
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
                 <div class="section-tittle text-center mb-80">
@@ -69,5 +70,20 @@
         @endif
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('pesan') || request('pesan'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('pesan') ?? request('pesan') }}',
+                confirmButtonColor: '#3085d6',
+            });
+        });
+    </script>
+@endif
 
 @endsection
