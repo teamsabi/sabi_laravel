@@ -57,7 +57,7 @@
                 @foreach($kategoriDonasi as $kategori)
                     @php
                         $persen = $kategori->target_dana > 0 
-                            ? round(($kategori->terkumpul / $kategori->target_dana) * 100) 
+                            ? round(($kategori->donasi_terkumpul / $kategori->target_dana) * 100) 
                             : 0;
                         $persen = min($persen, 100);
                     @endphp
@@ -104,7 +104,7 @@
                                 </div>
         
                                 <div class="prices d-flex justify-content-between">
-                                    <p>Terkumpul :<span> Rp {{ number_format($kategori->terkumpul, 0, ',', '.') }}</span></p>
+                                    <p>Terkumpul :<span> Rp {{ number_format($kategori->donasi_terkumpul, 0, ',', '.') }}</span></p>
                                     <p>Target :<span> Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</span></p>
                                 </div>
                                 <div style="border-top: 1px solid #e0e0e0; margin-top: -5px; padding-top: 5px;">

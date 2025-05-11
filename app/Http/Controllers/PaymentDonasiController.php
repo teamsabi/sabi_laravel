@@ -64,17 +64,14 @@ class PaymentDonasiController extends Controller
 
     public function handleCallback(Request $request)
     {
-        // Konfigurasi Midtrans manual
         MidtransConfig::$serverKey = config('midtrans.server_key');
         MidtransConfig::$isProduction = config('midtrans.is_production');
         MidtransConfig::$isSanitized = true;
         MidtransConfig::$is3ds = true;
     
         try {
-            // Ambil data notifikasi dari Midtrans
             $notif = new Notification();
     
-            // Cari transaksi berdasarkan order_id
             $transaction = MidtransTransaction::where('order_id', $notif->order_id)->first();
     
             if (!$transaction) {
@@ -82,7 +79,6 @@ class PaymentDonasiController extends Controller
                 return response()->json(['message' => 'Transaction not found'], 404);
             }
     
-            // Ambil data dari notifikasi
             $status = $notif->transaction_status;
             $type = $notif->payment_type;
             $fraud = $notif->fraud_status ?? null;
@@ -90,22 +86,24 @@ class PaymentDonasiController extends Controller
             $vaNumber = $notif->va_numbers[0]->va_number ?? null;
             $pdfUrl = $notif->pdf_url ?? null;
     
-            // Proses logika status
+            // Default status
+            $finalStatus = $transaction->transaction_status;
+    
             if ($status == 'capture') {
                 if ($type == 'credit_card') {
-                    $transaction->transaction_status = ($fraud == 'challenge') ? 'challenge' : 'success';
+                    $finalStatus = ($fraud == 'challenge') ? 'challenge' : 'success';
                 }
             } elseif ($status == 'settlement') {
-                $transaction->transaction_status = 'success';
+                $finalStatus = 'success';
             } elseif ($status == 'pending') {
-                $transaction->transaction_status = 'pending';
+                $finalStatus = 'pending';
             } elseif (in_array($status, ['deny', 'cancel', 'expire'])) {
-                $transaction->transaction_status = 'failed';
+                $finalStatus = 'failed';
             }
     
-            // Update data transaksi
+            // Update transaksi
             $transaction->update([
-                'transaction_status' => $transaction->transaction_status,
+                'transaction_status' => $finalStatus,
                 'payment_type' => $type,
                 'fraud_status' => $fraud,
                 'bank' => $bank,
@@ -114,7 +112,17 @@ class PaymentDonasiController extends Controller
                 'payload' => json_encode($notif),
             ]);
     
-            Log::info("Callback berhasil. Order ID: {$notif->order_id}, Status: {$transaction->transaction_status}");
+            // Tambahkan logika update kategori_donasi jika success
+            if ($finalStatus === 'success') {
+                $kategori = \App\Models\KategoriDonasi::find($transaction->kategori_donasi_id);
+    
+                if ($kategori) {
+                    $kategori->increment('jumlah_donatur');
+                    $kategori->increment('donasi_terkumpul', $transaction->gross_amount);
+                }
+            }
+    
+            Log::info("Callback berhasil. Order ID: {$notif->order_id}, Status: {$finalStatus}");
     
             return response()->json(['message' => 'Callback handled successfully']);
         } catch (\Exception $e) {

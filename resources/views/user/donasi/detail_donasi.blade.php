@@ -3,6 +3,12 @@
 
 <div class="container mt-5">
     <div class="row">
+        @php
+            $persen = $kategori->target_dana > 0 
+                ? round(($kategori->donasi_terkumpul / $kategori->target_dana) * 100) 
+                : 0;
+            $persen = min($persen, 100);
+        @endphp
         <!-- Bagian Donasi Utama -->
         <div class="col-lg-8">
             <div class="card border-0 mb-4">
@@ -12,11 +18,14 @@
                     <p class="mb-3 text-muted" style="font-size: 18px;">{{ $kategori->deskripsi }}</p>
 
                     <!-- Progress Bar -->
-                    <div style="width: 100%; margin-bottom: 10px;">
+                    <div class="mt-3"></div>
+                    <div class="single-skill mb-2">
                         <div class="bar-progress">
                             <div class="barfiller">
-                                <div class="tipWrap"><span class="tip"></span></div>
-                                <span class="fill" data-percentage="0"></span> <!-- Sesuaikan dengan progress -->
+                                <div class="tipWrap">
+                                    <span class="tip">{{ $persen }}%</span>
+                                </div>
+                                <span class="fill" data-percentage="{{ $persen }}" style="width: {{ $persen }}%; background: #1d8cf8;"></span>
                             </div>
                         </div>
                     </div>
@@ -24,7 +33,7 @@
                     <!-- Informasi Dana dan Deadline -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div style="min-width: 130px;">
-                            <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp 0</h6> <!-- Belum ada donasi -->
+                            <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp {{ number_format($kategori->donasi_terkumpul, 0, ',', '.') }}</h6> <!-- Belum ada donasi -->
                             <small class="text-muted" style="font-size: 15px;">Dari target Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</small>
                         </div>
                         <div class="text-end" style="min-width: 80px;">

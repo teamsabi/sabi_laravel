@@ -52,17 +52,6 @@
                             </td>
                             <td>11-01-2025</td>                         
                         </tr>
-                        <tr>
-                            <td>Dwi Rasyari Putra</td>
-                            <td>putra@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>Rp 3.000</td>
-                            <td>DANA</td>
-                            <td class="text-center">
-                                <span class="badge badge-success">Berhasil</span>
-                            </td>   
-                            <td>11-01-2025</td>                           
-                        </tr>
                     </tbody>
                 </table>
             </div>

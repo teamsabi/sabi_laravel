@@ -11,8 +11,13 @@
             </div>
         </div>
         <div class="row justify-content-center">
+            @php
+                $persen = $kategori->target_dana > 0 
+                    ? round(($kategori->donasi_terkumpul / $kategori->target_dana) * 100) 
+                    : 0;
+                $persen = min($persen, 100);
+            @endphp
             <div class="col-lg-10 col-md-12">
-
                 {{-- Informasi Kategori Donasi --}}
                 <div class="row align-items-start mb-4">
                     <div class="col-lg-5 text-center">
@@ -25,15 +30,15 @@
                         <div style="width: 100%; margin-bottom: 10px;">
                             <div class="bar-progress">
                                 <div class="barfiller">
-                                    <div class="tipWrap"><span class="tip"></span></div>
-                                    <span class="fill" data-percentage="0"></span>
+                                    <div class="tipWrap"><span class="tip">{{ $persen }}%</span></div>
+                                    <span class="fill" data-percentage="{{ $persen }}" style="width: {{ $persen }}%; background: #1d8cf8;"></span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <h6 style="font-size: 25px; font-weight: bold;">Rp 0</h6>
+                                <h6 style="font-size: 25px; font-weight: bold;">Rp {{ number_format($kategori->donasi_terkumpul, 0, ',', '.') }}</h6>
                                 <small class="text-muted">Dari target Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</small>
                             </div>
                             <div class="text-end">
