@@ -1,4 +1,5 @@
 @extends('app')
+
 @section('content')
 
 <div class="row">
@@ -12,45 +13,56 @@
                 <table id="basic-datatables" class="display table table-striped table-hover">
                     <thead>
                         <tr>
-                        <th>Nama Donatur</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Kategori Donasi</th>
-                        <th>Nominal</th>
-                        <th>Metode Pembayaran</th>
-                        <th>Status</th>
-                        <th>Tanggal</th>
+                            <th>Nama Donatur</th>
+                            <th>Email</th>
+                            <th>No WhatsApp</th>
+                            <th>Kategori Donasi</th>
+                            <th>Nominal</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                        <th>Nama Donatur</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Kategori Donasi</th>
-                        <th>Nominal</th>
-                        <th>Metode Pembayaran</th>
-                        <th>Status</th>
-                        <th>Tanggal</th>
-                            </tr>
+                            <th>Nama Donatur</th>
+                            <th>Email</th>
+                            <th>No WhatsApp</th>
+                            <th>Kategori Donasi</th>
+                            <th>Nominal</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                        </tr>
                     </tfoot>
                     <tbody>
+                        @foreach($detailDonaturs as $detail)
                         <tr>
-                            <td>Syaiful Amin</td>
-                            <td>ipul@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>Berita Duka: Orangtua Asup Berpulang</td>
-                            <td>Rp 10.000</td>
-                            <td>QRIS</td>
+                            <td>{{ $detail->nama_donatur }}</td>
+                            <td>{{ $detail->email }}</td>
+                            <td>{{ $detail->no_whatsapp }}</td>
+                            <td>{{ $detail->kategori_donasi }}</td>
+                            <td>Rp {{ number_format($detail->nominal, 0, ',', '.') }}</td>
+                            <td>{{ strtoupper($detail->metode_pembayaran) }}</td>
                             <td class="text-center">
-                                <span class="badge badge-success">Complete</span>
+                                @if ($detail->status == 'success')
+                                    <span class="badge badge-success">Berhasil</span>
+                                @elseif ($detail->status == 'pending')
+                                    <span class="badge badge-warning">Pending</span>
+                                @elseif ($detail->status == 'failed')
+                                    <span class="badge badge-danger">Gagal</span>
+                                @else
+                                    <span class="badge badge-secondary">{{ ucfirst($detail->status) }}</span>
+                                @endif
                             </td>
-                            <td>11-01-2025</td>                         
+                            <td>{{ \Carbon\Carbon::parse($detail->tanggal_transaksi)->format('d-m-Y') }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

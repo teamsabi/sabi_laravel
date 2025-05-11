@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('kategori_donasi');
             $table->decimal('nominal', 15, 2);
             $table->string('metode_pembayaran');
+            $table->string('status');
             $table->timestamp('tanggal_transaksi')->useCurrent();
 
             $table->timestamps();

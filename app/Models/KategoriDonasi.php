@@ -44,4 +44,5 @@ class KategoriDonasi extends Model
     {
         return $this->hasMany(MidtransTransaction::class, 'kategori_donasi_id');
     }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\KategoriDonasiController;
@@ -64,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         // Data Donatur
-        Route::get('/data-donatur', fn () => view('administrator.data donatur.index'))->name('donatur.index');
+        Route::get('/data-donatur', [DonaturController::class, 'index'])->name('data.donatur');
 
         // Dokumentasi
         Route::prefix('dokumentasi')->name('admin.dokumentasi.')->group(function () {

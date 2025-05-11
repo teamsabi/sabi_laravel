@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('donatur.index') ? 'active' : '' }}">
-            <a href="{{ route('donatur.index') }}">
+            <a href="{{ route('data.donatur') }}">
               <i class="fas fa-receipt"></i>
               <p>Data Donatur</p>
               <span class="badge badge-success">4</span>

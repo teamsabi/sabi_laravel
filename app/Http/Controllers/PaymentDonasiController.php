@@ -86,7 +86,6 @@ class PaymentDonasiController extends Controller
             $vaNumber = $notif->va_numbers[0]->va_number ?? null;
             $pdfUrl = $notif->pdf_url ?? null;
     
-            // Default status
             $finalStatus = $transaction->transaction_status;
     
             if ($status == 'capture') {
@@ -100,8 +99,7 @@ class PaymentDonasiController extends Controller
             } elseif (in_array($status, ['deny', 'cancel', 'expire'])) {
                 $finalStatus = 'failed';
             }
-    
-            // Update transaksi
+
             $transaction->update([
                 'transaction_status' => $finalStatus,
                 'payment_type' => $type,
@@ -112,15 +110,34 @@ class PaymentDonasiController extends Controller
                 'payload' => json_encode($notif),
             ]);
     
-            // Tambahkan logika update kategori_donasi jika success
-            if ($finalStatus === 'success') {
-                $kategori = \App\Models\KategoriDonasi::find($transaction->kategori_donasi_id);
-    
-                if ($kategori) {
-                    $kategori->increment('jumlah_donatur');
-                    $kategori->increment('donasi_terkumpul', $transaction->gross_amount);
-                }
+            // Ambil user dan kategori
+            $user = \App\Models\User::find($transaction->user_id);
+            $kategori = \App\Models\KategoriDonasi::find($transaction->kategori_donasi_id);
+
+            if ($finalStatus === 'success' && $kategori) {
+                $kategori->increment('jumlah_donatur');
+                $kategori->increment('donasi_terkumpul', $transaction->gross_amount);
             }
+    
+            // Buat atau ambil data_donatur (hindari duplikasi)
+            $dataDonatur = \App\Models\DataDonatur::firstOrCreate([
+                'user_id' => $transaction->user_id,
+                'kategori_donasi_id' => $transaction->kategori_donasi_id,
+                'transaction_id' => $transaction->id,
+            ]);
+    
+            // Tambah detail_data_donatur (boleh duplikat antar status)
+            \App\Models\DetailDataDonatur::create([
+                'data_donatur_id' => $dataDonatur->id,
+                'nama_donatur' => $user->nama_lengkap ?? 'Anonim',
+                'email' => $user->email ?? '-',
+                'no_whatsapp' => $user->no_whatsapp ?? '-',
+                'kategori_donasi' => $kategori->judul_donasi ?? '-',
+                'nominal' => $transaction->gross_amount,
+                'metode_pembayaran' => $type,
+                'status' => $finalStatus,
+                'tanggal_transaksi' => now(),
+            ]);
     
             Log::info("Callback berhasil. Order ID: {$notif->order_id}, Status: {$finalStatus}");
     

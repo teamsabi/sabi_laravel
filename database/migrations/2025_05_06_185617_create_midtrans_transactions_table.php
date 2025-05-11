@@ -6,18 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('midtrans_transactions', function (Blueprint $table) {
             $table->id();
-
-            // Relasi ke user
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 
-            // Relasi ke kategori_donasi
             $table->foreignId('kategori_donasi_id')->constrained('kategori_donasi')->onDelete('cascade');
 
             $table->string('order_id')->unique();
@@ -34,9 +28,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('midtrans_transactions');
