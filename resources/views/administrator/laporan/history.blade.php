@@ -62,11 +62,16 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="mt-4">
-                <a href="{{ url()->previous() }}" class="btn btn-danger">
-                    <i class="fa fa-arrow-left me-1"></i> Kembali
-                </a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a href="{{ url()->previous() }}" class="btn btn-danger">
+                        <i class="fa fa-arrow-left me-1"></i> Kembali
+                    </a>
+                    <div class="d-flex align-items-center">
+                        <label class="fw-bold me-2 mb-0">Total Dana:</label>
+                        <input type="text" class="form-control w-auto" value="Rp" readonly>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
