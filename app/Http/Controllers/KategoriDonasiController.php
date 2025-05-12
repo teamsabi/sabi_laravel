@@ -10,10 +10,8 @@ class KategoriDonasiController extends Controller
 {
     public function index()
     {
-        // Ambil semua data kategori donasi
         $kategoriDonasi = KategoriDonasi::all();
-    
-        // Loop untuk mengecek dedline dan update status jika lewat
+
         foreach ($kategoriDonasi as $kategori) {
             if (strtotime($kategori->dedline) < strtotime(now()) && strtolower($kategori->status) === 'aktif') {
                 $kategori->update(['status' => 'nonaktif']);
@@ -23,13 +21,11 @@ class KategoriDonasiController extends Controller
         return view('administrator.kategori.index', compact('kategoriDonasi'));
     }
 
-    // Tampilkan form tambah data
     public function create()
     {
         return view('administrator.kategori.add');
     }
 
-    // Simpan data baru ke database
     public function store(Request $request)
     {
         $request->validate([
