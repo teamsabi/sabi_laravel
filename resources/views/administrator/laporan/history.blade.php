@@ -7,7 +7,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>
                     <h4 class="card-title mb-0">Data Donatur</h4>
-                    <h6 class="op-7 mb-2">Kategori Donasi</h6> {{-- Judul Donasi --}}
+                    <h6 class="op-7 mb-2">Kategori Donasi : {{ $kategori->judul_donasi }}</h6>
                 </div>
                 <div>
                     <button onclick="window.print()" class="btn btn-primary">
@@ -69,7 +69,7 @@
                     </a>
                     <div class="d-flex align-items-center">
                         <label class="fw-bold me-2 mb-0">Total Dana:</label>
-                        <input type="text" class="form-control w-auto" value="Rp" readonly>
+                        <input type="text" class="form-control w-auto" value="Rp {{ number_format($totalDana, 0, ',', '.') }}" readonly>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,10 @@ class LaporanController extends Controller
             $query->where('kategori_donasi_id', $id);
         })->get();
 
-        return view('administrator.laporan.history', compact('detailDonatur'));
+        $kategori = KategoriDonasi::findOrFail($id);
+
+        $totalDana = $detailDonatur->whereIn('status', ['success', 'settlement'])->sum('nominal');
+
+        return view('administrator.laporan.history', compact('detailDonatur', 'kategori', 'totalDana'));
     }
 }
