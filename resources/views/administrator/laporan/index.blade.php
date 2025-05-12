@@ -30,7 +30,7 @@
                 <p class="card-text">
                     {{ Str::limit($donasi->deskripsi, 100) }}
                 </p>
-                <a href="{{ route('laporan.riwayat') }}" class="btn btn-primary btn-rounded btn-sm">Lihat Detail</a>
+                <a href="{{ route('laporan.detail', $donasi->id) }}" class="btn btn-primary btn-rounded btn-sm">Lihat Detail</a>
             </div>
         </div>
     </div>

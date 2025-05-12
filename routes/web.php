@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DonaturController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\KategoriDonasiController;
@@ -60,8 +61,8 @@ Route::middleware(['auth'])->group(function () {
 
         // Laporan
         Route::prefix('laporan')->group(function () {
-            Route::get('/', [KategoriDonasiController::class, 'laporanIndex'])->name('laporan.index');
-            Route::get('/riwayat', fn () => view('administrator.laporan.history'))->name('laporan.riwayat');
+            Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+            Route::get('/laporan/{id}', [LaporanController::class, 'detail'])->name('laporan.detail');
         });
 
         // Data Donatur

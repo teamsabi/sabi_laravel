@@ -7,7 +7,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>
                     <h4 class="card-title mb-0">Data Donatur</h4>
-                    <h6 class="op-7 mb-2">Pilih salah satu kategori donasi!</h6>
+                    <h6 class="op-7 mb-2">Kategori Donasi</h6> {{-- Judul Donasi --}}
                 </div>
                 <div>
                     <button onclick="window.print()" class="btn btn-primary">
@@ -41,17 +41,25 @@
                             </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($detailDonatur as $detail)
                         <tr>
-                            <td>Syaiful Amin</td>
-                            <td>ipul@gmail.com</td>
-                            <td>01234567890</td>
-                            <td>Rp 10.000</td>
-                            <td>QRIS</td>
+                            <td>{{ $detail->nama_donatur }}</td>
+                            <td>{{ $detail->email }}</td>
+                            <td>{{ $detail->no_whatsapp }}</td>
+                            <td>Rp {{ number_format($detail->nominal, 0, ',', '.') }}</td>
+                            <td>{{ $detail->metode_pembayaran }}</td>
                             <td class="text-center">
-                                <span class="badge badge-success">Berhasil</span>
+                                @if ($detail->status == 'settlement' || $detail->status == 'success')
+                                    <span class="badge badge-success">Berhasil</span>
+                                @elseif ($detail->status == 'pending')
+                                    <span class="badge badge-warning">Pending</span>
+                                @else
+                                    <span class="badge badge-danger">Gagal</span>
+                                @endif
                             </td>
-                            <td>11-01-2025</td>                         
+                            <td>{{ \Carbon\Carbon::parse($detail->tanggal_transaksi)->format('d-m-Y') }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

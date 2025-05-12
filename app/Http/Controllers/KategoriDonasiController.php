@@ -127,10 +127,4 @@ class KategoriDonasiController extends Controller
         return view('user.donasi.form_donasi', compact('kategori'));
     }
 
-    public function laporanIndex()
-{
-    $kategoriDonasi = KategoriDonasi::all();
-    return view('administrator.laporan.index', compact('kategoriDonasi'));
-}
-
 }
