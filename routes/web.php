@@ -36,10 +36,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda');
 });
 
-// Logout
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// Route::post('/user/berdonasi/callback', [PaymentDonasiController::class, 'midtransCallback']);
 
 // Authenticated User
 Route::middleware(['auth'])->group(function () {

@@ -16,6 +16,14 @@
     </script>
 @endif
 
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="alert alert-info" role="alert">
+            <strong>Statistik Berdasarkan Kategori Donasi Terbaru :</strong> {{ $kategoriTerbaru->judul_donasi }}
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-sm-6 col-md-3">
         <div class="card card-stats card-round">
@@ -29,7 +37,7 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Jumlah Donatur</p>
-                            <h4 class="card-title">123</h4>
+                            <h4 class="card-title">{{ $jumlahDonatur }}</h4>
                         </div>
                     </div>
                 </div>
@@ -48,7 +56,7 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Jumlah Donasi</p>
-                            <h4 class="card-title"><span style="font-size: 16px;">Rp 1.200.000</span></h4>
+                            <h4 class="card-title"><span style="font-size: 16px;">Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</span></h4>
                         </div>
                     </div>
                 </div>
@@ -67,7 +75,7 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Donasi Sukses</p>
-                            <h4 class="card-title">2</h4>
+                            <h4 class="card-title">{{ $donasiSukses }}</h4>
                         </div>
                     </div>
                 </div>
@@ -86,7 +94,7 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Donasi Aktif</p>
-                            <h4 class="card-title">3</h4>
+                            <h4 class="card-title">{{ $donasiAktif }}</h4>
                         </div>
                     </div>
                 </div>
@@ -94,6 +102,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-8">
         <div class="card">
@@ -112,11 +121,9 @@
             <div class="card-header">
                 <div class="card-head-row">
                     <div class="card-title">Donasi bulan ini</div>
-                    <div class="card-tools">
                 </div>
+                <div class="card-category">1 Februari - 1 Maret</div>
             </div>
-            <div class="card-category">1 Februari - 1 Maret</div>
-        </div>
             <div class="card-body pb-0">
                 <div class="mb-4 mt-2">
                     <h1>Rp 2.340.000</h1>
@@ -126,10 +133,11 @@
         <div class="card card-round mt-3 flex-grow-1">
             <div class="card-body pb-0">
                 <div class="h1 fw-bold float-end text-primary">+5%</div>
-                    <h2 class="mb-2">17</h2>
-                    <p class="text-muted">Donatur bulan ini</p>
-                    <div class="pull-in sparkline-fix">
-                <div id="lineChart"></div>
+                <h2 class="mb-2">17</h2>
+                <p class="text-muted">Donatur bulan ini</p>
+                <div class="pull-in sparkline-fix">
+                    <div id="lineChart"></div>
+                </div>
             </div>
         </div>
     </div>

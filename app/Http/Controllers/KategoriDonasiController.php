@@ -52,7 +52,6 @@ class KategoriDonasiController extends Controller
         return redirect()->route('kategori.index')->with('success', 'Kategori Donasi berhasil ditambahkan.');
     }
 
-    // Tampilkan form edit
     public function edit($id)
     {
         $kategori = KategoriDonasi::findOrFail($id);
@@ -124,6 +123,11 @@ class KategoriDonasiController extends Controller
     public function formDonasi($id)
     {
         $kategori = KategoriDonasi::findOrFail($id);
+
+        if ($kategori->donasi_terkumpul >= $kategori->target_dana) {
+            return redirect()->route('donasi.detail', $id)->with('pesan', 'Donasi untuk kategori ini sudah terpenuhi.');
+        }
+    
         return view('user.donasi.form_donasi', compact('kategori'));
     }
 

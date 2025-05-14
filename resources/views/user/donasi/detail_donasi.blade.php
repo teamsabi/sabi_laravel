@@ -77,4 +77,18 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('pesan'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'info',
+                title: 'Info',
+                text: '{{ session('pesan') }}',
+                confirmButtonColor: '#3085d6',
+            });
+        });
+    </script>
+@endif
+
 @endsection
