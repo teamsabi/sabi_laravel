@@ -23,6 +23,10 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/verify-email-baru/{verify_key}', [AuthController::class, 'verifyNewEmail'])->name('auth.verify_email_baru');
 
+    Route::get('/verifikasi-email', function () {
+        return view('auth.verifikasi');
+    });
+
     // Halaman Lupa Password
     Route::prefix('lupa-password')->group(function () {
         Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
