@@ -13,7 +13,6 @@ use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\KategoriDonasiController;
 use App\Http\Controllers\UserKategoriDonasiController;
 
-// Guest (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/sesi', [AuthController::class, 'index'])->name('auth.login');
     Route::post('/sesi', [AuthController::class, 'login']);
@@ -27,7 +26,6 @@ Route::middleware('guest')->group(function () {
         return view('auth.verifikasi');
     });
 
-    // Halaman Lupa Password
     Route::prefix('lupa-password')->group(function () {
         Route::get('/', [AuthController::class, 'showForgotPasswordForm'])->name('auth.lupa_password');
         Route::post('/kirim', [AuthController::class, 'sendResetLink'])->name('auth.lupa_password.kirim');
@@ -36,25 +34,19 @@ Route::middleware('guest')->group(function () {
         Route::post('/new-password', [AuthController::class, 'updatePassword'])->name('auth.lupa_password.update');    
     });
 
-    // Halaman utama sebelum login (untuk guest)
     Route::get('/', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda');
 });
 
-    // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
-// Authenticated User
 Route::middleware(['auth'])->group(function () {
 
-    // Role Admin
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 
-        // CRUD Akun
         Route::resource('/akun', AkunController::class);
 
-        // CRUD Kategori Donasi
         Route::get('/kategori', [KategoriDonasiController::class, 'index'])->name('kategori.index');
         Route::get('/kategori/create', [KategoriDonasiController::class, 'create'])->name('kategori.create');
         Route::post('/kategori', [KategoriDonasiController::class, 'store'])->name('kategori.store');
@@ -62,16 +54,13 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/kategori/{id}', [KategoriDonasiController::class, 'update'])->name('kategori.update');
         Route::delete('/kategori/{id}', [KategoriDonasiController::class, 'destroy'])->name('kategori.destroy');
 
-        // Laporan
         Route::prefix('laporan')->group(function () {
             Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
             Route::get('/laporan/{id}', [LaporanController::class, 'detail'])->name('laporan.detail');
         });
 
-        // Data Donatur
         Route::get('/data-donatur', [DonaturController::class, 'index'])->name('data.donatur');
 
-        // Dokumentasi
         Route::prefix('dokumentasi')->name('admin.dokumentasi.')->group(function () {
             Route::get('/', [DokumentasiController::class, 'index'])->name('index');
             Route::get('/create', [DokumentasiController::class, 'create'])->name('add');
@@ -81,7 +70,6 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}', [DokumentasiController::class, 'destroy'])->name('destroy');
         });
 
-        // Profil Admin
         Route::get('/profile', [ProfilController::class, 'index'])->name('profil.index');
         Route::put('/profil/update', [ProfilController::class, 'updateProfile'])->name('profil.update');
         Route::put('/admin/profil/hapus-foto', [ProfilController::class, 'hapusFoto'])->name('profil.hapus-foto');
@@ -89,23 +77,18 @@ Route::middleware(['auth'])->group(function () {
             return view('administrator.profil.pengaturan-akun');
         })->name('admin.profil.pengaturan-akun');
 
-        // Ganti Email Admin via AuthController
         Route::post('/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('update.email');
 
-        // Ganti Password baru
         Route::post('/update-password', [ProfilController::class, 'updatePassword'])->name('update.password');
 
         Route::delete('/admin/hapus-akun', [ProfilController::class, 'hapusAkun'])->name('admin.hapus-akun');
     });
 
-    // Role User
     Route::middleware('role:user')->group(function () {
         Route::get('/user', [UserController::class, 'index'])->name('home.index');
 
-        // Halaman Donasi untuk User
         Route::get('/user/donasi', [UserKategoriDonasiController::class, 'index'])->name('donasi.index');
 
-        // Halaman Lain
         Route::get('/user/dokumentasi', [DokumentasiController::class, 'showuser'])->name('user.dokumentasi.index');
         Route::get('/user/dokumentasi/{id}', [DokumentasiController::class, 'show'])->name('user.dokumentasi.show');       
 
@@ -114,28 +97,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
 
-        // Route yang ingin diamankan (Detail Donasi)
         Route::get('/user/detail/{id}', [KategoriDonasiController::class, 'detail'])->name('donasi.detail');
 
-        // Form Donasi
         Route::get('/user/berdonasi/{id}', [KategoriDonasiController::class, 'formDonasi'])->name('donasi.form_donasi');
 
-        // Detail Transaksi
         Route::get('/donasi/detail-transaksi', function () {
             return view('user.donasi.detail_transaksi');
         })->name('user.donasi.detail_transaksi');
 
         Route::post('/donasi/pay', [PaymentDonasiController::class, 'createCharge'])->name('donasi.pay');
 
-        // Halaman utama setelah login
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
-        
-        // Tranparansi
+
         Route::get('/tranparansi', function () {
             return view('user.transparansi.index');
         })->name('user.transparansi.index');     
 
-        //Profil untuk User
         Route::get('/profil', [ProfilController::class, 'user'])->name('user.profil.index');
         Route::put('user/profil/update', [ProfilController::class, 'updateProfile'])->name('user.profil.update');
         Route::put('/user/profil/hapus-foto', [ProfilController::class, 'hapusFoto'])->name('user.profil.hapus-foto');
