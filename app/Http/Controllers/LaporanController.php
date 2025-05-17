@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KategoriDonasi;
 use App\Models\DetailDataDonatur;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanController extends Controller
 {
@@ -26,5 +27,21 @@ class LaporanController extends Controller
         $totalDana = $detailDonatur->whereIn('status', ['success', 'settlement'])->sum('nominal');
 
         return view('administrator.laporan.history', compact('detailDonatur', 'kategori', 'totalDana'));
+    }
+
+    public function print($id)
+    {
+        $kategori = KategoriDonasi::findOrFail($id);
+
+        $dataDonaturIds = $kategori->dataDonatur()->pluck('id');
+
+        $detailDonatur = DetailDataDonatur::whereIn('data_donatur_id', $dataDonaturIds)->get();
+
+        $totalDana = $detailDonatur->sum('nominal');
+
+        $pdf = Pdf::loadView('administrator.laporan.pdf', compact('kategori', 'detailDonatur', 'totalDana'))
+                 ->setPaper('A4', 'landscape');
+
+        return $pdf->stream('laporan_donatur_' . now()->format('Ymd_His') . '.pdf');
     }
 }

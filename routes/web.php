@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('laporan')->group(function () {
             Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
             Route::get('/laporan/{id}', [LaporanController::class, 'detail'])->name('laporan.detail');
+            Route::get('/laporan/{id}/print', [LaporanController::class, 'print'])->name('laporan.print');
         });
 
         Route::get('/data-donatur', [DonaturController::class, 'index'])->name('data.donatur');

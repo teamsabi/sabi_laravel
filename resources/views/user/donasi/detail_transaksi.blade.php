@@ -56,7 +56,7 @@
                 const nominal = '{{ $request->nominal }}';
                 const judulDonasi = `{{ \App\Models\KategoriDonasi::find($request->kategori_donasi_id)->judul_donasi }}`;
                 
-                const pesan = encodeURIComponent(`Anda berhasil melakukan donasi sebesar Rp${nominal} ke kategori donasi ${judulDonasi}`);
+                const pesan = encodeURIComponent(`Anda berhasil melakukan donasi sebesar Rp.${nominal} ke kategori donasi ${judulDonasi}`);
                 window.location.href = "{{ route('donasi.index') }}?pesan=" + pesan;
             },
             onPending: function (result) {

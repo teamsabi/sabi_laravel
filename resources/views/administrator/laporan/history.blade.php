@@ -10,9 +10,9 @@
                     <h6 class="op-7 mb-2">Kategori Donasi : {{ $kategori->judul_donasi }}</h6>
                 </div>
                 <div>
-                    <button onclick="window.print()" class="btn btn-primary">
+                    <a href="{{ route('laporan.print', $kategori->id) }}" class="btn btn-primary" target="_blank">
                         <i class="fa fa-print me-1"></i> Print
-                    </button>
+                    </a>
                 </div>            
             </div>
             <div class="card-body">
@@ -68,7 +68,7 @@
                         <i class="fa fa-arrow-left me-1"></i> Kembali
                     </a>
                     <div class="d-flex align-items-center">
-                        <label class="fw-bold me-2 mb-0">Total Dana:</label>
+                        <label class="fw-bold me-2 mb-0">Total Donasi :</label>
                         <input type="text" class="form-control w-auto" value="Rp {{ number_format($totalDana, 0, ',', '.') }}" readonly>
                     </div>
                 </div>

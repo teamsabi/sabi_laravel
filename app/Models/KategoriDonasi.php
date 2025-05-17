@@ -32,9 +32,6 @@ class KategoriDonasi extends Model
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    /**
-     * Relasi ke tabel dokumentasi_penyerahan
-     */
     public function dokumentasi()
     {
         return $this->hasMany(DokumentasiPenyerahan::class, 'kategori_donasi_id');
@@ -43,6 +40,11 @@ class KategoriDonasi extends Model
     public function transaksi()
     {
         return $this->hasMany(MidtransTransaction::class, 'kategori_donasi_id');
+    }
+
+    public function dataDonatur()
+    {
+        return $this->hasMany(DataDonatur::class, 'kategori_donasi_id');
     }
 
 }
