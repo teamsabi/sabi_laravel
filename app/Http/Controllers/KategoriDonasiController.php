@@ -124,10 +124,14 @@ class KategoriDonasiController extends Controller
     {
         $kategori = KategoriDonasi::findOrFail($id);
 
+        if (strtolower($kategori->status) !== 'aktif') {
+            return redirect()->route('donasi.detail', $id)->with('pesan', 'Donasi untuk kategori ini sudah tidak aktif.');
+        }
+
         if ($kategori->donasi_terkumpul >= $kategori->target_dana) {
             return redirect()->route('donasi.detail', $id)->with('pesan', 'Donasi untuk kategori ini sudah terpenuhi.');
         }
-    
+
         return view('user.donasi.form_donasi', compact('kategori'));
     }
 
