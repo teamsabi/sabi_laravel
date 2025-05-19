@@ -66,6 +66,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users|email',
             'no_whatsapp' => 'required|min:10|unique:users',
             'no_whatsapp' => 'required|min:10',
+            'password' => 'required|min:8',
             'confirm' => 'required|same:password',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap harus diisi',
@@ -73,7 +74,7 @@ class AuthController extends Controller
             'email.required' => 'Email Wajib diisi',
             'email.unique' => 'Email telah terdaftar',
             'password.required' => 'Password Wajib diisi',
-            'password.min' => 'Password minimal 6 karakter',
+            'password.min' => 'Password minimal 8 karakter',
             'no_whatsapp.required' => 'No Whatsapp Wajib diisi',
             'no_whatsapp.min' => 'No Whatsapp minimal 12 karakter',
             'confirm.required' => 'Konfirmasi Password Wajib diisi',
