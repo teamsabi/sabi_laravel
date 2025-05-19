@@ -85,7 +85,7 @@
     </div>
 </div>
 
-{{-- Notifikasi SweetAlert --}}
+<!-- Notifikasi SweetAlert -->
 @if(session('success'))
 <script>
     Swal.fire({

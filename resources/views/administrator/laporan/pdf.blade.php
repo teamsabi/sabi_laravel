@@ -5,7 +5,7 @@
     <title>Laporan Donatur</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 12px;
             margin: 20px;
         }
@@ -53,7 +53,7 @@
         }
 
         .kop-tengah p {
-            font-size: 11px;
+            font-size: 15px;
             margin: 0;
         }
 
@@ -87,15 +87,15 @@
         $logoKanan = base64_encode(file_get_contents(public_path('template/assets/img/HMJTI.png')));
     @endphp
 
-    {{-- Kop Surat --}}
+    <!-- Kop Surat -->
     <div class="kop-surat">
         <div class="kop-kiri">
             <img src="data:image/png;base64,{{ $logoKiri }}" class="kop-logo" alt="Logo POLIJE">
         </div>
         <div class="kop-tengah">
             <h1>POLITEKNIK NEGERI JEMBER</h1>
-            <h2>KELUARGA MAHASISWA</h2>
-            <h3>HIMPUNAN MAHASISWA JURUSAN<br>TEKNOLOGI INFORMASI</h3>
+            <h1>KELUARGA MAHASISWA</h1>
+            <h1>HIMPUNAN MAHASISWA JURUSAN TEKNOLOGI INFORMASI</h1>
             <p>Jalan Mastrip Kotak Pos 164 Jember 68121</p>
             <p>Hp. +62 813-3122-7313 | Email: hmjti2024@gmail.com</p>
         </div>
@@ -104,12 +104,12 @@
         </div>
     </div>
 
-    {{-- Judul dan Info --}}
+    <!-- Judul dan Info -->
     <div class="title">Laporan Data Donatur</div>
     <p><strong>Kategori Donasi:</strong> {{ $kategori->judul_donasi }}</p>
     <p><strong>Tanggal Cetak:</strong> {{ now()->format('d-m-Y H:i') }}</p>
 
-    {{-- Tabel Donatur --}}
+    <!-- Tabel Donatur -->
     <table>
         <thead>
             <tr>

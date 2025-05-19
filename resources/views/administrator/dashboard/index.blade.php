@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-{{-- SweetAlert untuk notifikasi sukses --}}
+<!-- SweetAlert untuk notifikasi sukses -->
 @if (Session::has('success'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -17,15 +17,14 @@
     </script>
 @endif
 
-{{-- Pengecekan jika tidak ada kategori --}}
+<!-- Pengecekan jika tidak ada kategori -->
 @if (!$kategoriTerbaru)
     <div class="alert alert-warning text-center">
         <h4><i class="fas fa-exclamation-circle"></i> Tidak ada kategori donasi!</h4>
         <p>Silakan tambahkan kategori donasi terlebih dahulu untuk melihat statistik.</p>
     </div>
 @else
-
-{{-- Info kategori terbaru --}}
+<!-- Info kategori terbaru -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="alert alert-info" role="alert">
@@ -34,7 +33,7 @@
     </div>
 </div>
 
-{{-- Card Statistik --}}
+<!-- Card Statistik -->
 <div class="row">
     <div class="col-sm-6 col-md-3">
         <div class="card card-stats card-round">
@@ -114,7 +113,7 @@
     </div>
 </div>
 
-{{-- Grafik dan Statistik Bulanan --}}
+<!-- Grafik dan Statistik Bulanan -->
 <div class="row">
     <div class="col-md-8">
         <div class="card">
@@ -155,5 +154,5 @@
     </div>
 </div>
 
-@endif {{-- Penutup if $kategoriTerbaru --}}
+@endif <!-- Penutup if $kategoriTerbaru -->
 @endsection
