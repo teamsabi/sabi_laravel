@@ -20,34 +20,35 @@
                 <table id="basic-datatables" class="display table table-striped table-hover">
                     <thead>
                         <tr>
-                        <th>Nama Donatur</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Nominal</th>
-                        <th>Metode Pembayaran</th>
-                        <th>Status</th>
-                        <th>Tanggal</th>
+                            <th>Tanggal</th>
+                            <th>Nama Donatur</th>
+                            <th>Email</th>
+                            <th>No WhatsApp</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Nominal</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                        <th>Nama Donatur</th>
-                        <th>Email</th>
-                        <th>No WhatsApp</th>
-                        <th>Nominal</th>
-                        <th>Metode Pembayaran</th>
-                        <th>Status</th>
-                        <th>Tanggal</th>
-                            </tr>
+                            <th>Tanggal</th>
+                            <th>Nama Donatur</th>
+                            <th>Email</th>
+                            <th>No WhatsApp</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Nominal</th>
+                            <th>Status</th>
+                        </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($detailDonatur as $detail)
                         <tr>
+                            <td>{{ \Carbon\Carbon::parse($detail->tanggal_transaksi)->format('d-m-Y') }}</td>
                             <td>{{ $detail->nama_donatur }}</td>
                             <td>{{ $detail->email }}</td>
                             <td>{{ $detail->no_whatsapp }}</td>
-                            <td>Rp {{ number_format($detail->nominal, 0, ',', '.') }}</td>
                             <td>{{ $detail->metode_pembayaran }}</td>
+                            <td>Rp {{ number_format($detail->nominal, 0, ',', '.') }}</td>
                             <td class="text-center">
                                 @if ($detail->status == 'settlement' || $detail->status == 'success')
                                     <span class="badge badge-success">Berhasil</span>
@@ -57,7 +58,6 @@
                                     <span class="badge badge-danger">Gagal</span>
                                 @endif
                             </td>
-                            <td>{{ \Carbon\Carbon::parse($detail->tanggal_transaksi)->format('d-m-Y') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
