@@ -21,7 +21,8 @@
                 {{-- Informasi Kategori Donasi --}}
                 <div class="row align-items-start mb-4">
                     <div class="col-lg-5 text-center">
-                        <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="{{ $kategori->judul_donasi }}" class="img-fluid" style="border-radius: 10px;">
+                        <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="{{ $kategori->judul_donasi }}" class="img-fluid" 
+                            style="border-radius: 10px; height: 250px; width: 100%; object-fit: cover;">
                     </div>
                     <div class="col-lg-7">
                         <h5 style="font-size: 30px; font-weight: bold;">{{ $kategori->judul_donasi }}</h5>

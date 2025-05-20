@@ -9,10 +9,15 @@
                 : 0;
             $persen = min($persen, 100);
         @endphp
+
         <!-- Bagian Donasi Utama -->
         <div class="col-lg-8">
             <div class="card border-0 mb-4">
-                <img src="{{ asset('storage/' . $kategori->gambar) }}" alt="{{ $kategori->judul_donasi }}" class="card-img-top mb-3" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 20px;">
+                <div style="width: 100%; height: 350px; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 20px;">
+                    <img src="{{ asset('storage/' . $kategori->gambar) }}" 
+                         alt="{{ $kategori->judul_donasi }}" 
+                         style="height: 100%; width: auto; object-fit: cover;" />
+                </div>
                 <div class="card-body px-0">
                     <h5 class="card-title" style="font-size: 30px; font-weight: bold;">{{ $kategori->judul_donasi }}</h5>
                     <p class="mb-3 text-muted" style="font-size: 18px;">{{ $kategori->deskripsi }}</p>
@@ -33,7 +38,7 @@
                     <!-- Informasi Dana dan Deadline -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div style="min-width: 130px;">
-                            <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp {{ number_format($kategori->donasi_terkumpul, 0, ',', '.') }}</h6> <!-- Belum ada donasi -->
+                            <h6 class="mb-1" style="font-size: 25px; font-weight: bold;">Rp {{ number_format($kategori->donasi_terkumpul, 0, ',', '.') }}</h6>
                             <small class="text-muted" style="font-size: 15px;">Dari target Rp {{ number_format($kategori->target_dana, 0, ',', '.') }}</small>
                         </div>
                         <div class="text-end" style="min-width: 80px;">
@@ -61,10 +66,17 @@
 
             @foreach($donasiSerupa as $donasi)
             <div class="d-flex align-items-start mb-3">
-                <img src="{{ asset('storage/' . $donasi->gambar) }}" alt="Donasi Serupa" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px; margin-right: 16px;">
+                <div style="width: 100px; height: 100px; overflow: hidden; border-radius: 10px; margin-right: 16px; flex-shrink: 0;">
+                    <img src="{{ asset('storage/' . $donasi->gambar) }}" 
+                         alt="Donasi Serupa" 
+                         style="height: 100%; width: auto; object-fit: cover;" />
+                </div>
                 <div>
                     <p class="text-start mb-1" style="font-weight: bold;">
-                        <a href="{{ route('donasi.detail', $donasi->id) }}" style="color: #0b1c39; text-decoration: none;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'">
+                        <a href="{{ route('donasi.detail', $donasi->id) }}" 
+                           style="color: #0b1c39; text-decoration: none;" 
+                           onmouseover="this.style.color='blue'" 
+                           onmouseout="this.style.color='black'">
                             {{ Str::limit($donasi->judul_donasi, 40) }}
                         </a>
                     </p>
@@ -72,7 +84,6 @@
                 </div>
             </div>
             @endforeach
-
         </div>
     </div>
 </div>
