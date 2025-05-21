@@ -22,9 +22,7 @@
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card card-post card-round h-100">
                     <div style="width: 100%; height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
-                        <img src="{{ asset('storage/' . $donasi->gambar) }}"
-                            alt="Gambar Donasi"
-                            style="max-height: 100%; width: auto; object-fit: cover;" />
+                        <img src="{{ asset('storage/' . $donasi->gambar) }}" alt="Gambar Donasi" style="max-height: 100%; width: auto; object-fit: cover;" />
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
