@@ -5,7 +5,7 @@
 @if (Session::has('success'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             Swal.fire({
                 title: "Berhasil!",
                 text: "{{ Session::get('success') }}",
@@ -66,7 +66,9 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Jumlah Donasi</p>
-                            <h4 class="card-title"><span style="font-size: 16px;">Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</span></h4>
+                            <h4 class="card-title">
+                                <span style="font-size: 16px;">Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</span>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -118,7 +120,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Statistik Donasi</div>
+                <div class="card-title">Statistik Donatur Per Bulan ({{ now()->year }})</div>
             </div>
             <div class="card-body">
                 <div class="chart-container">
@@ -133,18 +135,23 @@
                 <div class="card-head-row">
                     <div class="card-title">Donasi bulan ini</div>
                 </div>
-                <div class="card-category">1 Februari - 1 Maret</div>
+                <div class="card-category">
+                    {{ \Carbon\Carbon::now()->startOfMonth()->translatedFormat('d F') }} - 
+                    {{ \Carbon\Carbon::now()->endOfMonth()->translatedFormat('d F') }}
+                </div>
             </div>
             <div class="card-body pb-0">
                 <div class="mb-4 mt-2">
-                    <h1>Rp 2.340.000</h1>
+                    <h1>Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</h1>
                 </div>
             </div>
         </div>
         <div class="card card-round mt-3 flex-grow-1">
             <div class="card-body pb-0">
-                <div class="h1 fw-bold float-end text-primary">+5%</div>
-                <h2 class="mb-2">17</h2>
+                <div class="h1 fw-bold float-end text-primary">
+                    {{ $jumlahDonatur }}
+                </div>
+                <h2 class="mb-2">{{ $jumlahDonatur }}</h2>
                 <p class="text-muted">Donatur bulan ini</p>
                 <div class="pull-in sparkline-fix">
                     <div id="lineChart"></div>
@@ -154,5 +161,36 @@
     </div>
 </div>
 
-@endif <!-- Penutup if $kategoriTerbaru -->
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('barChart').getContext('2d');
+    const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($bulan) !!},
+            datasets: [{
+                label: 'Jumlah Donatur',
+                backgroundColor: '#1d7af3',
+                borderColor: '#1d7af3',
+                data: {!! json_encode($jumlahDonaturPerBulan) !!}
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script>
+@endif
 @endsection
