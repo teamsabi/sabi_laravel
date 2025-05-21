@@ -36,7 +36,7 @@ class LaporanController extends Controller
         $dataDonaturIds = $kategori->dataDonatur()->pluck('id');
 
         $detailDonatur = DetailDataDonatur::whereIn('data_donatur_id', $dataDonaturIds)
-                                        ->where('status', 'success')
+                                        ->whereIn('status', ['success', 'settlement'])
                                         ->get();
 
         $totalDana = $detailDonatur->whereIn('status', ['success', 'settlement'])->sum('nominal');

@@ -110,7 +110,11 @@ class KategoriDonasiController extends Controller
 
     public function tampilTigaKategori()
     {
-        $kategoriDonasi = KategoriDonasi::latest()->take(3)->get();
+        $kategoriDonasi = KategoriDonasi::where('status', 'aktif')
+                                        ->latest()
+                                        ->take(3)
+                                        ->get();
+
         return view('user.home.index', compact('kategoriDonasi'));
     }
 
