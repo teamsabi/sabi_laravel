@@ -164,44 +164,33 @@
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    let barChartInstance;
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('barChart').getContext('2d');
-
-        // Hancurkan chart jika sudah ada
-        if (barChartInstance) {
-            barChartInstance.destroy();
-        }
-
-        barChartInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode($bulan) !!},
-                datasets: [{
-                    label: 'Jumlah Donatur',
-                    backgroundColor: '#1d7af3',
-                    borderColor: '#1d7af3',
-                    data: {!! json_encode($jumlahDonaturPerBulan) !!}
-                }]
+    const ctx = document.getElementById('barChart').getContext('2d');
+    const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($bulan) !!},
+            datasets: [{
+                label: 'Jumlah Donatur',
+                backgroundColor: '#1d7af3',
+                borderColor: '#1d7af3',
+                data: {!! json_encode($jumlahDonaturPerBulan) !!}
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0
-                        }
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
                     }
                 }
             }
-        });
+        }
     });
 </script>
-
 @endif
 @endsection
