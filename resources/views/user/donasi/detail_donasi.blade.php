@@ -51,7 +51,11 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('donasi.form_donasi', ['id' => $kategori->id]) }}" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Donasi Sekarang</a>
+                    @if(strtolower($kategori->status) === 'aktif' && $kategori->donasi_terkumpul < $kategori->target_dana)
+                        <a href="{{ route('donasi.form_donasi', $kategori->id) }}" class="genric-btn info w-100" style="font-size: 15px; border-radius: 10px;">Donasi Sekarang</a>
+                    @else
+                        <button class="btn btn-secondary w-100  " style="font-size: 15px; border-radius: 10px;" disabled>Donasi Tidak Tersedia</button>
+                    @endif
                 </div>
             </div>
         </div>

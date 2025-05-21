@@ -35,9 +35,11 @@ class LaporanController extends Controller
 
         $dataDonaturIds = $kategori->dataDonatur()->pluck('id');
 
-        $detailDonatur = DetailDataDonatur::whereIn('data_donatur_id', $dataDonaturIds)->get();
+        $detailDonatur = DetailDataDonatur::whereIn('data_donatur_id', $dataDonaturIds)
+                                        ->where('status', 'success')
+                                        ->get();
 
-        $totalDana = $detailDonatur->sum('nominal');
+        $totalDana = $detailDonatur->whereIn('status', ['success', 'settlement'])->sum('nominal');
 
         $pdf = Pdf::loadView('administrator.laporan.pdf', compact('kategori', 'detailDonatur', 'totalDana'))
                  ->setPaper('A4', 'landscape');
