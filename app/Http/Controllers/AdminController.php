@@ -48,6 +48,16 @@ class AdminController extends Controller
             $jumlahDonaturPerBulan[] = $jumlah;
         }
 
+        $bulanIni = Carbon::now()->month;
+        $tahunIni = Carbon::now()->year;
+
+        $kategoriDonasiBulanIni = KategoriDonasi::whereMonth('tanggal_buat', $bulanIni)
+            ->whereYear('tanggal_buat', $tahunIni)
+            ->get();
+
+        $jumlahDonaturbulanini = $kategoriDonasiBulanIni->sum('jumlah_donatur');
+        $danaTerkumpulbullanini = $kategoriDonasiBulanIni->sum('donasi_terkumpul');
+
         return view('administrator.dashboard.index', compact(
             'jumlahDonatur',
             'jumlahDonasi',
@@ -55,7 +65,9 @@ class AdminController extends Controller
             'donasiAktif',
             'kategoriTerbaru',
             'bulan',
-            'jumlahDonaturPerBulan'
+            'jumlahDonaturPerBulan',
+            'jumlahDonaturbulanini',
+            'danaTerkumpulbullanini'
         ));
     }
 }

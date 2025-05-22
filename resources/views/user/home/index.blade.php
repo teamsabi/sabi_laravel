@@ -139,16 +139,16 @@
                             <div class="single-counter text-center">
                                 <i class="fas fa-users fa-3x"></i>
                                 <p class="fw-bold fs-2 mb-0">
-                                    <span class="counter color-green">180</span>
+                                    <span class="counter color-green">{{ $jumlahDonatur ?? 0 }}</span>
                                 </p>
-                                <p class="mb-0">Orang Telah Berdonasi</p>
+                                <p class="mb-0">Orang Telah Berdonasi di Bulan ini</p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="single-counter text-center">
                                 <i class="fas fa-credit-card fa-3x"></i>
                                 <p class="fw-bold fs-2 mb-0">
-                                    Rp <span class="counter color-green">3,200,000</span>
+                                    Rp <span class="counter color-green">{{ number_format($danaTerkumpul ?? 0, 0, ',', '.') }}</span>
                                 </p>
                                 <p class="mb-0">Dana Terkumpul</p>
                             </div>
@@ -159,7 +159,7 @@
         </div>
     </div>
 </div>
-<!--? Jumlah Donatur & Donasi End-->
+<!--? Jumlah Donatur & Donasi End -->
 
 <!-- Lihat Semua Button -->
 <div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">

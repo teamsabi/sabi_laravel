@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KategoriDonasi;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class KategoriDonasiController extends Controller
 {
@@ -114,8 +115,18 @@ class KategoriDonasiController extends Controller
                                         ->latest()
                                         ->take(3)
                                         ->get();
+        
+        $bulanIni = Carbon::now()->month;
+        $tahunIni = Carbon::now()->year;
 
-        return view('user.home.index', compact('kategoriDonasi'));
+        $kategoriDonasiBulanIni = KategoriDonasi::whereMonth('tanggal_buat', $bulanIni)
+            ->whereYear('tanggal_buat', $tahunIni)
+            ->get();
+
+        $jumlahDonatur = $kategoriDonasiBulanIni->sum('jumlah_donatur');
+        $danaTerkumpul = $kategoriDonasiBulanIni->sum('donasi_terkumpul');
+
+        return view('user.home.index', compact('kategoriDonasi', 'jumlahDonatur', 'danaTerkumpul'));
     }
 
     public function detail($id)

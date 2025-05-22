@@ -142,16 +142,16 @@
             </div>
             <div class="card-body pb-0">
                 <div class="mb-4 mt-2">
-                    <h1>Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</h1>
+                    <h1>Rp {{ number_format($danaTerkumpulbullanini, 0, ',', '.') }}</h1>
                 </div>
             </div>
         </div>
         <div class="card card-round mt-3 flex-grow-1">
             <div class="card-body pb-0">
                 <div class="h1 fw-bold float-end text-primary">
-                    {{ $jumlahDonatur }}
+                    {{ $jumlahDonaturbulanini }}
                 </div>
-                <h2 class="mb-2">{{ $jumlahDonatur }}</h2>
+                <h2 class="mb-2">{{ $jumlahDonaturbulanini }}</h2>
                 <p class="text-muted">Donatur bulan ini</p>
                 <div class="pull-in sparkline-fix">
                     <div id="lineChart"></div>
