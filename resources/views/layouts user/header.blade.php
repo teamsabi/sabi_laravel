@@ -53,7 +53,7 @@
                                     <li><a href="#" style="font-weight: bold;">Dokumentasi</a>
                                         <ul class="submenu">
                                             <li><a href="{{ route('user.dokumentasi.index') }}" style="font-weight: bold;">Galeri Dokumentasi</a></li>
-                                            <li><a href="{{ route('user.transparansi.index') }}" style="font-weight: bold;">Transparansi</a></li>
+                                            <li><a href="{{ route('user.transparansi') }}" style="font-weight: bold;">Transparansi</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="{{ route('download.index') }}" style="font-weight: bold;">Download</a></li>

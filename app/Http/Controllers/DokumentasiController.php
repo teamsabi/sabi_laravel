@@ -119,4 +119,28 @@ class DokumentasiController extends Controller
 
         return view('user.dokumentasi.detail_dokumentasi', compact('dokumentasi', 'dokumentasiLainnya'));
     }
+
+    public function showTransparansi(Request $request)
+    {
+        $query = DokumentasiPenyerahan::with('kategoriDonasi');
+
+        // Filter berdasarkan bulan dan tahun
+        if ($request->filled('month')) {
+            $query->whereMonth('tgl_penyerahan', $request->month);
+        }
+
+        if ($request->filled('year')) {
+            $query->whereYear('tgl_penyerahan', $request->year);
+        }
+
+        $dokumentasi = $query->get();
+
+        // Ambil tahun unik dari semua dokumentasi
+        $tahunList = DokumentasiPenyerahan::selectRaw('YEAR(tgl_penyerahan) as year')
+            ->distinct()
+            ->pluck('year');
+
+        return view('user.transparansi.index', compact('dokumentasi', 'tahunList'));
+    }
+
 }

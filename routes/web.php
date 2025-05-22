@@ -110,9 +110,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');
 
-        Route::get('/tranparansi', function () {
-            return view('user.transparansi.index');
-        })->name('user.transparansi.index');     
+        Route::get('/transparansi', [DokumentasiController::class, 'showTransparansi'])->name('user.transparansi');
+   
 
         Route::get('/profil', [ProfilController::class, 'user'])->name('user.profil.index');
         Route::put('user/profil/update', [ProfilController::class, 'updateProfile'])->name('user.profil.update');
