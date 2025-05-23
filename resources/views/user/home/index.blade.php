@@ -161,13 +161,6 @@
 </div>
 <!--? Jumlah Donatur & Donasi End -->
 
-<!-- Lihat Semua Button -->
-<div class="header-center-btn" style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 40px;">
-    <a href="#" class="btn btn-primary" style="border-radius: 10px;">Lihat Semua</a>
-</div>
-
-<!-- Katalog Donasi End-->
-
 <!--? Tentang Kami Start-->
 <section class="about-low-area section-padding2" style="padding-top: 120px;">
     <div class="container">

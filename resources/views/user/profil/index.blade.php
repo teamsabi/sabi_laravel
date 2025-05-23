@@ -3,12 +3,18 @@
 @section('content')
 <div class="container py-5" style="padding-top: 50px; padding-bottom: 50px;">
     <div class="row">
-        <!-- Kiri -->
+        <!-- Sidebar -->
         <div class="col-md-3 pe-4">
             <h4 class="mb-4" style="font-size: 20px; font-weight: bold;">Pengaturan</h4>
             <div class="list-group">
                 <a href="{{ route('user.profil.index') }}" class="list-group-item list-group-item-action border-0 bg-transparent text-primary fw-bold" style="padding-left: 0;">
                     Profil Publik
+                </a>
+                <a href="{{ route('user.profil.notifikasi') }}" class="list-group-item list-group-item-action border-0 bg-transparent text-dark" style="padding-left: 0;">
+                    Notifikasi
+                </a>
+                <a href="{{ route('user.profil.donasi-saya') }}" class="list-group-item list-group-item-action border-0 bg-transparent text-dark" style="padding-left: 0;">
+                    Donasi Saya
                 </a>
                 <a href="{{ route('user.profil.pengaturan-akun') }}" class="list-group-item list-group-item-action border-0 bg-transparent text-dark" style="padding-left: 0;">
                     Pengaturan Akun
@@ -16,7 +22,7 @@
             </div>
         </div>    
 
-        <!-- Kanan -->
+        <!-- Main Content -->
         <div class="col-md-9 ps-4" style="border-left: 1px solid #d1d5db;">
             <h4 class="mb-4" style="font-size: 20px; font-weight: bold;">Profil Saya</h4>
             {{-- Foto Profil dan Upload --}}

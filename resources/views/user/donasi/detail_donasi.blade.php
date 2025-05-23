@@ -71,9 +71,7 @@
             @foreach($donasiSerupa as $donasi)
             <div class="d-flex align-items-start mb-3">
                 <div style="width: 100px; height: 100px; overflow: hidden; border-radius: 10px; margin-right: 16px; flex-shrink: 0;">
-                    <img src="{{ asset('storage/' . $donasi->gambar) }}" 
-                         alt="Donasi Serupa" 
-                         style="height: 100%; width: auto; object-fit: cover;" />
+                    <img src="{{ asset('storage/' . $donasi->gambar) }}" alt="Donasi Serupa" style="height: 100%; width: auto; object-fit: cover;" />
                 </div>
                 <div>
                     <p class="text-start mb-1" style="font-weight: bold;">

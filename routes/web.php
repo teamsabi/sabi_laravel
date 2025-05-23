@@ -121,6 +121,14 @@ Route::middleware(['auth'])->group(function () {
             return view('user.profil.pengaturan_akun');
         })->name('user.profil.pengaturan-akun');
 
+        Route::get('/profil/notifikasi', function () {
+            return view('user.profil.notifikasi');
+        })->name('user.profil.notifikasi');
+
+        Route::get('/profil/donasi-saya', function () {
+            return view('user.profil.donasi_saya');
+        })->name('user.profil.donasi-saya');
+
         Route::post('user/profile/ganti-email', [AuthController::class, 'updateEmail'])->name('user.update.email');
 
         Route::post('/user/update-password', [ProfilController::class, 'updatePasswordUser'])->name('user.update.password');
