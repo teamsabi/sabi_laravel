@@ -95,7 +95,6 @@ class KategoriDonasiController extends Controller
         return redirect()->route('kategori.index')->with('success', 'Kategori Donasi berhasil diperbarui.');
     }
 
-    // Hapus data
     public function destroy($id)
     {
         $kategori = KategoriDonasi::findOrFail($id);
@@ -127,6 +126,22 @@ class KategoriDonasiController extends Controller
         $danaTerkumpul = $kategoriDonasiBulanIni->sum('donasi_terkumpul');
 
         return view('user.home.index', compact('kategoriDonasi', 'jumlahDonatur', 'danaTerkumpul'));
+    }
+
+    public function aboutdonasi() {
+                
+        $bulanIni = Carbon::now()->month;
+        $tahunIni = Carbon::now()->year;
+
+        $kategoriDonasiBulanIni = KategoriDonasi::whereMonth('tanggal_buat', $bulanIni)
+            ->whereYear('tanggal_buat', $tahunIni)
+            ->get();
+
+        $jumlahDonatur = $kategoriDonasiBulanIni->sum('jumlah_donatur');
+        $danaTerkumpul = $kategoriDonasiBulanIni->sum('donasi_terkumpul');
+
+        return view('user.about.index', compact( 'jumlahDonatur', 'danaTerkumpul'));
+
     }
 
     public function detail($id)

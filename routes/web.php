@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/dokumentasi/{id}', [DokumentasiController::class, 'show'])->name('user.dokumentasi.show');       
 
         Route::get('/user/download', fn () => view('user.download.index'))->name('download.index');
-        Route::get('/user/about', fn () => view('user.about.index'))->name('about.index');
+        Route::get('/user/about', [KategoriDonasiController::class, 'aboutdonasi'])->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
 
