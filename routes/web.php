@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DokumentasiController;
+use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\KategoriDonasiController;
 use App\Http\Controllers\UserKategoriDonasiController;
@@ -97,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/user/about', [KategoriDonasiController::class, 'aboutdonasi'])->name('about.index');
         Route::get('/user/faq', fn () => view('user.FAQ.index'))->name('FAQ.index');
         Route::get('/user/kontak', fn () => view('user.hubungi kami.index'))->name('hubungi kami.index');
+        Route::post('/hubungi-kami/kirim', [HubungiKamiController::class, 'kirim'])->name('hubungi.kami.kirim');
 
         Route::get('/user/detail/{id}', [KategoriDonasiController::class, 'detail'])->name('donasi.detail');
 
