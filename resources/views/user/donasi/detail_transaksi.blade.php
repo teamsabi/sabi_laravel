@@ -57,7 +57,7 @@
                 const judulDonasi = `{{ \App\Models\KategoriDonasi::find($request->kategori_donasi_id)->judul_donasi }}`;
                 
                 const pesan = encodeURIComponent(`Anda berhasil melakukan donasi sebesar Rp.${nominal} ke kategori donasi ${judulDonasi}`);
-                window.location.href = "{{ route('donasi.index') }}?pesan=" + pesan;
+                window.location.href = "{{ route('user.profil.notifikasi') }}?pesan=" + pesan;
             },
             onPending: function (result) {
                 console.log("Menunggu pembayaran...");

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Models\DataDonatur;
 
 class ProfilController extends Controller
 {
@@ -124,5 +125,22 @@ class ProfilController extends Controller
         $user->delete();
 
         return redirect()->route('auth.login')->with('akun_dihapus', 'Akun anda berhasil dihapus, anda dapat melakukan registrasi kembali apabila ingin membuat akun baru lagi.');
-    }      
+    }
+    
+    public function notifikasi()
+    {
+        $user = Auth::user();
+
+        $dataDonaturs = DataDonatur::with(['kategoriDonasi', 'detail' => function ($query) {
+            $query->where('status', 'Success');
+        }])
+        ->where('user_id', $user->id)
+        ->whereHas('detail', function ($query) {
+            $query->where('status', 'Success');
+        })
+        ->latest()
+        ->get();
+
+        return view('user.profil.notifikasi', compact('dataDonaturs'));
+    }
 }

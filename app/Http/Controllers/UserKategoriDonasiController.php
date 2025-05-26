@@ -13,7 +13,7 @@ class UserKategoriDonasiController extends Controller
                                         ->latest()
                                         ->get();
 
-        $pesan = $request->query('pesan'); // Ambil pesan dari URL jika ada
+        $pesan = $request->query('pesan'); 
 
         return view('user.donasi.index', compact('kategoriDonasi', 'pesan'));
     }
