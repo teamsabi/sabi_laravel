@@ -29,27 +29,30 @@
 
             <!-- Notifikasi -->
             <div class="border rounded mb-3 p-3 position-relative" style="max-width: 500px; min-height: 100px;">
-    <div class="d-flex align-items-start" style="gap: 1rem;">
-        <img src="{{ asset('template/assets/img/Foto Team/Putra.png') }}" alt="Campaign Image" class="rounded" style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
-        <div style="font-size: 14px; line-height: 1.5;">
-            <div class="text-success fw-semibold">Berhasil</div>
-            <div class="mb-1">
-                <strong>Ayah Asep Berpulang</strong>
-                <div class="text-muted" style="font-size: 13px;">2 bulan yang lalu</div>
-                <div class="fw-bold mt-1">Rp 1.000</div>
+                <div class="d-flex align-items-start" style="gap: 1rem;">
+                    <img src="{{ asset('template/assets/img/Foto Team/Putra.png') }}" alt="Campaign Image" class="rounded" style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
+                    <div style="font-size: 14px; line-height: 1.5;">
+                        <div class="text-success fw-semibold">Berhasil</div>
+                        <div class="mb-1">
+                            <strong>Ayah Asep Berpulang</strong>
+                            <div class="text-muted" style="font-size: 13px;">01 April</div>
+                            <div class="fw-bold mt-1">Rp 1.000</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Btn untuk desktop -->
+                <a href="#" class="genric-btn info btn-sm position-absolute d-none d-sm-block" style="bottom: 10px; right: 10px;">
+                    Lagi
+                </a>
+
+                <!-- Btn untuk mobile -->
+                <div class="d-block d-sm-none mt-3 text-end">
+                    <a href="#" class="genric-btn info btn-sm">
+                        Lagi
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Btn untuk desktop -->
-    <a href="#" class="genric-btn info btn-sm position-absolute d-none d-sm-block" style="bottom: 10px; right: 10px;">
-        Lagi
-    </a>
-
-    <!-- Btn untuk mobile -->
-    <div class="d-block d-sm-none mt-3 text-end">
-        <a href="#" class="genric-btn info btn-sm">
-            Lagi
-        </a>
     </div>
 </div>
 

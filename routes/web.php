@@ -108,6 +108,10 @@ Route::middleware(['auth'])->group(function () {
             return view('user.donasi.detail_transaksi');
         })->name('user.donasi.detail_transaksi');
 
+        Route::get('/donasi/success', function () {
+            return view('user.donasi.form_success');
+        })->name('user.donasi.form_success');
+
         Route::post('/donasi/pay', [PaymentDonasiController::class, 'createCharge'])->name('donasi.pay');
 
         Route::get('/beranda', [KategoriDonasiController::class, 'tampilTigaKategori'])->name('beranda.login');

@@ -53,7 +53,7 @@
             <img src="{{ asset('template/assets/img/JTICare blue.png') }}" alt="JTICare" style="height: 50px; vertical-align: middle;">
         </div>
         <dotlottie-player 
-            src="https://lottie.host/7055ddad-0070-4991-9973-e92b8249c548/ZGfsyTEspt.lottie" 
+            src="https://lottie.host/11fea6ea-fae8-44eb-b695-8a89f59717b8/CQlJsyh15X.lottie" 
             background="transparent" 
             speed="1" 
             class="lottie-animation"
