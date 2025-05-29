@@ -28,4 +28,4 @@ Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handleCallba
 
 Route::post('/donasi/create-charge', [PaymentDonasiApiController::class, 'createCharge']);
 
-
+Route::post('/donasi/update-status', [PaymentDonasiApiController::class, 'handleCallback']);
