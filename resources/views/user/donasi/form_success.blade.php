@@ -20,15 +20,15 @@
                         </dotlottie-player>
 
                         <p style="font-size: 16px; color: #444; font-weight: bold;">
-                            <strong>Lihat dan tingkatkan terus kontribusimu di <br>aplikasi JTICare</strong>
+                            <strong>Donasimu Berhasil di salurkan <br>terima kasih!!<br>Lihat dan tingkatkan terus kontribusimu di <br>aplikasi JTICare</strong>
                         </p>
                         <p style="font-size: 16px; color: #444;">
-                            Bukan hanya riwayat donasi, kamu juga bisa melihat dampak nyata dari bantuanmu.
+                            Kami juga menyediakan Aplikasi android, kamu bisa melihat dampak nyata dari bantuanmu. Ayo Download Sekarang juga!!!!
                         </p>
 
-                        <button id="pay-button" class="genric-btn info w-100" style="border-radius: 8px; font-weight: bold; font-size: 16px;">
-                            Download Aplikasi Sekarang
-                        </button>
+                        <div class="genric-btn info w-100" style="border-radius: 8px; font-weight: bold; font-size: 16px;">
+                            <a href="{{ route('donasi.index') }}">Kembali</a>
+                        </div>
                     </div>
                 </div>
             </div>
