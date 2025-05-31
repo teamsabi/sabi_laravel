@@ -99,7 +99,7 @@ class ProfilController extends Controller
         return redirect()->route('user.profil.pengaturan-akun')->with('success', 'Password Anda berhasil diperbarui');
     }
 
-        public function hapusFoto(Request $request)
+    public function hapusFoto(Request $request)
     {
         $user = Auth::user();
 

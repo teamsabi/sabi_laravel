@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DataDonaturApi;
+use App\Http\Controllers\Api\ProfilApiController;
 use App\Http\Controllers\PaymentDonasiController;
+use App\Http\Controllers\Api\TransaksiApiController;
 use App\Http\Controllers\Api\PaymentDonasiApiController;
 use App\Http\Controllers\Api\KategoriDonasiApiController;
 
@@ -20,12 +23,18 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/ganti-email', [AuthController::class, 'updateEmail']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/data-donatur', [DataDonaturApi::class, 'getDetailByUser']);
+    Route::get('/transaksi-user', [TransaksiApiController::class, 'getTransaksiUser']);  
+    Route::post('/update-profile', [ProfilApiController::class, 'updateProfile']);
+    Route::post('/update-password', [ProfilApiController::class, 'updatePassword']);
+    Route::delete('/hapus-akun', [ProfilApiController::class, 'hapusAkunApi']);
+
 });
+
+Route::get('/form-donasi/{id}', [KategoriDonasiApiController::class, 'getFormDonasiData']);
 
 Route::get('/kategori-donasi', [KategoriDonasiApiController::class, 'index']);
 
 Route::post('/midtrans/callback', [PaymentDonasiController::class, 'handleCallback']);
 
 Route::post('/donasi/create-charge', [PaymentDonasiApiController::class, 'createCharge']);
-
-Route::post('/donasi/update-status', [PaymentDonasiApiController::class, 'handleCallback']);
