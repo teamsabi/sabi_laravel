@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MidtransTransaction;
+use Illuminate\Support\Facades\Auth;
+use App\Models\DataDonatur;
+use Carbon\Carbon;
 
 class TransaksiApiController extends Controller
 {
@@ -63,6 +66,61 @@ class TransaksiApiController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $data,
+        ]);
+    }
+
+    public function getTotalDonasi()
+    {
+        $user = Auth::user();
+
+        // Ambil semua data donatur milik user
+        $dataDonatur = DataDonatur::with(['detail' => function ($query) {
+            $query->where('status', 'success');
+        }])->where('user_id', $user->id)->get();
+
+        if ($dataDonatur->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Belum ada data donasi.',
+                'total_donasi' => 0
+            ], 404);
+        }
+
+        // Hitung total nominal dari detail yang status = success
+        $totalDonasi = $dataDonatur->flatMap(function ($donatur) {
+            return $donatur->detail;
+        })->sum('nominal');
+
+        return response()->json([
+            'status' => 'success',
+            'total_donasi' => $totalDonasi,
+        ]);
+    }
+
+        public function totalDonasiBulanIni()
+    {
+        $user = Auth::user();
+
+        // Ambil tanggal awal dan akhir bulan ini
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        // Ambil semua data donatur milik user yang memiliki detail dengan status success dan dalam bulan ini
+        $total = DataDonatur::with('detail')
+            ->where('user_id', $user->id)
+            ->get()
+            ->flatMap(function ($dataDonatur) use ($startOfMonth, $endOfMonth) {
+                return $dataDonatur->detail->filter(function ($detail) use ($startOfMonth, $endOfMonth) {
+                    return $detail->status === 'success' &&
+                           Carbon::parse($detail->tanggal_transaksi)->between($startOfMonth, $endOfMonth);
+                });
+            })
+            ->sum('nominal');
+
+        return response()->json([
+            'status' => 'success',
+            'total_donasi_bulan_ini' => $total,
+            'periode' => $startOfMonth->format('Y-m') // contoh: 2025-05
         ]);
     }
 }

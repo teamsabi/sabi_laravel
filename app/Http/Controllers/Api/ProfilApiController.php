@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfilApiController extends Controller
 {
-        public function updateProfile(Request $request)
+    public function updateProfile(Request $request)
     {
         $user = Auth::user();
 

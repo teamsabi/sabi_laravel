@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/update-profile', [ProfilApiController::class, 'updateProfile']);
     Route::post('/update-password', [ProfilApiController::class, 'updatePassword']);
     Route::delete('/hapus-akun', [ProfilApiController::class, 'hapusAkunApi']);
+    Route::get('/total-donasi', [TransaksiApiController::class, 'getTotalDonasi']);
+    Route::get('/total-donasi-bulan-ini', [TransaksiApiController::class, 'totalDonasiBulanIni']);
 
 });
 
