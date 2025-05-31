@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataDonatur;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class DataDonaturApi extends Controller
 {
     public function getDetailByUser()
     {
-        $userId = auth()->id();
+        Carbon::setLocale('id'); // Set Bahasa Indonesia
 
-        $dataDonatur = DataDonatur::with(['detail'])
+        $userId = auth()->id();
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        $dataDonatur = DataDonatur::with(['detail', 'kategoriDonasi'])
             ->where('user_id', $userId)
             ->get();
 
@@ -24,8 +28,11 @@ class DataDonaturApi extends Controller
             ], 404);
         }
 
-        $allDetails = $dataDonatur->flatMap(function ($donatur) {
-            return $donatur->detail->map(function ($detail) {
+        $filteredDetails = $dataDonatur->flatMap(function ($donatur) use ($startOfMonth, $endOfMonth) {
+            return $donatur->detail->filter(function ($detail) use ($startOfMonth, $endOfMonth) {
+                $tanggal = Carbon::parse($detail->tanggal_transaksi);
+                return $tanggal->between($startOfMonth, $endOfMonth);
+            })->map(function ($detail) use ($donatur) {
                 return [
                     'id' => $detail->id,
                     'data_donatur_id' => $detail->data_donatur_id,
@@ -33,6 +40,7 @@ class DataDonaturApi extends Controller
                     'email' => $detail->email,
                     'no_whatsapp' => $detail->no_whatsapp,
                     'kategori_donasi' => $detail->kategori_donasi,
+                    'gambar_donasi' => $donatur->kategoriDonasi->gambar ?? null,
                     'nominal' => $detail->nominal,
                     'metode_pembayaran' => $detail->metode_pembayaran,
                     'status' => $detail->status,
@@ -44,7 +52,9 @@ class DataDonaturApi extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => $allDetails,
+            'data' => $filteredDetails->values(),
+            'periode' => Carbon::now()->format('Y-m'),
         ]);
     }
 }
+

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\MidtransTransaction;
-use Illuminate\Support\Facades\Auth;
 use App\Models\DataDonatur;
 use Carbon\Carbon;
 
@@ -71,9 +69,8 @@ class TransaksiApiController extends Controller
 
     public function getTotalDonasi()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        // Ambil semua data donatur milik user
         $dataDonatur = DataDonatur::with(['detail' => function ($query) {
             $query->where('status', 'success');
         }])->where('user_id', $user->id)->get();
@@ -86,7 +83,6 @@ class TransaksiApiController extends Controller
             ], 404);
         }
 
-        // Hitung total nominal dari detail yang status = success
         $totalDonasi = $dataDonatur->flatMap(function ($donatur) {
             return $donatur->detail;
         })->sum('nominal');
@@ -97,15 +93,13 @@ class TransaksiApiController extends Controller
         ]);
     }
 
-        public function totalDonasiBulanIni()
+    public function totalDonasiBulanIni()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        // Ambil tanggal awal dan akhir bulan ini
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
 
-        // Ambil semua data donatur milik user yang memiliki detail dengan status success dan dalam bulan ini
         $total = DataDonatur::with('detail')
             ->where('user_id', $user->id)
             ->get()
@@ -120,7 +114,7 @@ class TransaksiApiController extends Controller
         return response()->json([
             'status' => 'success',
             'total_donasi_bulan_ini' => $total,
-            'periode' => $startOfMonth->format('Y-m') // contoh: 2025-05
+            'periode' => $startOfMonth->format('Y-m')
         ]);
     }
 }
