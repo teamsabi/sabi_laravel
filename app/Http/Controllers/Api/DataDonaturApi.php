@@ -11,7 +11,7 @@ class DataDonaturApi extends Controller
 {
     public function getDetailByUser()
     {
-        Carbon::setLocale('id'); // Set Bahasa Indonesia
+        Carbon::setLocale('id');
 
         $userId = auth()->id();
         $startOfMonth = Carbon::now()->startOfMonth();

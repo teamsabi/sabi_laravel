@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class KategoriDonasi extends Model
 {
@@ -24,9 +25,6 @@ class KategoriDonasi extends Model
         'status',
     ];
 
-    /**
-     * Relasi ke tabel users
-     */
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
@@ -47,4 +45,15 @@ class KategoriDonasi extends Model
         return $this->hasMany(DataDonatur::class, 'kategori_donasi_id');
     }
 
+    public function getTanggalBuatIndoAttribute()
+    {
+        return Carbon::parse($this->tanggal_buat)
+            ->translatedFormat('d F Y');
+    }
+
+    public function getTanggalBuatRelativeAttribute()
+    {
+        return Carbon::parse($this->tanggal_buat)
+            ->diffForHumans();
+    }
 }

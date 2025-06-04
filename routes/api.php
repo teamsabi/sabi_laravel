@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DataDonaturApi;
+use App\Http\Controllers\Api\HubungiKamiApi;
 use App\Http\Controllers\Api\ProfilApiController;
 use App\Http\Controllers\PaymentDonasiController;
 use App\Http\Controllers\Api\TransaksiApiController;
@@ -30,7 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/hapus-akun', [ProfilApiController::class, 'hapusAkunApi']);
     Route::get('/total-donasi', [TransaksiApiController::class, 'getTotalDonasi']);
     Route::get('/total-donasi-bulan-ini', [TransaksiApiController::class, 'totalDonasiBulanIni']);
-
+    Route::get('/donasi/{id}', [KategoriDonasiApiController::class, 'show']);
+    Route::post('/hubungi-kami', [HubungiKamiApi::class, 'kirimPesanApi']);
 });
 
 Route::get('/form-donasi/{id}', [KategoriDonasiApiController::class, 'getFormDonasiData']);

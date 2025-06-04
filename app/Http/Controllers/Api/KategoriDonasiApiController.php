@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\KategoriDonasi;
 use Illuminate\Http\JsonResponse;
+use Carbon\Carbon;
 
 class KategoriDonasiApiController extends Controller
 {
@@ -12,7 +13,24 @@ class KategoriDonasiApiController extends Controller
     {
         $data = KategoriDonasi::where('status', 'aktif')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($kategori) {
+                return [
+                    'id' => $kategori->id,
+                    'id_user' => $kategori->id_user ?? null,
+                    'judul_donasi' => $kategori->judul_donasi,
+                    'deskripsi' => $kategori->deskripsi,
+                    'target_dana' => $kategori->target_dana,
+                    'donasi_terkumpul' => $kategori->donasi_terkumpul,
+                    'jumlah_donatur' => $kategori->jumlah_donatur,
+                    'gambar' => asset('storage/' . $kategori->gambar),
+                    'status' => $kategori->status,
+                    'deadline' => $kategori->dedline,
+                    'tanggal_buat' => $kategori->tanggal_buat,
+                    'tanggal_buat_indo' => Carbon::parse($kategori->tanggal_buat)->translatedFormat('d F Y'),
+                    'tanggal_buat_relative' => Carbon::parse($kategori->tanggal_buat)->diffForHumans(),                    
+                ];
+            });
 
         return response()->json([
             'success' => true,
@@ -20,9 +38,11 @@ class KategoriDonasiApiController extends Controller
             'data' => $data
         ]);
     }
-
-    public function getFormDonasiData($id)
+    
+    public function show($id)
     {
+        \Carbon\Carbon::setLocale('id');
+
         $kategori = KategoriDonasi::find($id);
 
         if (!$kategori) {
@@ -32,32 +52,22 @@ class KategoriDonasiApiController extends Controller
             ], 404);
         }
 
-        if (strtolower($kategori->status) !== 'aktif') {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Donasi untuk kategori ini sudah tidak aktif.',
-            ], 403);
-        }
-
-        if ($kategori->donasi_terkumpul >= $kategori->target_dana) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Donasi untuk kategori ini sudah terpenuhi.',
-            ], 403);
-        }
-
         return response()->json([
             'status' => 'success',
-            'message' => 'Data kategori tersedia.',
+            'message' => 'Data kategori donasi berhasil ditemukan.',
             'data' => [
                 'id' => $kategori->id,
                 'judul_donasi' => $kategori->judul_donasi,
                 'deskripsi' => $kategori->deskripsi,
                 'target_dana' => $kategori->target_dana,
                 'donasi_terkumpul' => $kategori->donasi_terkumpul,
+                'jumlah_donatur' => $kategori->jumlah_donatur,
                 'gambar' => asset('storage/' . $kategori->gambar),
                 'status' => $kategori->status,
                 'deadline' => $kategori->dedline,
+                'tanggal_buat' => $kategori->tanggal_buat,
+                'tanggal_buat_indo' => Carbon::parse($kategori->tanggal_buat)->translatedFormat('d F Y'),
+                'tanggal_buat_relative' => Carbon::parse($kategori->tanggal_buat)->diffForHumans(),
             ],
         ]);
     }

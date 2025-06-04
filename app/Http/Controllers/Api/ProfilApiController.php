@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ProfilApiController extends Controller
 {
@@ -81,22 +82,28 @@ class ProfilApiController extends Controller
 
     public function hapusAkunApi(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Hapus foto profil jika ada
         if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
             Storage::disk('public')->delete($user->foto_profil);
         }
 
-        // Hapus token Sanctum untuk logout
-        $user->currentAccessToken()->delete();
+        // Hapus token Sanctum yang sedang digunakan
+        $currentToken = $user->currentAccessToken();
+        if ($currentToken instanceof PersonalAccessToken) {
+            $currentToken->delete();
+        }
 
-        // Hapus akun
+        // (Opsional) Hapus semua token aktif user
+        // $user->tokens()->delete();
+
+        // Hapus user
         $user->delete();
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Akun anda berhasil dihapus. Anda dapat registrasi kembali jika ingin membuat akun baru.',
+            'status'  => 'success',
+            'message' => 'Akun Anda berhasil dihapus. Anda dapat mendaftar ulang jika ingin membuat akun baru.',
         ]);
     }
 }

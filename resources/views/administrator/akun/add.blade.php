@@ -9,11 +9,9 @@
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <form id="formAkun" action="{{ isset($user) ? route('akun.update', $user->id) : route('akun.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="formAkun" action="{{ route('akun.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @if(isset($user))
-                            @method('PUT')
-                        @endif
+                        @method('PUT')
                     
                         <div class="row mb-3">
                             <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap</label>
@@ -81,7 +79,7 @@
                         <div class="text-end">
                             <button type="button" class="btn btn-primary" id="btnSubmit">
                                 <i class="fa fa-save me-1"></i>
-                                {{ isset($user) ? 'Simpan Perubahan' : 'Simpan' }}
+                                Simpan Perubahan
                             </button>
                             <a href="{{ route('akun.index') }}" class="btn btn-danger">
                                 <i class="fa fa-arrow-left me-1"></i> Kembali

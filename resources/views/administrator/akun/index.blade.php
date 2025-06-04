@@ -6,9 +6,6 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title mb-0">Data Akun</h4>
-                <a href="{{ route('akun.create') }}" class="btn btn-primary btn-round">
-                    <i class="fa fa-plus me-1"></i> Tambah
-                </a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,7 +15,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Email</th>
                                 <th>No WhatsApp</th>
-                                <th>Foto Profil</th>
+                                <th>Foto Profil</th>    
                                 <th>Password</th>
                                 <th>Role</th>
                                 <th>Tanggal Buat</th>
